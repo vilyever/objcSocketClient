@@ -1,0 +1,98 @@
+//
+//  VDSocketClient.h
+//  objcTempUtilities
+//
+//  Created by Deng on 16/6/27.
+//  Copyright © Deng. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+#import "VDSocketPacket.h"
+#import "VDSocketResponsePacket.h"
+#import "VDSocketPacketHelper.h"
+#import "VDSocketHeartBeatHelper.h"
+#import "VDSocketConfigure.h"
+#import "VDSocketAddress.h"
+
+typedef NS_ENUM(NSInteger, VDSocketClientState) {
+    VDSocketClientStateDisconnected,
+    VDSocketClientStateConnecting,
+    VDSocketClientStateConnected
+};
+
+@class VDSocketClient;
+
+@protocol VDSocketClientDelegate <NSObject>
+
+@optional
+- (void)onSocketClientConnected:(VDSocketClient *)client;
+- (void)onSocketClientDisconnected:(VDSocketClient *)client;
+- (void)onSocketClient:(VDSocketClient *)client response:(VDSocketResponsePacket *)packet;
+
+@end
+
+@protocol VDSocketClientReceiveDelegate <NSObject>
+
+@optional
+- (void)onSocketClient:(VDSocketClient *)client receiveResponse:(VDSocketResponsePacket *)packet;
+- (void)onSocketClientReceiveHeartBeat:(VDSocketClient *)client;
+
+@end
+
+@protocol VDSocketClientSendingDelegate <NSObject>
+
+@optional
+- (void)onSocketClient:(VDSocketClient *)client sendingBegin:(VDSocketPacket *)packet;
+- (void)onSocketClient:(VDSocketClient *)client sendingEnd:(VDSocketPacket *)packet;
+//- (void)onSocketClient:(VDSocketClient *)client sendingCancel:(VDSocketPacket *)packet;
+- (void)onSocketClient:(VDSocketClient *)client sending:(VDSocketPacket *)packet inProgressing:(float)progress;
+
+@end
+
+@interface VDSocketClient : NSObject
+
+#pragma mark Public Method
+- (instancetype)initWithAddress:(VDSocketAddress *)address;
+
+- (void)connect;
+- (void)disconnect;
+- (VDSocketPacket *)sendString:(NSString *)message;
+- (VDSocketPacket *)sendData:(NSData *)data;
+//- (void)cancelSend:(VDSocketPacket *)packet;
+- (BOOL)isConnected;
+- (BOOL)isConnecting;
+- (BOOL)isDisconnected;
+
+- (instancetype)registerSocketClientDelegate:(id<VDSocketClientDelegate>)delegate;
+- (instancetype)removeSocketClientDelegate:(id<VDSocketClientDelegate>)delegate;
+- (instancetype)registerSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate;
+- (instancetype)removeSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate;
+- (instancetype)registerSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
+- (instancetype)removeSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
+
+#pragma mark Protected Method
+/**
+ *  never call these methods outside, just override them and remember call super
+ */
+- (void)internalOnConnected;
+- (void)internalOnDisconnected;
+- (void)internalOnReceiveResponse:(VDSocketResponsePacket *)packet;
+- (void)internalOnReceiveHeartBeat;
+- (void)internalOnSendPacketBegin:(VDSocketPacket *)packet;
+- (void)internalOnSendPacketEnd:(VDSocketPacket *)packet;
+//- (void)internalOnSendPacketCancel:(VDSocketPacket *)packet;
+- (void)internalOnSendPacketProgressing:(VDSocketPacket *)packet progress:(float)progress;
+
+#pragma mark Properties
+@property (nonatomic, strong) VDSocketAddress *address;
+/**
+ *  STRING与byte转换的编码
+ */
+@property (nonatomic, assign) NSStringEncoding encoding;
+@property (nonatomic, strong) VDSocketPacketHelper *socketPacketHelper;
+@property (nonatomic, strong) VDSocketHeartBeatHelper *heartBeatHelper;
+@property (nonatomic, strong) VDSocketConfigure *socketConfigure;
+@property (nonatomic, assign, readonly) VDSocketClientState state;
+
+@end

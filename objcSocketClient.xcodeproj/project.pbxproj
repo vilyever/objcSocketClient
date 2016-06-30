@@ -1,0 +1,477 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FECA25BF1D23A35400ED8FDD /* objcSocketClient.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA25BE1D23A35400ED8FDD /* objcSocketClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FECA25C61D23A35400ED8FDD /* objcSocketClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FECA25BB1D23A35400ED8FDD /* objcSocketClient.framework */; };
+		FECA25CB1D23A35400ED8FDD /* objcSocketClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25CA1D23A35400ED8FDD /* objcSocketClientTests.m */; };
+		FECA26061D23A3D700ED8FDD /* VDSocketAddress.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA25FA1D23A3D700ED8FDD /* VDSocketAddress.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FECA26071D23A3D700ED8FDD /* VDSocketAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25FB1D23A3D700ED8FDD /* VDSocketAddress.m */; };
+		FECA26081D23A3D700ED8FDD /* VDSocketConfigure.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA25FC1D23A3D700ED8FDD /* VDSocketConfigure.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FECA26091D23A3D700ED8FDD /* VDSocketConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25FD1D23A3D700ED8FDD /* VDSocketConfigure.m */; };
+		FECA260A1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA25FE1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FECA260B1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25FF1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.m */; };
+		FECA260C1D23A3D700ED8FDD /* VDSocketPacket.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA26001D23A3D700ED8FDD /* VDSocketPacket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FECA260D1D23A3D700ED8FDD /* VDSocketPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA26011D23A3D700ED8FDD /* VDSocketPacket.m */; };
+		FECA260E1D23A3D700ED8FDD /* VDSocketPacketHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA26021D23A3D700ED8FDD /* VDSocketPacketHelper.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FECA260F1D23A3D700ED8FDD /* VDSocketPacketHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA26031D23A3D700ED8FDD /* VDSocketPacketHelper.m */; };
+		FECA26101D23A3D700ED8FDD /* VDSocketResponsePacket.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA26041D23A3D700ED8FDD /* VDSocketResponsePacket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FECA26111D23A3D700ED8FDD /* VDSocketResponsePacket.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA26051D23A3D700ED8FDD /* VDSocketResponsePacket.m */; };
+		FECA26141D23A3E200ED8FDD /* VDSocketClient.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA26121D23A3E200ED8FDD /* VDSocketClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FECA26151D23A3E200ED8FDD /* VDSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA26131D23A3E200ED8FDD /* VDSocketClient.m */; };
+		FECA26321D23BE7800ED8FDD /* VDSocketPacketSender.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA26301D23BE7800ED8FDD /* VDSocketPacketSender.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		FECA26331D23BE7800ED8FDD /* VDSocketPacketSender.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA26311D23BE7800ED8FDD /* VDSocketPacketSender.m */; };
+		FECA26411D2505ED00ED8FDD /* objcSocketClient.podspec in Resources */ = {isa = PBXBuildFile; fileRef = FECA263F1D2505ED00ED8FDD /* objcSocketClient.podspec */; };
+		FECA26421D2505ED00ED8FDD /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = FECA26401D2505ED00ED8FDD /* README.md */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		FECA25C71D23A35400ED8FDD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FECA25B21D23A35400ED8FDD /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FECA25BA1D23A35400ED8FDD;
+			remoteInfo = objcSocketClient;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		FECA25BB1D23A35400ED8FDD /* objcSocketClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = objcSocketClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FECA25BE1D23A35400ED8FDD /* objcSocketClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = objcSocketClient.h; sourceTree = "<group>"; };
+		FECA25C01D23A35400ED8FDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FECA25C51D23A35400ED8FDD /* objcSocketClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = objcSocketClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		FECA25CA1D23A35400ED8FDD /* objcSocketClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = objcSocketClientTests.m; sourceTree = "<group>"; };
+		FECA25CC1D23A35400ED8FDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FECA25FA1D23A3D700ED8FDD /* VDSocketAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketAddress.h; sourceTree = "<group>"; };
+		FECA25FB1D23A3D700ED8FDD /* VDSocketAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketAddress.m; sourceTree = "<group>"; };
+		FECA25FC1D23A3D700ED8FDD /* VDSocketConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketConfigure.h; sourceTree = "<group>"; };
+		FECA25FD1D23A3D700ED8FDD /* VDSocketConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketConfigure.m; sourceTree = "<group>"; };
+		FECA25FE1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketHeartBeatHelper.h; sourceTree = "<group>"; };
+		FECA25FF1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketHeartBeatHelper.m; sourceTree = "<group>"; };
+		FECA26001D23A3D700ED8FDD /* VDSocketPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketPacket.h; sourceTree = "<group>"; };
+		FECA26011D23A3D700ED8FDD /* VDSocketPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketPacket.m; sourceTree = "<group>"; };
+		FECA26021D23A3D700ED8FDD /* VDSocketPacketHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketPacketHelper.h; sourceTree = "<group>"; };
+		FECA26031D23A3D700ED8FDD /* VDSocketPacketHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketPacketHelper.m; sourceTree = "<group>"; };
+		FECA26041D23A3D700ED8FDD /* VDSocketResponsePacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketResponsePacket.h; sourceTree = "<group>"; };
+		FECA26051D23A3D700ED8FDD /* VDSocketResponsePacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketResponsePacket.m; sourceTree = "<group>"; };
+		FECA26121D23A3E200ED8FDD /* VDSocketClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketClient.h; sourceTree = "<group>"; };
+		FECA26131D23A3E200ED8FDD /* VDSocketClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketClient.m; sourceTree = "<group>"; };
+		FECA26301D23BE7800ED8FDD /* VDSocketPacketSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketPacketSender.h; sourceTree = "<group>"; };
+		FECA26311D23BE7800ED8FDD /* VDSocketPacketSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketPacketSender.m; sourceTree = "<group>"; };
+		FECA263F1D2505ED00ED8FDD /* objcSocketClient.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = objcSocketClient.podspec; sourceTree = "<group>"; };
+		FECA26401D2505ED00ED8FDD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FECA25B71D23A35400ED8FDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FECA25C21D23A35400ED8FDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FECA25C61D23A35400ED8FDD /* objcSocketClient.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FECA25B11D23A35400ED8FDD = {
+			isa = PBXGroup;
+			children = (
+				FECA25BD1D23A35400ED8FDD /* objcSocketClient */,
+				FECA25C91D23A35400ED8FDD /* objcSocketClientTests */,
+				FECA25BC1D23A35400ED8FDD /* Products */,
+				FECA263F1D2505ED00ED8FDD /* objcSocketClient.podspec */,
+				FECA26401D2505ED00ED8FDD /* README.md */,
+			);
+			sourceTree = "<group>";
+		};
+		FECA25BC1D23A35400ED8FDD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FECA25BB1D23A35400ED8FDD /* objcSocketClient.framework */,
+				FECA25C51D23A35400ED8FDD /* objcSocketClientTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FECA25BD1D23A35400ED8FDD /* objcSocketClient */ = {
+			isa = PBXGroup;
+			children = (
+				FECA25F81D23A3B300ED8FDD /* Helper */,
+				FECA26121D23A3E200ED8FDD /* VDSocketClient.h */,
+				FECA26131D23A3E200ED8FDD /* VDSocketClient.m */,
+				FECA25BE1D23A35400ED8FDD /* objcSocketClient.h */,
+				FECA25C01D23A35400ED8FDD /* Info.plist */,
+			);
+			path = objcSocketClient;
+			sourceTree = "<group>";
+		};
+		FECA25C91D23A35400ED8FDD /* objcSocketClientTests */ = {
+			isa = PBXGroup;
+			children = (
+				FECA25CA1D23A35400ED8FDD /* objcSocketClientTests.m */,
+				FECA25CC1D23A35400ED8FDD /* Info.plist */,
+			);
+			path = objcSocketClientTests;
+			sourceTree = "<group>";
+		};
+		FECA25F81D23A3B300ED8FDD /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				FECA25FA1D23A3D700ED8FDD /* VDSocketAddress.h */,
+				FECA25FB1D23A3D700ED8FDD /* VDSocketAddress.m */,
+				FECA25FC1D23A3D700ED8FDD /* VDSocketConfigure.h */,
+				FECA25FD1D23A3D700ED8FDD /* VDSocketConfigure.m */,
+				FECA25FE1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.h */,
+				FECA25FF1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.m */,
+				FECA26001D23A3D700ED8FDD /* VDSocketPacket.h */,
+				FECA26011D23A3D700ED8FDD /* VDSocketPacket.m */,
+				FECA26021D23A3D700ED8FDD /* VDSocketPacketHelper.h */,
+				FECA26031D23A3D700ED8FDD /* VDSocketPacketHelper.m */,
+				FECA26041D23A3D700ED8FDD /* VDSocketResponsePacket.h */,
+				FECA26051D23A3D700ED8FDD /* VDSocketResponsePacket.m */,
+				FECA26301D23BE7800ED8FDD /* VDSocketPacketSender.h */,
+				FECA26311D23BE7800ED8FDD /* VDSocketPacketSender.m */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		FECA25B81D23A35400ED8FDD /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FECA26141D23A3E200ED8FDD /* VDSocketClient.h in Headers */,
+				FECA26081D23A3D700ED8FDD /* VDSocketConfigure.h in Headers */,
+				FECA260E1D23A3D700ED8FDD /* VDSocketPacketHelper.h in Headers */,
+				FECA26061D23A3D700ED8FDD /* VDSocketAddress.h in Headers */,
+				FECA260A1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.h in Headers */,
+				FECA26321D23BE7800ED8FDD /* VDSocketPacketSender.h in Headers */,
+				FECA25BF1D23A35400ED8FDD /* objcSocketClient.h in Headers */,
+				FECA260C1D23A3D700ED8FDD /* VDSocketPacket.h in Headers */,
+				FECA26101D23A3D700ED8FDD /* VDSocketResponsePacket.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		FECA25BA1D23A35400ED8FDD /* objcSocketClient */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FECA25CF1D23A35400ED8FDD /* Build configuration list for PBXNativeTarget "objcSocketClient" */;
+			buildPhases = (
+				FECA25B61D23A35400ED8FDD /* Sources */,
+				FECA25B71D23A35400ED8FDD /* Frameworks */,
+				FECA25B81D23A35400ED8FDD /* Headers */,
+				FECA25B91D23A35400ED8FDD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = objcSocketClient;
+			productName = objcSocketClient;
+			productReference = FECA25BB1D23A35400ED8FDD /* objcSocketClient.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		FECA25C41D23A35400ED8FDD /* objcSocketClientTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FECA25D21D23A35400ED8FDD /* Build configuration list for PBXNativeTarget "objcSocketClientTests" */;
+			buildPhases = (
+				FECA25C11D23A35400ED8FDD /* Sources */,
+				FECA25C21D23A35400ED8FDD /* Frameworks */,
+				FECA25C31D23A35400ED8FDD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				FECA25C81D23A35400ED8FDD /* PBXTargetDependency */,
+			);
+			name = objcSocketClientTests;
+			productName = objcSocketClientTests;
+			productReference = FECA25C51D23A35400ED8FDD /* objcSocketClientTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FECA25B21D23A35400ED8FDD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = vilyever;
+				TargetAttributes = {
+					FECA25BA1D23A35400ED8FDD = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 2594YAARKH;
+					};
+					FECA25C41D23A35400ED8FDD = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 2594YAARKH;
+					};
+				};
+			};
+			buildConfigurationList = FECA25B51D23A35400ED8FDD /* Build configuration list for PBXProject "objcSocketClient" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FECA25B11D23A35400ED8FDD;
+			productRefGroup = FECA25BC1D23A35400ED8FDD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FECA25BA1D23A35400ED8FDD /* objcSocketClient */,
+				FECA25C41D23A35400ED8FDD /* objcSocketClientTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FECA25B91D23A35400ED8FDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FECA26411D2505ED00ED8FDD /* objcSocketClient.podspec in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FECA25C31D23A35400ED8FDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FECA25B61D23A35400ED8FDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FECA26151D23A3E200ED8FDD /* VDSocketClient.m in Sources */,
+				FECA26071D23A3D700ED8FDD /* VDSocketAddress.m in Sources */,
+				FECA26111D23A3D700ED8FDD /* VDSocketResponsePacket.m in Sources */,
+				FECA260F1D23A3D700ED8FDD /* VDSocketPacketHelper.m in Sources */,
+				FECA26091D23A3D700ED8FDD /* VDSocketConfigure.m in Sources */,
+				FECA26331D23BE7800ED8FDD /* VDSocketPacketSender.m in Sources */,
+				FECA26421D2505ED00ED8FDD /* README.md in Sources */,
+				FECA260D1D23A3D700ED8FDD /* VDSocketPacket.m in Sources */,
+				FECA260B1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FECA25C11D23A35400ED8FDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FECA25CB1D23A35400ED8FDD /* objcSocketClientTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		FECA25C81D23A35400ED8FDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FECA25BA1D23A35400ED8FDD /* objcSocketClient */;
+			targetProxy = FECA25C71D23A35400ED8FDD /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		FECA25CD1D23A35400ED8FDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		FECA25CE1D23A35400ED8FDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		FECA25D01D23A35400ED8FDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS/";
+				INFOPLIST_FILE = objcSocketClient/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = vilyever.objcSocketClient;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		FECA25D11D23A35400ED8FDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS/";
+				INFOPLIST_FILE = objcSocketClient/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = vilyever.objcSocketClient;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		FECA25D31D23A35400ED8FDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = objcSocketClientTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = vilyever.objcSocketClientTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		FECA25D41D23A35400ED8FDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = objcSocketClientTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = vilyever.objcSocketClientTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FECA25B51D23A35400ED8FDD /* Build configuration list for PBXProject "objcSocketClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FECA25CD1D23A35400ED8FDD /* Debug */,
+				FECA25CE1D23A35400ED8FDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FECA25CF1D23A35400ED8FDD /* Build configuration list for PBXNativeTarget "objcSocketClient" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FECA25D01D23A35400ED8FDD /* Debug */,
+				FECA25D11D23A35400ED8FDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FECA25D21D23A35400ED8FDD /* Build configuration list for PBXNativeTarget "objcSocketClientTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FECA25D31D23A35400ED8FDD /* Debug */,
+				FECA25D41D23A35400ED8FDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FECA25B21D23A35400ED8FDD /* Project object */;
+}

@@ -1,0 +1,357 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FECA25E31D23A36D00ED8FDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25E21D23A36D00ED8FDD /* main.m */; };
+		FECA25E61D23A36D00ED8FDD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25E51D23A36D00ED8FDD /* AppDelegate.m */; };
+		FECA25E91D23A36D00ED8FDD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25E81D23A36D00ED8FDD /* ViewController.m */; };
+		FECA25EC1D23A36D00ED8FDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FECA25EA1D23A36D00ED8FDD /* Main.storyboard */; };
+		FECA25EE1D23A36D00ED8FDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FECA25ED1D23A36D00ED8FDD /* Assets.xcassets */; };
+		FECA25F11D23A36D00ED8FDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FECA25EF1D23A36D00ED8FDD /* LaunchScreen.storyboard */; };
+		FECA262C1D23BDC000ED8FDD /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FECA262A1D23BDC000ED8FDD /* CocoaAsyncSocket.framework */; };
+		FECA262D1D23BDC000ED8FDD /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FECA262A1D23BDC000ED8FDD /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FECA262E1D23BDC000ED8FDD /* objcTemp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FECA262B1D23BDC000ED8FDD /* objcTemp.framework */; };
+		FECA262F1D23BDC000ED8FDD /* objcTemp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FECA262B1D23BDC000ED8FDD /* objcTemp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FECA26391D24BC6D00ED8FDD /* objcSocketClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FECA26381D24BC6D00ED8FDD /* objcSocketClient.framework */; };
+		FECA263A1D24BC6D00ED8FDD /* objcSocketClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FECA26381D24BC6D00ED8FDD /* objcSocketClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FECA26211D23BAD700ED8FDD /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FECA262F1D23BDC000ED8FDD /* objcTemp.framework in Embed Frameworks */,
+				FECA262D1D23BDC000ED8FDD /* CocoaAsyncSocket.framework in Embed Frameworks */,
+				FECA263A1D24BC6D00ED8FDD /* objcSocketClient.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		FECA25DE1D23A36D00ED8FDD /* objcSocketClientDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = objcSocketClientDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FECA25E21D23A36D00ED8FDD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FECA25E41D23A36D00ED8FDD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FECA25E51D23A36D00ED8FDD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FECA25E71D23A36D00ED8FDD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		FECA25E81D23A36D00ED8FDD /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		FECA25EB1D23A36D00ED8FDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		FECA25ED1D23A36D00ED8FDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FECA25F01D23A36D00ED8FDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FECA25F21D23A36D00ED8FDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FECA262A1D23BDC000ED8FDD /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = ../Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
+		FECA262B1D23BDC000ED8FDD /* objcTemp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcTemp.framework; path = ../Carthage/Build/iOS/objcTemp.framework; sourceTree = "<group>"; };
+		FECA26381D24BC6D00ED8FDD /* objcSocketClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = objcSocketClient.framework; path = "/Users/ftet/Library/Developer/Xcode/DerivedData/objcSocketClient-anvzfxhedjydjbfwqfikualelhkd/Build/Products/Debug-iphoneos/objcSocketClient.framework"; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FECA25DB1D23A36D00ED8FDD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FECA262E1D23BDC000ED8FDD /* objcTemp.framework in Frameworks */,
+				FECA262C1D23BDC000ED8FDD /* CocoaAsyncSocket.framework in Frameworks */,
+				FECA26391D24BC6D00ED8FDD /* objcSocketClient.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FECA25D51D23A36D00ED8FDD = {
+			isa = PBXGroup;
+			children = (
+				FECA26381D24BC6D00ED8FDD /* objcSocketClient.framework */,
+				FECA262A1D23BDC000ED8FDD /* CocoaAsyncSocket.framework */,
+				FECA262B1D23BDC000ED8FDD /* objcTemp.framework */,
+				FECA25E01D23A36D00ED8FDD /* objcSocketClientDemo */,
+				FECA25DF1D23A36D00ED8FDD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FECA25DF1D23A36D00ED8FDD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FECA25DE1D23A36D00ED8FDD /* objcSocketClientDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FECA25E01D23A36D00ED8FDD /* objcSocketClientDemo */ = {
+			isa = PBXGroup;
+			children = (
+				FECA25E41D23A36D00ED8FDD /* AppDelegate.h */,
+				FECA25E51D23A36D00ED8FDD /* AppDelegate.m */,
+				FECA25E71D23A36D00ED8FDD /* ViewController.h */,
+				FECA25E81D23A36D00ED8FDD /* ViewController.m */,
+				FECA25EA1D23A36D00ED8FDD /* Main.storyboard */,
+				FECA25ED1D23A36D00ED8FDD /* Assets.xcassets */,
+				FECA25EF1D23A36D00ED8FDD /* LaunchScreen.storyboard */,
+				FECA25F21D23A36D00ED8FDD /* Info.plist */,
+				FECA25E11D23A36D00ED8FDD /* Supporting Files */,
+			);
+			path = objcSocketClientDemo;
+			sourceTree = "<group>";
+		};
+		FECA25E11D23A36D00ED8FDD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FECA25E21D23A36D00ED8FDD /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FECA25DD1D23A36D00ED8FDD /* objcSocketClientDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FECA25F51D23A36D00ED8FDD /* Build configuration list for PBXNativeTarget "objcSocketClientDemo" */;
+			buildPhases = (
+				FECA25DA1D23A36D00ED8FDD /* Sources */,
+				FECA25DB1D23A36D00ED8FDD /* Frameworks */,
+				FECA25DC1D23A36D00ED8FDD /* Resources */,
+				FECA26211D23BAD700ED8FDD /* Embed Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = objcSocketClientDemo;
+			productName = objcSocketClientDemo;
+			productReference = FECA25DE1D23A36D00ED8FDD /* objcSocketClientDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FECA25D61D23A36D00ED8FDD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = vilyever;
+				TargetAttributes = {
+					FECA25DD1D23A36D00ED8FDD = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 2594YAARKH;
+					};
+				};
+			};
+			buildConfigurationList = FECA25D91D23A36D00ED8FDD /* Build configuration list for PBXProject "objcSocketClientDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = FECA25D51D23A36D00ED8FDD;
+			productRefGroup = FECA25DF1D23A36D00ED8FDD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FECA25DD1D23A36D00ED8FDD /* objcSocketClientDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FECA25DC1D23A36D00ED8FDD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FECA25F11D23A36D00ED8FDD /* LaunchScreen.storyboard in Resources */,
+				FECA25EE1D23A36D00ED8FDD /* Assets.xcassets in Resources */,
+				FECA25EC1D23A36D00ED8FDD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FECA25DA1D23A36D00ED8FDD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FECA25E91D23A36D00ED8FDD /* ViewController.m in Sources */,
+				FECA25E61D23A36D00ED8FDD /* AppDelegate.m in Sources */,
+				FECA25E31D23A36D00ED8FDD /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FECA25EA1D23A36D00ED8FDD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FECA25EB1D23A36D00ED8FDD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		FECA25EF1D23A36D00ED8FDD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FECA25F01D23A36D00ED8FDD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FECA25F31D23A36D00ED8FDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FECA25F41D23A36D00ED8FDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FECA25F61D23A36D00ED8FDD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../Carthage/Build/iOS/",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = objcSocketClientDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = vilyever.objcSocketClientDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Debug;
+		};
+		FECA25F71D23A36D00ED8FDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SRCROOT)/../Carthage/Build/iOS/",
+					"$(PROJECT_DIR)",
+				);
+				INFOPLIST_FILE = objcSocketClientDemo/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = vilyever.objcSocketClientDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FECA25D91D23A36D00ED8FDD /* Build configuration list for PBXProject "objcSocketClientDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FECA25F31D23A36D00ED8FDD /* Debug */,
+				FECA25F41D23A36D00ED8FDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FECA25F51D23A36D00ED8FDD /* Build configuration list for PBXNativeTarget "objcSocketClientDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FECA25F61D23A36D00ED8FDD /* Debug */,
+				FECA25F71D23A36D00ED8FDD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FECA25D61D23A36D00ED8FDD /* Project object */;
+}
