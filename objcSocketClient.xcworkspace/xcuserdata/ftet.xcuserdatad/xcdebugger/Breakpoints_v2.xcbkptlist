@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "objcSocketClient/VDSocketClient.m"
-            timestampString = "488959492.856334"
+            timestampString = "489058825.682167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "432"
-            endingLineNumber = "432"
+            startingLineNumber = "446"
+            endingLineNumber = "446"
             landmarkName = "-internalOnConnected"
             landmarkType = "5">
             <Locations>
@@ -26,11 +26,11 @@
                   moduleName = "objcSocketClient"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ftet/ResourceXcode/Github/objcSocketClient/objcSocketClient/VDSocketClient.m"
-                  timestampString = "488956387.437861"
+                  timestampString = "489058330.595161"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "352"
-                  endingLineNumber = "352"
+                  startingLineNumber = "432"
+                  endingLineNumber = "432"
                   offsetFromSymbolStart = "476">
                </Location>
                <Location
@@ -41,11 +41,11 @@
                   moduleName = "objcSocketClient"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/ftet/ResourceXcode/Github/objcSocketClient/objcSocketClient/VDSocketClient.m"
-                  timestampString = "488956387.438038"
+                  timestampString = "489058330.59534"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "352"
-                  endingLineNumber = "352"
+                  startingLineNumber = "432"
+                  endingLineNumber = "432"
                   offsetFromSymbolStart = "492">
                </Location>
             </Locations>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "objcSocketClient/VDSocketClient.m"
-            timestampString = "488959492.856334"
+            timestampString = "489058825.682167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "533"
-            endingLineNumber = "533"
+            startingLineNumber = "539"
+            endingLineNumber = "539"
             landmarkName = "-internalOnTimeTick"
             landmarkType = "5">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "objcSocketClient/VDSocketClient.m"
-            timestampString = "488962565.707966"
+            timestampString = "489058825.682167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
+            startingLineNumber = "335"
+            endingLineNumber = "335"
             landmarkName = "-internalSendPacket:"
             landmarkType = "5">
          </BreakpointContent>
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "objcSocketClient/VDSocketClient.m"
-            timestampString = "488962565.707966"
+            timestampString = "489058825.682167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "297"
-            endingLineNumber = "297"
+            startingLineNumber = "311"
+            endingLineNumber = "311"
             landmarkName = "-socket:didWriteDataWithTag:"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,12 +138,188 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "objcSocketClient/VDSocketClient.m"
-            timestampString = "488963730.463717"
+            timestampString = "489058825.682167"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "336"
-            endingLineNumber = "336"
+            startingLineNumber = "350"
+            endingLineNumber = "350"
             landmarkName = "-internalSendPacket:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objcSocketClient/VDSocketClient.m"
+            timestampString = "489058825.682167"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "504"
+            endingLineNumber = "504"
+            landmarkName = "-internalOnSendPacketBegin:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[VDSocketClient internalOnSendPacketBegin:]"
+                  moduleName = "objcSocketClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ftet/ResourceXcode/Github/objcSocketClient/objcSocketClient/VDSocketClient.m"
+                  timestampString = "489058241.858414"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "490"
+                  endingLineNumber = "490"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[VDSocketClient internalOnSendPacketBegin:]"
+                  moduleName = "objcSocketClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ftet/ResourceXcode/Github/objcSocketClient/objcSocketClient/VDSocketClient.m"
+                  timestampString = "489058241.858585"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "490"
+                  endingLineNumber = "490"
+                  offsetFromSymbolStart = "108">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objcSocketClient/VDSocketClient.m"
+            timestampString = "489058825.682167"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "460"
+            endingLineNumber = "460"
+            landmarkName = "-internalOnDisconnected"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[VDSocketClient internalOnDisconnected]"
+                  moduleName = "objcSocketClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ftet/ResourceXcode/Github/objcSocketClient/objcSocketClient/VDSocketClient.m"
+                  timestampString = "489058330.626708"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "446"
+                  endingLineNumber = "446"
+                  offsetFromSymbolStart = "228">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[VDSocketClient internalOnDisconnected]"
+                  moduleName = "objcSocketClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ftet/ResourceXcode/Github/objcSocketClient/objcSocketClient/VDSocketClient.m"
+                  timestampString = "489058330.626847"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "446"
+                  endingLineNumber = "446"
+                  offsetFromSymbolStart = "244">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objcSocketClient/VDSocketClient.m"
+            timestampString = "489058825.682167"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "513"
+            endingLineNumber = "513"
+            landmarkName = "-internalOnSendPacketEnd:"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[VDSocketClient internalOnSendPacketEnd:]"
+                  moduleName = "objcSocketClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ftet/ResourceXcode/Github/objcSocketClient/objcSocketClient/VDSocketClient.m"
+                  timestampString = "489058389.254139"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "499"
+                  endingLineNumber = "499"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[VDSocketClient internalOnSendPacketEnd:]"
+                  moduleName = "objcSocketClient"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/ftet/ResourceXcode/Github/objcSocketClient/objcSocketClient/VDSocketClient.m"
+                  timestampString = "489058389.254306"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "499"
+                  endingLineNumber = "499"
+                  offsetFromSymbolStart = "108">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objcSocketClient/VDSocketPacketSender.m"
+            timestampString = "489058421.18159"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "-getProgressOnNextSended:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "objcSocketClient/VDSocketPacketSender.m"
+            timestampString = "489058425.636327"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "-getProgressOnNextSended:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

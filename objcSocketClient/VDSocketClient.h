@@ -64,12 +64,17 @@ typedef NS_ENUM(NSInteger, VDSocketClientState) {
 - (BOOL)isConnecting;
 - (BOOL)isDisconnected;
 
-- (instancetype)registerSocketClientDelegate:(id<VDSocketClientDelegate>)delegate;
-- (instancetype)removeSocketClientDelegate:(id<VDSocketClientDelegate>)delegate;
-- (instancetype)registerSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate;
-- (instancetype)removeSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate;
-- (instancetype)registerSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
-- (instancetype)removeSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
+- (void)registerSocketClientDelegate:(id<VDSocketClientDelegate>)delegate;
+- (void)registerWeakSocketClientDelegate:(id<VDSocketClientDelegate>)delegate;
+- (void)removeSocketClientDelegate:(id<VDSocketClientDelegate>)delegate;
+
+- (void)registerSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate;
+- (void)registerWeakSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate;
+- (void)removeSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate;
+
+- (void)registerSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
+- (void)registerWeakSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
+- (void)removeSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
 
 #pragma mark Protected Method
 /**

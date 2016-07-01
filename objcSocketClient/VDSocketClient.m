@@ -135,46 +135,52 @@
 	return self.state == VDSocketClientStateDisconnected;
 }
 
-- (instancetype)registerSocketClientDelegate:(id<VDSocketClientDelegate>)delegate {
+- (void)registerSocketClientDelegate:(id<VDSocketClientDelegate>)delegate {
+    if (![self.socketClientDelegates containsObject:delegate]) {
+        [self.socketClientDelegates addObject:delegate];
+    }
+}
+
+- (void)registerWeakSocketClientDelegate:(id<VDSocketClientDelegate>)delegate {
     if (![self.socketClientDelegates containsObject:delegate]) {
         [self.socketClientDelegates addObject:[VDWeakRef refWithObject:delegate]];
     }
-    
-    return self;
 }
 
-- (instancetype)removeSocketClientDelegate:(id<VDSocketClientDelegate>)delegate {
+- (void)removeSocketClientDelegate:(id<VDSocketClientDelegate>)delegate {
     [self.socketClientDelegates removeObject:delegate];
-    
-    return self;
 }
 
-- (instancetype)registerSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate {
+- (void)registerSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate {
+    if (![self.socketClientSendingDelegates containsObject:delegate]) {
+        [self.socketClientSendingDelegates addObject:delegate];
+    }
+}
+
+- (void)registerWeakSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate {
     if (![self.socketClientSendingDelegates containsObject:delegate]) {
         [self.socketClientSendingDelegates addObject:[VDWeakRef refWithObject:delegate]];
     }
-    
-    return self;
 }
 
-- (instancetype)removeSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate {
+- (void)removeSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate {
     [self.socketClientSendingDelegates removeObject:delegate];
-    
-    return self;
 }
 
-- (instancetype)registerSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate {
+- (void)registerSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate {
+    if (![self.socketClientReceiveDelegates containsObject:delegate]) {
+        [self.socketClientReceiveDelegates addObject:delegate];
+    }
+}
+
+- (void)registerWeakSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate {
     if (![self.socketClientReceiveDelegates containsObject:delegate]) {
         [self.socketClientReceiveDelegates addObject:[VDWeakRef refWithObject:delegate]];
     }
-    
-    return self;
 }
 
-- (instancetype)removeSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate {
+- (void)removeSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate {
     [self.socketClientReceiveDelegates removeObject:delegate];
-    
-    return self;
 }
 
 
@@ -219,6 +225,14 @@
     }
     
     return _socketConfigure;
+}
+
+- (VDSocketAddress *)address {
+    if (!_address) {
+        _address = [VDSocketAddress emptyAddress];
+    }
+    
+    return _address;
 }
 
 - (VDSocketPacketHelper *)socketPacketHelper {
@@ -429,8 +443,7 @@
     self.lastReceiveMessageTime = [NSDate timeIntervalSinceReferenceDate];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(internalOnTimeTick) userInfo:nil repeats:YES];
     
-    for (VDWeakRef *ref in self.socketClientDelegates) {
-        id<VDSocketClientDelegate> delegate = ref.object;
+    for (id delegate in self.socketClientDelegates) {
         if ([delegate respondsToSelector:@selector(onSocketClientConnected:)]) {
             [delegate onSocketClientConnected:self];
         }
@@ -444,8 +457,7 @@
     [self.timer invalidate];
     self.timer = nil;
     
-    for (VDWeakRef *ref in self.socketClientDelegates) {
-        id<VDSocketClientDelegate> delegate = ref.object;
+    for (id delegate in self.socketClientDelegates) {
         if ([delegate respondsToSelector:@selector(onSocketClientDisconnected:)]) {
             [delegate onSocketClientDisconnected:self];
         }
@@ -465,15 +477,13 @@
         return;
     }
     
-    for (VDWeakRef *ref in self.socketClientDelegates) {
-        id<VDSocketClientDelegate> delegate = ref.object;
+    for (id delegate in self.socketClientDelegates) {
         if ([delegate respondsToSelector:@selector(onSocketClient:response:)]) {
             [delegate onSocketClient:self response:packet];
         }
     }
     
-    for (VDWeakRef *ref in self.socketClientReceiveDelegates) {
-        id<VDSocketClientReceiveDelegate> delegate = ref.object;
+    for (id delegate in self.socketClientReceiveDelegates) {
         if ([delegate respondsToSelector:@selector(onSocketClient:receiveResponse:)]) {
             [delegate onSocketClient:self receiveResponse:packet];
         }
@@ -482,8 +492,7 @@
 
 - (void)internalOnReceiveHeartBeat {
     
-    for (VDWeakRef *ref in self.socketClientReceiveDelegates) {
-        id<VDSocketClientReceiveDelegate> delegate = ref.object;
+    for (id delegate in self.socketClientReceiveDelegates) {
         if ([delegate respondsToSelector:@selector(onSocketClientReceiveHeartBeat:)]) {
             [delegate onSocketClientReceiveHeartBeat:self];
         }
@@ -492,8 +501,7 @@
 
 - (void)internalOnSendPacketBegin:(VDSocketPacket *)packet {
     
-    for (VDWeakRef *ref in self.socketClientSendingDelegates) {
-        id<VDSocketClientSendingDelegate> delegate = ref.object;
+    for (id delegate in self.socketClientSendingDelegates) {
         if ([delegate respondsToSelector:@selector(onSocketClient:sendingBegin:)]) {
             [delegate onSocketClient:self sendingBegin:packet];
         }
@@ -502,8 +510,7 @@
 
 - (void)internalOnSendPacketEnd:(VDSocketPacket *)packet {
     
-    for (VDWeakRef *ref in self.socketClientSendingDelegates) {
-        id<VDSocketClientSendingDelegate> delegate = ref.object;
+    for (id delegate in self.socketClientSendingDelegates) {
         if ([delegate respondsToSelector:@selector(onSocketClient:sendingEnd:)]) {
             [delegate onSocketClient:self sendingEnd:packet];
         }
@@ -516,8 +523,7 @@
 
 - (void)internalOnSendPacketProgressing:(VDSocketPacket *)packet progress:(float)progress {
     
-    for (VDWeakRef *ref in self.socketClientSendingDelegates) {
-        id<VDSocketClientSendingDelegate> delegate = ref.object;
+    for (id delegate in self.socketClientSendingDelegates) {
         if ([delegate respondsToSelector:@selector(onSocketClient:sending:inProgressing:)]) {
             [delegate onSocketClient:self sending:packet inProgressing:progress];
         }
