@@ -76,19 +76,6 @@ typedef NS_ENUM(NSInteger, VDSocketClientState) {
 - (void)registerWeakSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
 - (void)removeSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
 
-#pragma mark Protected Method
-/**
- *  never call these methods outside, just override them and remember call super
- */
-- (void)internalOnConnected;
-- (void)internalOnDisconnected;
-- (void)internalOnReceiveResponse:(VDSocketResponsePacket *)packet;
-- (void)internalOnReceiveHeartBeat;
-- (void)internalOnSendPacketBegin:(VDSocketPacket *)packet;
-- (void)internalOnSendPacketEnd:(VDSocketPacket *)packet;
-//- (void)internalOnSendPacketCancel:(VDSocketPacket *)packet;
-- (void)internalOnSendPacketProgressing:(VDSocketPacket *)packet progress:(float)progress;
-
 #pragma mark Properties
 @property (nonatomic, strong) VDSocketAddress *address;
 /**
@@ -99,5 +86,18 @@ typedef NS_ENUM(NSInteger, VDSocketClientState) {
 @property (nonatomic, strong) VDSocketHeartBeatHelper *heartBeatHelper;
 @property (nonatomic, strong) VDSocketConfigure *socketConfigure;
 @property (nonatomic, assign, readonly) VDSocketClientState state;
+
+#pragma mark Private Method
+- (void)internalSendPacket:(VDSocketPacket *)packet;
+- (void)internalSendHeartBeat;
+- (void)internalReadNextResponse;
+- (void)internalOnConnected;
+- (void)internalOnDisconnected;
+- (void)internalOnReceiveResponse:(VDSocketResponsePacket *)packet;
+- (void)internalOnReceiveHeartBeat;
+- (void)internalOnSendPacketBegin:(VDSocketPacket *)packet;
+- (void)internalOnSendPacketEnd:(VDSocketPacket *)packet;
+- (void)internalOnSendPacketProgressing:(VDSocketPacket *)packet progress:(float)progress;
+- (void)internalOnTimeTick;
 
 @end

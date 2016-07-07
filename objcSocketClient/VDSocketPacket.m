@@ -40,9 +40,8 @@ static NSInteger AtomicID = 0;
 #pragma mark Overrides
 - (instancetype)init {
     self = [super init];
-    if (self) {
-        [self internalInit];
-    }
+    
+    _ID = AtomicID++;
     
     return self;
 }
@@ -56,8 +55,5 @@ static NSInteger AtomicID = 0;
 
 
 #pragma mark Private Method
-- (void)internalInit {
-    _ID = AtomicID++;
-}
 
 @end

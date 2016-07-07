@@ -254,9 +254,9 @@
 #pragma mark Overrides
 - (instancetype)init {
     self = [super init];
-    if (self) {
-        [self internalInit];
-    }
+    
+    _asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+    _encoding = NSUTF8StringEncoding;
     
     return self;
 }
@@ -322,11 +322,6 @@
 
 
 #pragma mark Private Method
-- (void)internalInit {
-    _asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
-    _encoding = NSUTF8StringEncoding;
-}
-
 - (void)internalSendPacket:(VDSocketPacket *)packet {
     [self.sendingPacketDictionary setObject:[VDSocketPacketSender senderWithPacket:packet] forKey:@(packet.ID)];
     VDWeakifySelf;
