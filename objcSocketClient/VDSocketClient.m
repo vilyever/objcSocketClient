@@ -251,6 +251,18 @@
     return _heartBeatHelper;
 }
 
+- (void)setState:(VDSocketClientState)state {
+    if (_state != state) {
+        _state = state;
+        
+        for (id delegate in self.socketClientDelegates) {
+            if ([delegate respondsToSelector:@selector(onSocketClient:stateChange:)]) {
+                [delegate onSocketClient:self stateChange:_state];
+            }
+        }
+    }
+}
+
 #pragma mark Overrides
 - (instancetype)init {
     self = [super init];

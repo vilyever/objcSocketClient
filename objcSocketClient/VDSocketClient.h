@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, VDSocketClientState) {
 - (void)onSocketClientConnected:(VDSocketClient *)client;
 - (void)onSocketClientDisconnected:(VDSocketClient *)client;
 - (void)onSocketClient:(VDSocketClient *)client response:(VDSocketResponsePacket *)packet;
+- (void)onSocketClient:(VDSocketClient *)client stateChange:(VDSocketClientState)state;
 
 @end
 
