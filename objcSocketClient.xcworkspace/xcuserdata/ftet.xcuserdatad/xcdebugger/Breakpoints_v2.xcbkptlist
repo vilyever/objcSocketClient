@@ -111,8 +111,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "335"
             endingLineNumber = "335"
-            landmarkName = "-internalSendPacket:"
-            landmarkType = "5">
+            landmarkName = "@implementation VDSocketClient"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -127,7 +127,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "311"
             endingLineNumber = "311"
-            landmarkName = "-socket:didWriteDataWithTag:"
+            landmarkName = "-socket:didReadData:withTag:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -159,7 +159,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "504"
             endingLineNumber = "504"
-            landmarkName = "-internalOnSendPacketBegin:"
+            landmarkName = "-internalOnReceiveHeartBeat"
             landmarkType = "5">
             <Locations>
                <Location
@@ -255,7 +255,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "513"
             endingLineNumber = "513"
-            landmarkName = "-internalOnSendPacketEnd:"
+            landmarkName = "-internalOnSendPacketBegin:"
             landmarkType = "5">
             <Locations>
                <Location

@@ -255,7 +255,7 @@
     if (_state != state) {
         _state = state;
         
-        for (id delegate in self.socketClientDelegates) {
+        for (id delegate in [self.socketClientDelegates copy]) {
             if ([delegate respondsToSelector:@selector(onSocketClient:stateChange:)]) {
                 [delegate onSocketClient:self stateChange:_state];
             }
@@ -450,7 +450,7 @@
     self.lastReceiveMessageTime = [NSDate timeIntervalSinceReferenceDate];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(internalOnTimeTick) userInfo:nil repeats:YES];
     
-    for (id delegate in self.socketClientDelegates) {
+    for (id delegate in [self.socketClientDelegates copy]) {
         if ([delegate respondsToSelector:@selector(onSocketClientConnected:)]) {
             [delegate onSocketClientConnected:self];
         }
@@ -464,7 +464,7 @@
     [self.timer invalidate];
     self.timer = nil;
     
-    for (id delegate in self.socketClientDelegates) {
+    for (id delegate in [self.socketClientDelegates copy]) {
         if ([delegate respondsToSelector:@selector(onSocketClientDisconnected:)]) {
             [delegate onSocketClientDisconnected:self];
         }
@@ -484,13 +484,13 @@
         return;
     }
     
-    for (id delegate in self.socketClientDelegates) {
+    for (id delegate in [self.socketClientDelegates copy]) {
         if ([delegate respondsToSelector:@selector(onSocketClient:response:)]) {
             [delegate onSocketClient:self response:packet];
         }
     }
     
-    for (id delegate in self.socketClientReceiveDelegates) {
+    for (id delegate in [self.socketClientReceiveDelegates copy]) {
         if ([delegate respondsToSelector:@selector(onSocketClient:receiveResponse:)]) {
             [delegate onSocketClient:self receiveResponse:packet];
         }
@@ -499,7 +499,7 @@
 
 - (void)internalOnReceiveHeartBeat {
     
-    for (id delegate in self.socketClientReceiveDelegates) {
+    for (id delegate in [self.socketClientReceiveDelegates copy]) {
         if ([delegate respondsToSelector:@selector(onSocketClientReceiveHeartBeat:)]) {
             [delegate onSocketClientReceiveHeartBeat:self];
         }
@@ -508,7 +508,7 @@
 
 - (void)internalOnSendPacketBegin:(VDSocketPacket *)packet {
     
-    for (id delegate in self.socketClientSendingDelegates) {
+    for (id delegate in [self.socketClientSendingDelegates copy]) {
         if ([delegate respondsToSelector:@selector(onSocketClient:sendingBegin:)]) {
             [delegate onSocketClient:self sendingBegin:packet];
         }
@@ -517,7 +517,7 @@
 
 - (void)internalOnSendPacketEnd:(VDSocketPacket *)packet {
     
-    for (id delegate in self.socketClientSendingDelegates) {
+    for (id delegate in [self.socketClientSendingDelegates copy]) {
         if ([delegate respondsToSelector:@selector(onSocketClient:sendingEnd:)]) {
             [delegate onSocketClient:self sendingEnd:packet];
         }
@@ -530,7 +530,7 @@
 
 - (void)internalOnSendPacketProgressing:(VDSocketPacket *)packet progress:(float)progress {
     
-    for (id delegate in self.socketClientSendingDelegates) {
+    for (id delegate in [self.socketClientSendingDelegates copy]) {
         if ([delegate respondsToSelector:@selector(onSocketClient:sending:inProgressing:)]) {
             [delegate onSocketClient:self sending:packet inProgressing:progress];
         }
