@@ -23,4 +23,3 @@ FOUNDATION_EXPORT const unsigned char objcSocketClientVersionString[];
 #import <objcSocketClient/VDSocketPacket.h>
 #import <objcSocketClient/VDSocketPacketHelper.h>
 #import <objcSocketClient/VDSocketResponsePacket.h>
-#import <objcSocketClient/VDSocketPacketSender.h>
