@@ -17,80 +17,87 @@
 @implementation VDSocketPacketHelper
 
 #pragma mark Public Method
-- (void)disalbeSegmentSend {
-    self.sendSegmentLength = VDSocketPacketSegmentLengthMax;
-}
-
-- (BOOL)shouldSegmentSend {
-    return self.sendSegmentLength != VDSocketPacketSegmentLengthMax;
-}
-
-- (BOOL)isDataWithHeader {
-    return self.headerProtocol || (self.sendHeaderDataBlock && self.receiveBodyDataLengthBlock && self.receiveHeaderDataLength > 0);
-}
-
-- (NSData *)getSendHeaderDataWithSendingData:(NSData *)sendingData isHeartBeat:(BOOL)isHeartBeat {
-    if (self.headerProtocol && [self.headerProtocol respondsToSelector:@selector(socketHeaderDataFromSendingData:isHeartBeat:)]) {
-        return [self.headerProtocol socketHeaderDataFromSendingData:sendingData isHeartBeat:isHeartBeat];
+- (void)checkValidation {
+    if (self.receivePacketLengthDataLength > 0) {
+        if (self.receivePacketDataLengthConvertor) {
+            return;
+        }
+        else if (self.packetLengthConversionProtocol && [self.packetLengthConversionProtocol respondsToSelector:@selector(receivePacketDataLengthForPacketLengthData:forSocketPacketHelper:)]) {
+            return;
+        }
+        
+        NSCAssert(NO, @"we need receivePacketDataLengthConvertor or packetLengthConversionProtocol since the receivePacketLengthDataLength > 0");
     }
     
-    if (self.sendHeaderDataBlock) {
-        return self.sendHeaderDataBlock(sendingData, isHeartBeat);
+    if (self.receiveTrailerData) {
+        return;
+    }
+    
+    NSCAssert(NO, @"we need receiveTrailerData or receivePacketLengthDataLength");
+}
+
+- (NSData *)getSendPacketLengthDataForPacketLength:(NSInteger)packetLength {
+    if (self.sendPacketLengthDataConvertor) {
+        return self.sendPacketLengthDataConvertor(packetLength);
+    }
+    
+    if (self.packetLengthConversionProtocol && [self.packetLengthConversionProtocol respondsToSelector:@selector(sendPacketLengthDataForPacketLength:forSocketPacketHelper:)]) {
+        return [self.packetLengthConversionProtocol sendPacketLengthDataForPacketLength:packetLength forSocketPacketHelper:self];
     }
     
     return nil;
 }
 
-- (NSInteger)getReceiveHeaderDataLength {
-    if (self.headerProtocol && [self.headerProtocol respondsToSelector:@selector(socketReceiveHeaderDataLength)]) {
-        return [self.headerProtocol socketReceiveHeaderDataLength];
+- (NSInteger)getReceivePacketDataLength:(NSData *)packetLengthData {
+    if (self.receivePacketDataLengthConvertor) {
+        return self.receivePacketDataLengthConvertor(packetLengthData);
     }
     
-    return self.receiveHeaderDataLength;
-}
-
-- (NSInteger)getReceiveBodyDataLengthWithHeaderData:(NSData *)headerData {
-    if (self.headerProtocol && [self.headerProtocol respondsToSelector:@selector(socketReceiveBodyDataLengthFromHeaderData:)]) {
-        return [self.headerProtocol socketReceiveBodyDataLengthFromHeaderData:headerData];
-    }
-    
-    if (self.receiveBodyDataLengthBlock) {
-        return self.receiveBodyDataLengthBlock(headerData);
+    if (self.packetLengthConversionProtocol && [self.packetLengthConversionProtocol respondsToSelector:@selector(receivePacketDataLengthForPacketLengthData:forSocketPacketHelper:)]) {
+        return [self.packetLengthConversionProtocol receivePacketDataLengthForPacketLengthData:packetLengthData forSocketPacketHelper:self];
     }
     
     return 0;
 }
 
-
-#pragma mark Properties
-- (NSData *)sendTrailerData {
-    if ([self isDataWithHeader]) {
-        return nil;
-    }
-    return _sendTrailerData;
-}
-
-- (NSData *)receiveTrailerData {
-    if ([self isDataWithHeader]) {
-        return nil;
-    }
-    return _receiveTrailerData;
-}
-
-- (NSInteger)sendSegmentLength {
-    if (_sendSegmentLength <= 0) {
-        return VDSocketPacketSegmentLengthMax;
+- (BOOL)isReadDataWithPacketLength {
+    if (self.receivePacketLengthDataLength > 0) {
+        if (self.receivePacketDataLengthConvertor) {
+            return YES;
+        }
+        else if (self.packetLengthConversionProtocol && [self.packetLengthConversionProtocol respondsToSelector:@selector(receivePacketDataLengthForPacketLengthData:forSocketPacketHelper:)]) {
+            return YES;
+        }
     }
     
-    return _sendSegmentLength;
+    return NO;
 }
 
-- (void)setSendHeaderDataBlock:(NSData *(^)(NSData *data, BOOL isHeartBeat))sendHeaderDataBlock {
-    _sendHeaderDataBlock = sendHeaderDataBlock;
+#pragma mark Properties
+- (void)setSendSegmentLength:(NSInteger)sendSegmentLength {
+    _sendSegmentLength = sendSegmentLength;
+    if (_sendSegmentLength <= 0) {
+        self.sendSegmentEnabled = NO;
+    }
+    else {
+        self.sendSegmentEnabled = YES;
+    }
 }
 
-- (void)setReceiveBodyDataLengthBlock:(NSInteger(^)(NSData *headerData))receiveBodyDataLengthBlock {
-    _receiveBodyDataLengthBlock = receiveBodyDataLengthBlock;
+- (BOOL)sendSegmentEnabled {
+    if (self.sendSegmentEnabled <= 0) {
+        return NO;
+    }
+    
+    return _sendSegmentEnabled;
+}
+
+- (void)setSendPacketLengthDataConvertor:(NSData *(^)(NSInteger))sendPacketLengthDataConvertor {
+    _sendPacketLengthDataConvertor = [sendPacketLengthDataConvertor copy];
+}
+
+- (void)setReceivePacketDataLengthConvertor:(NSInteger (^)(NSData *))receivePacketDataLengthConvertor {
+    _receivePacketDataLengthConvertor = [receivePacketDataLengthConvertor copy];
 }
 
 #pragma mark Overrides
@@ -106,15 +113,19 @@
 
 - (id)copy {
     VDSocketPacketHelper *packetHelper = [[[self class] alloc] init];
-    packetHelper.sendTrailerData = self.sendTrailerData;
-    packetHelper.sendTrailerMessage = self.sendTrailerMessage;
-    packetHelper.receiveTrailerData = self.receiveTrailerData;
-    packetHelper.receiveTrailerMessage = self.receiveTrailerMessage;
+    packetHelper.packetLengthConversionProtocol = self.packetLengthConversionProtocol;
+    
+    packetHelper.sendHeaderData = [self.sendHeaderData copy];
+    packetHelper.sendPacketLengthDataConvertor = [self.sendPacketLengthDataConvertor copy];
+    packetHelper.sendTrailerData = [self.sendTrailerData copy];
     packetHelper.sendSegmentLength = self.sendSegmentLength;
-    packetHelper.sendHeaderDataBlock = self.sendHeaderDataBlock;
-    packetHelper.receiveHeaderDataLength = self.receiveHeaderDataLength;
-    packetHelper.receiveBodyDataLengthBlock = self.receiveBodyDataLengthBlock;
-    packetHelper.headerProtocol = self.headerProtocol;
+    packetHelper.sendSegmentEnabled = self.sendSegmentEnabled;
+    
+    packetHelper.receiveHeaderData = [self.receiveHeaderData copy];
+    packetHelper.receivePacketLengthDataLength = self.receivePacketLengthDataLength;
+    packetHelper.receivePacketDataLengthConvertor = [self.receivePacketDataLengthConvertor copy];
+    packetHelper.receiveTrailerData = [self.receiveTrailerData copy];
+    
     return packetHelper;
 }
 

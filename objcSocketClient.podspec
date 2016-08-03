@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "objcSocketClient"
-  s.version          = "1.0.4"
+  s.version          = "1.1.0"
   s.summary          = "sth useful."
   s.description      = <<-DESC
                        wait for next time.

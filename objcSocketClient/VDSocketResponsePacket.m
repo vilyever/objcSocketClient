@@ -11,41 +11,20 @@
 
 @interface VDSocketResponsePacket ()
 
-@property (nonatomic, strong, readwrite) NSData *headerData;
-@property (nonatomic, strong, readwrite) NSData *data;
-//@property (nonatomic, copy, readwrite) NSString *message;
-
 @end
 
 
 @implementation VDSocketResponsePacket
 
+#pragma mark Constructor
++ (instancetype)packet {
+    return [[self alloc] init];
+}
+
 #pragma mark Public Method
-+ (instancetype)packetWithHeaderData:(NSData *)headerData bodyData:(NSData *)data {
-    VDSocketResponsePacket *packet = [[self alloc] init];
-    packet.headerData = headerData;
-    packet.data = data;
-    return packet;
-}
-
-+ (instancetype)packetWithData:(NSData *)data {
-    return [self packetWithHeaderData:nil bodyData:data];
-}
-
-//+ (instancetype)packetWithData:(NSData *)data withString:(NSString *)message {
-//    VDSocketResponsePacket *packet = [[self alloc] init];
-//    packet.data = data;
-//    packet.message = message;
-//    return packet;
-//}
-
-- (BOOL)isMatchData:(NSData *)data {
+- (BOOL)isDataEqual:(NSData *)data {
     return [data isEqualToData:self.data];
 }
-
-//- (BOOL)isMatchString:(NSString *)message {
-//    return [message isEqualToString:self.message];
-//}
 
 #pragma mark Properties
 

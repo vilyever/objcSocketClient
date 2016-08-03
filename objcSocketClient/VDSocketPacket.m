@@ -13,25 +13,58 @@ static NSInteger AtomicID = 0;
 @interface VDSocketPacket ()
 
 @property (nonatomic, assign, readwrite) NSInteger ID;
-@property (nonatomic, strong, readwrite) NSData *data;
+@property (nonatomic, copy, readwrite) NSData *data;
 @property (nonatomic, copy, readwrite) NSString *message;
+@property (nonatomic, assign, readwrite) BOOL isHeartBeat;
 
 @end
 
 
 @implementation VDSocketPacket
 
-#pragma mark Public Method
+#pragma mark Constructor
 + (instancetype)packetWithData:(NSData *)data {
-    VDSocketPacket *packet = [[self alloc] init];
-    packet.data = data;
-    return packet;
+    return [[self alloc] initWithData:data];
 }
 
 + (instancetype)packetWithString:(NSString *)message {
-    VDSocketPacket *packet = [[self alloc] init];
-    packet.message = message;
-    return packet;
+    return [[self alloc] initWithString:message];
+}
+
++ (instancetype)heartBeatPacketWithData:(NSData *)data {
+    return [[self alloc] initHeartBeatPacketWithData:data];
+}
+
+- (instancetype)initWithData:(NSData *)data {
+    self = [super init];
+    
+    self.data = data;
+    
+    return self;
+}
+
+- (instancetype)initWithString:(NSString *)message {
+    self = [super init];
+    
+    self.message = message;
+    
+    return self;
+}
+
+- (instancetype)initHeartBeatPacketWithData:(NSData *)data {
+    self = [super init];
+    
+    self.data = data;
+    self.isHeartBeat = YES;
+    
+    return self;
+}
+
+#pragma mark Public Method
+- (void)buildDataWithEncoding:(NSStringEncoding)encoding {
+    if (self.message) {
+        self.data = [self.message dataUsingEncoding:encoding];
+    }
 }
 
 #pragma mark Properties

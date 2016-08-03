@@ -8,99 +8,89 @@
 
 #import <Foundation/Foundation.h>
 
-#if !VDSocketPacketSegmentLengthMax
-#define VDSocketPacketSegmentLengthMax \
-(-1)
-#endif
-
 @class VDSocketPacketHelper;
 
-@protocol VDSocketPacketHelperHeaderProtocol <NSObject>
+@protocol VDSocketPacketHelperPacketLengthConversionProtocol <NSObject>
 
 @required
-- (NSData *)socketHeaderDataFromSendingData:(NSData *)sendingData isHeartBeat:(BOOL)isHeartBeat;
-- (NSInteger)socketReceiveHeaderDataLength;
-- (NSInteger)socketReceiveBodyDataLengthFromHeaderData:(NSData *)headerData;
+- (NSData *)sendPacketLengthDataForPacketLength:(NSInteger)packetLength forSocketPacketHelper:(VDSocketPacketHelper *)helper;
+- (NSInteger)receivePacketDataLengthForPacketLengthData:(NSData *)packetLengthData forSocketPacketHelper:(VDSocketPacketHelper *)helper;
 
 @end
 
 
 @interface VDSocketPacketHelper : NSObject
+/**
+ *  封包格式
+ *  包头（可选） --- 包长度（正文长度+包尾长度，若有包尾此信息可选） --- 正文（包含任意信息，包类型，数据等，必选） --- 包尾（若有包长度此信息可选）
+ *  
+ *  发送：包头包尾依照此helper设置的值发送，nil表示不发送，包长度由VDSocketPacketHelperHeaderProtocol或block获取（block优先，都无法获取表示不发送）
+ *  接收：
+ *      按包长度接收：若有包头先确定包头正确，然后读取设定的包长度字节数，由VDSocketPacketHelperHeaderProtocol或block获取（block优先）将字节数组转换为int长度，然后读取此长度信息
+ *      按包尾接收：若有包头先确定包头正确，然后一直读取到与包尾相同的字节数组（若正文中含有与包尾相同的字节数组，会导致读取错误）
+ */
 
 #pragma mark Public Method
-/**
- *  禁用分段发送
- */
-- (void)disalbeSegmentSend;
+- (void)checkValidation; // （接收包尾） 或 （接收长度，接收长度转换） 必须设置一项，以确保能够正确读取远程数据
+
+- (NSData *)getSendPacketLengthDataForPacketLength:(NSInteger)packetLength;
+- (NSInteger)getReceivePacketDataLength:(NSData *)packetLengthData;
 
 /**
- *  是否分段发送
- *
- *  @return
+ *  是否按包长度读取数据
+ *  否表示按包尾分割读取数据
  */
-- (BOOL)shouldSegmentSend;
-
-/**
- *  是否在发送和接收时，都包含包头和正文信息两部份
- *  包头：固定长度，必须含有正文长度信息，也可携带其它如消息类型等信息
- *
- *  @return
- */
-- (BOOL)isDataWithHeader;
-
-- (NSData *)getSendHeaderDataWithSendingData:(NSData *)sendingData isHeartBeat:(BOOL)isHeartBeat;
-- (NSInteger)getReceiveHeaderDataLength;
-- (NSInteger)getReceiveBodyDataLengthWithHeaderData:(NSData *)headerData;
-
-- (void)setSendHeaderDataBlock:(NSData *(^)(NSData *data, BOOL isHeartBeat))sendHeaderDataBlock;
-- (void)setReceiveBodyDataLengthBlock:(NSInteger(^)(NSData *headerData))receiveBodyDataLengthBlock;
+- (BOOL)isReadDataWithPacketLength;
 
 #pragma mark Properties
 /**
- *  发送时自动添加的包尾
- *  设置STRING会自动转化为byte，编码由VDSocketClient提供
- *  若@selector(isDataWithHeader)返回YES，将不会发送包尾
+ *  包头信息接口
  */
-@property (nonatomic, strong) NSData *sendTrailerData;
-@property (nonatomic, copy) NSString *sendTrailerMessage;
+@property (nonatomic, weak) id<VDSocketPacketHelperPacketLengthConversionProtocol> packetLengthConversionProtocol;
 
 /**
- *  接收时分离每条消息的包尾，返回数据时会自动删除
- *  设置STRING会自动转化为byte，编码由VDSocketClient提供
- *  若@selector(isDataWithHeader)返回YES，将不会依照此属性分离消息
+ *  发送时自动添加的包头
  */
-@property (nonatomic, strong) NSData *receiveTrailerData;
-@property (nonatomic, copy) NSString *receiveTrailerMessage;
+@property (nonatomic, copy) NSData *sendHeaderData;
+
+/**
+ *  获取发送包长度对应的data，若此block不为nil，将不会调用protocol中相同功能的方法
+ */
+@property (nonatomic, copy, setter=setSendPacketLengthDataConvertor:) NSData *(^sendPacketLengthDataConvertor)(NSInteger packetLength);
+- (void)setSendPacketLengthDataConvertor:(NSData *(^)(NSInteger packetLength))sendPacketLengthDataConvertor;
+
+/**
+ *  发送时自动添加的包尾
+ */
+@property (nonatomic, copy) NSData *sendTrailerData;
 
 /**
  *  分段发送信息，每段的长度
- *  若不大于0表示不分段
+ *  若设置大于0时，sendSegmentEnabled自动变更为YES，反之亦然
+ *  设置后可再次变更sendSegmentEnabled的值
  */
 @property (nonatomic, assign) NSInteger sendSegmentLength;
+@property (nonatomic, assign) BOOL sendSegmentEnabled; // 若sendSegmentLength<=0,返回NO
 
 /**
- *  以下属性为发送接收时以 包头（固定长度）-> 正文（包头信息中的长度）-> 包头（固定长度）-> 正文（包头信息中的长度）-> 包头（固定长度）-> 正文（包头信息中的长度）...
- *  方式发送，忽略以上设置的包尾
- *  注意：以下三个属性全设置才有效(或设置VDSocketPacketHelperHeaderProtocol, 优先使用protocol)
+ *  接收时每条消息的包头
  */
+@property (nonatomic, copy) NSData *receiveHeaderData;
 
 /**
- *  求解发送时的包头信息，因为自动发送的心跳包也需要包头信息，所以通过此block统一发送
+ *  接收时，包长度data的固定字节数
  */
-@property (nonatomic, copy, setter=setSendHeaderDataBlock:) NSData *(^sendHeaderDataBlock)(NSData *sendingData, BOOL isHeartBeat);
+@property (nonatomic, assign) NSInteger receivePacketLengthDataLength;
 
 /**
- *  接收时，包头的固定长度：先接收包头，得知正文长度后再接收正文
+ *  获取接收包data对应的长度，若此block不为nil，将不会调用protocol中相同功能的方法
  */
-@property (nonatomic, assign) NSInteger receiveHeaderDataLength;
-/**
- *  求解包头中携带的正文长度信息
- */
-@property (nonatomic, copy, setter=setReceiveBodyDataLengthBlock:) NSInteger(^receiveBodyDataLengthBlock)(NSData *headerData);
+@property (nonatomic, copy, setter=setReceivePacketDataLengthConvertor:) NSInteger(^receivePacketDataLengthConvertor)(NSData *packetLengthData);
+- (void)setReceivePacketDataLengthConvertor:(NSInteger(^)(NSData *packetLengthData))receivePacketDataLengthConvertor;
 
 /**
- *  包头信息接口
+ *  接收时每条消息的包尾
  */
-@property (nonatomic, weak) id<VDSocketPacketHelperHeaderProtocol> headerProtocol;
+@property (nonatomic, copy) NSData *receiveTrailerData;
 
 @end

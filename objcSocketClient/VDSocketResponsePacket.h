@@ -14,24 +14,23 @@
 
 @interface VDSocketResponsePacket : NSObject
 
-#pragma mark Public Method
-+ (instancetype)packetWithHeaderData:(NSData *)headerData bodyData:(NSData *)data;
-+ (instancetype)packetWithData:(NSData *)data;
-//+ (instancetype)packetWithData:(NSData *)data withString:(NSString *)message;
+#pragma mark Constructor
++ (instancetype)packet;
 
-- (BOOL)isMatchData:(NSData *)data;
-//- (BOOL)isMatchString:(NSString *)message;
+#pragma mark Public Method
+- (BOOL)isDataEqual:(NSData *)data;
 
 #pragma mark Properties
 /**
- *  包头信息，根据设置可能为nil
- */
-@property (nonatomic, strong, readonly) NSData *headerData;
-
-/**
  *  正文信息
  */
-@property (nonatomic, strong, readonly) NSData *data;
-//@property (nonatomic, copy, readonly) NSString *message;
+@property (nonatomic, copy) NSData *data;
+@property (nonatomic, copy) NSString *message;
+
+@property (nonatomic, copy) NSData *headerData;
+@property (nonatomic, copy) NSData *packetLengthData;
+@property (nonatomic, copy) NSData *trailerData;
+
+@property (nonatomic, assign) BOOL isHeartBeat;
 
 @end

@@ -14,17 +14,22 @@
 
 @interface VDSocketPacket : NSObject
 
-#pragma mark Public Method
+#pragma mark Constructor
 + (instancetype)packetWithData:(NSData *)data;
 + (instancetype)packetWithString:(NSString *)message;
++ (instancetype)heartBeatPacketWithData:(NSData *)data;
+
+- (instancetype)initWithData:(NSData *)data;
+- (instancetype)initWithString:(NSString *)message;
+- (instancetype)initHeartBeatPacketWithData:(NSData *)data;
+
+#pragma mark Public Method
+- (void)buildDataWithEncoding:(NSStringEncoding)encoding; // for string packet
 
 #pragma mark Properties
-/**
- *  唯一
- */
-@property (nonatomic, assign, readonly) NSInteger ID;
-@property (nonatomic, strong, readonly) NSData *data;
+@property (nonatomic, assign, readonly) NSInteger ID; // 唯一
+@property (nonatomic, copy, readonly) NSData *data;
 @property (nonatomic, copy, readonly) NSString *message;
-//@property (nonatomic, assign) BOOL canceled;
+@property (nonatomic, assign, readonly) BOOL isHeartBeat;
 
 @end

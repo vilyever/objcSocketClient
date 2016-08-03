@@ -13,12 +13,6 @@
 		FECA25EC1D23A36D00ED8FDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FECA25EA1D23A36D00ED8FDD /* Main.storyboard */; };
 		FECA25EE1D23A36D00ED8FDD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FECA25ED1D23A36D00ED8FDD /* Assets.xcassets */; };
 		FECA25F11D23A36D00ED8FDD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FECA25EF1D23A36D00ED8FDD /* LaunchScreen.storyboard */; };
-		FECA262C1D23BDC000ED8FDD /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FECA262A1D23BDC000ED8FDD /* CocoaAsyncSocket.framework */; };
-		FECA262D1D23BDC000ED8FDD /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FECA262A1D23BDC000ED8FDD /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FECA262E1D23BDC000ED8FDD /* objcTemp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FECA262B1D23BDC000ED8FDD /* objcTemp.framework */; };
-		FECA262F1D23BDC000ED8FDD /* objcTemp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FECA262B1D23BDC000ED8FDD /* objcTemp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FECA26391D24BC6D00ED8FDD /* objcSocketClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FECA26381D24BC6D00ED8FDD /* objcSocketClient.framework */; };
-		FECA263A1D24BC6D00ED8FDD /* objcSocketClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FECA26381D24BC6D00ED8FDD /* objcSocketClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,9 +22,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FECA262F1D23BDC000ED8FDD /* objcTemp.framework in Embed Frameworks */,
-				FECA262D1D23BDC000ED8FDD /* CocoaAsyncSocket.framework in Embed Frameworks */,
-				FECA263A1D24BC6D00ED8FDD /* objcSocketClient.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -48,9 +39,6 @@
 		FECA25ED1D23A36D00ED8FDD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FECA25F01D23A36D00ED8FDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FECA25F21D23A36D00ED8FDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FECA262A1D23BDC000ED8FDD /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = ../Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
-		FECA262B1D23BDC000ED8FDD /* objcTemp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcTemp.framework; path = ../Carthage/Build/iOS/objcTemp.framework; sourceTree = "<group>"; };
-		FECA26381D24BC6D00ED8FDD /* objcSocketClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = objcSocketClient.framework; path = "/Users/ftet/Library/Developer/Xcode/DerivedData/objcSocketClient-anvzfxhedjydjbfwqfikualelhkd/Build/Products/Debug-iphoneos/objcSocketClient.framework"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +46,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FECA262E1D23BDC000ED8FDD /* objcTemp.framework in Frameworks */,
-				FECA262C1D23BDC000ED8FDD /* CocoaAsyncSocket.framework in Frameworks */,
-				FECA26391D24BC6D00ED8FDD /* objcSocketClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,9 +55,6 @@
 		FECA25D51D23A36D00ED8FDD = {
 			isa = PBXGroup;
 			children = (
-				FECA26381D24BC6D00ED8FDD /* objcSocketClient.framework */,
-				FECA262A1D23BDC000ED8FDD /* CocoaAsyncSocket.framework */,
-				FECA262B1D23BDC000ED8FDD /* objcTemp.framework */,
 				FECA25E01D23A36D00ED8FDD /* objcSocketClientDemo */,
 				FECA25DF1D23A36D00ED8FDD /* Products */,
 			);
@@ -300,10 +282,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/../Carthage/Build/iOS/",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = objcSocketClientDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vilyever.objcSocketClientDemo;
@@ -318,10 +297,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SRCROOT)/../Carthage/Build/iOS/",
-					"$(PROJECT_DIR)",
-				);
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = objcSocketClientDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vilyever.objcSocketClientDemo;

@@ -21,33 +21,27 @@ typedef NS_ENUM(NSInteger, VDSocketClientState) {
     VDSocketClientStateConnected
 };
 
+static const NSInteger NoneEncodingType = -1;
+
 @class VDSocketClient;
 
 @protocol VDSocketClientDelegate <NSObject>
 
 @optional
-- (void)onSocketClientConnected:(VDSocketClient *)client;
-- (void)onSocketClientDisconnected:(VDSocketClient *)client;
-- (void)onSocketClient:(VDSocketClient *)client response:(VDSocketResponsePacket *)packet;
-- (void)onSocketClient:(VDSocketClient *)client stateChange:(VDSocketClientState)state;
-
-@end
-
-@protocol VDSocketClientReceiveDelegate <NSObject>
-
-@optional
-- (void)onSocketClient:(VDSocketClient *)client receiveResponse:(VDSocketResponsePacket *)packet;
-- (void)onSocketClientReceiveHeartBeat:(VDSocketClient *)client;
+- (void)socketClientDidConnected:(VDSocketClient *)client;
+- (void)socketClientDidDisconnected:(VDSocketClient *)client;
+- (void)socketClient:(VDSocketClient *)client didReceiveResponse:(VDSocketResponsePacket *)packet;
+- (void)socketClient:(VDSocketClient *)client didChangeState:(VDSocketClientState)state;
 
 @end
 
 @protocol VDSocketClientSendingDelegate <NSObject>
 
 @optional
-- (void)onSocketClient:(VDSocketClient *)client sendingBegin:(VDSocketPacket *)packet;
-- (void)onSocketClient:(VDSocketClient *)client sendingEnd:(VDSocketPacket *)packet;
-//- (void)onSocketClient:(VDSocketClient *)client sendingCancel:(VDSocketPacket *)packet;
-- (void)onSocketClient:(VDSocketClient *)client sending:(VDSocketPacket *)packet inProgressing:(float)progress;
+- (void)socketClient:(VDSocketClient *)client didBeginSending:(VDSocketPacket *)packet;
+- (void)socketClient:(VDSocketClient *)client didEndSending:(VDSocketPacket *)packet;
+- (void)socketClient:(VDSocketClient *)client didCancelSending:(VDSocketPacket *)packet;
+- (void)socketClient:(VDSocketClient *)client sendingPacket:(VDSocketPacket *)packet withSendedLength:(NSInteger)sendedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength;
 
 @end
 
@@ -58,9 +52,10 @@ typedef NS_ENUM(NSInteger, VDSocketClientState) {
 
 - (void)connect;
 - (void)disconnect;
-- (VDSocketPacket *)sendString:(NSString *)message;
 - (VDSocketPacket *)sendData:(NSData *)data;
-//- (void)cancelSend:(VDSocketPacket *)packet;
+- (VDSocketPacket *)sendString:(NSString *)message;
+- (void)sendPacket:(VDSocketPacket *)packet;
+- (void)cancelSend:(VDSocketPacket *)packet;
 - (BOOL)isConnected;
 - (BOOL)isConnecting;
 - (BOOL)isDisconnected;
@@ -68,10 +63,6 @@ typedef NS_ENUM(NSInteger, VDSocketClientState) {
 - (void)registerSocketClientDelegate:(id<VDSocketClientDelegate>)delegate;
 - (void)registerWeakSocketClientDelegate:(id<VDSocketClientDelegate>)delegate;
 - (void)removeSocketClientDelegate:(id<VDSocketClientDelegate>)delegate;
-
-- (void)registerSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate;
-- (void)registerWeakSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate;
-- (void)removeSocketClientReceiveDelegate:(id<VDSocketClientReceiveDelegate>)delegate;
 
 - (void)registerSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
 - (void)registerWeakSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
@@ -81,6 +72,7 @@ typedef NS_ENUM(NSInteger, VDSocketClientState) {
 @property (nonatomic, strong) VDSocketAddress *address;
 /**
  *  STRING与byte转换的编码
+ *  默认为NoneEncodingType，表示不自动转换byte为string
  */
 @property (nonatomic, assign) NSStringEncoding encoding;
 @property (nonatomic, strong) VDSocketPacketHelper *socketPacketHelper;
@@ -88,17 +80,19 @@ typedef NS_ENUM(NSInteger, VDSocketClientState) {
 @property (nonatomic, strong) VDSocketConfigure *socketConfigure;
 @property (nonatomic, assign, readonly) VDSocketClientState state;
 
+#pragma mark Protected Method
+
 #pragma mark Private Method
-- (void)internalSendPacket:(VDSocketPacket *)packet;
-- (void)internalSendHeartBeat;
-- (void)internalReadNextResponse;
-- (void)internalOnConnected;
-- (void)internalOnDisconnected;
-- (void)internalOnReceiveResponse:(VDSocketResponsePacket *)packet;
-- (void)internalOnReceiveHeartBeat;
-- (void)internalOnSendPacketBegin:(VDSocketPacket *)packet;
-- (void)internalOnSendPacketEnd:(VDSocketPacket *)packet;
-- (void)internalOnSendPacketProgressing:(VDSocketPacket *)packet progress:(float)progress;
-- (void)internalOnTimeTick;
+- (void)__i__enqueueNewPacket:(VDSocketPacket *)packet;
+- (void)__i__sendNextPacket;
+- (void)__i__sendHeartBeat;
+- (void)__i__readNextResponse;
+- (void)__i__onConnected;
+- (void)__i__onDisconnected;
+- (void)__i__onReceiveResponse:(VDSocketResponsePacket *)packet;
+- (void)__i__onSendPacketBegin:(VDSocketPacket *)packet;
+- (void)__i__onSendPacketEnd:(VDSocketPacket *)packet;
+- (void)__i__onSendingPacket:(VDSocketPacket *)packet withSendedLength:(NSInteger)sendedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength;
+- (void)__i__onTimeTick;
 
 @end

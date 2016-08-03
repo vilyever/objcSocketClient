@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		096F37F18F483AC28D42CE12 /* Pods_objcSocketClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86844D0640324CA6D57CE431 /* Pods_objcSocketClient.framework */; };
+		737240C96020284B69017833 /* Pods_objcSocketClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D73352445B7FEB02FFCAECD3 /* Pods_objcSocketClientTests.framework */; };
+		FE6401401D5079AC00652BAC /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = FE64013F1D5079AC00652BAC /* Cartfile */; };
 		FECA25BF1D23A35400ED8FDD /* objcSocketClient.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA25BE1D23A35400ED8FDD /* objcSocketClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FECA25C61D23A35400ED8FDD /* objcSocketClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FECA25BB1D23A35400ED8FDD /* objcSocketClient.framework */; };
 		FECA25CB1D23A35400ED8FDD /* objcSocketClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25CA1D23A35400ED8FDD /* objcSocketClientTests.m */; };
@@ -24,8 +27,6 @@
 		FECA26111D23A3D700ED8FDD /* VDSocketResponsePacket.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA26051D23A3D700ED8FDD /* VDSocketResponsePacket.m */; };
 		FECA26141D23A3E200ED8FDD /* VDSocketClient.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA26121D23A3E200ED8FDD /* VDSocketClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FECA26151D23A3E200ED8FDD /* VDSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA26131D23A3E200ED8FDD /* VDSocketClient.m */; };
-		FECA26321D23BE7800ED8FDD /* VDSocketPacketSender.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA26301D23BE7800ED8FDD /* VDSocketPacketSender.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FECA26331D23BE7800ED8FDD /* VDSocketPacketSender.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA26311D23BE7800ED8FDD /* VDSocketPacketSender.m */; };
 		FECA26411D2505ED00ED8FDD /* objcSocketClient.podspec in Resources */ = {isa = PBXBuildFile; fileRef = FECA263F1D2505ED00ED8FDD /* objcSocketClient.podspec */; };
 		FECA26421D2505ED00ED8FDD /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = FECA26401D2505ED00ED8FDD /* README.md */; };
 /* End PBXBuildFile section */
@@ -41,6 +42,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		86844D0640324CA6D57CE431 /* Pods_objcSocketClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_objcSocketClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E53C7445D1A8EE372B2305C /* Pods-objcSocketClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objcSocketClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-objcSocketClient/Pods-objcSocketClient.debug.xcconfig"; sourceTree = "<group>"; };
+		AE245C1A2801C969B35CDB6B /* Pods-objcSocketClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objcSocketClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-objcSocketClient/Pods-objcSocketClient.release.xcconfig"; sourceTree = "<group>"; };
+		B19836E59B0B73AA517E21C6 /* Pods-objcSocketClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objcSocketClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-objcSocketClientTests/Pods-objcSocketClientTests.release.xcconfig"; sourceTree = "<group>"; };
+		D73352445B7FEB02FFCAECD3 /* Pods_objcSocketClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_objcSocketClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9C267C922AFAB2C9DD5708C /* Pods-objcSocketClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objcSocketClientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-objcSocketClientTests/Pods-objcSocketClientTests.debug.xcconfig"; sourceTree = "<group>"; };
+		FE64013F1D5079AC00652BAC /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
+		FE6401411D507D1B00652BAC /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = "../../../Library/Developer/Xcode/DerivedData/objcSocketClient-anvzfxhedjydjbfwqfikualelhkd/Build/Products/Debug-iphoneos/CocoaAsyncSocket/CocoaAsyncSocket.framework"; sourceTree = "<group>"; };
+		FE6401421D507D1B00652BAC /* objcTemp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcTemp.framework; path = "../../../Library/Developer/Xcode/DerivedData/objcSocketClient-anvzfxhedjydjbfwqfikualelhkd/Build/Products/Debug-iphoneos/objcTemp/objcTemp.framework"; sourceTree = "<group>"; };
 		FECA25BB1D23A35400ED8FDD /* objcSocketClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = objcSocketClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FECA25BE1D23A35400ED8FDD /* objcSocketClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = objcSocketClient.h; sourceTree = "<group>"; };
 		FECA25C01D23A35400ED8FDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -61,8 +71,6 @@
 		FECA26051D23A3D700ED8FDD /* VDSocketResponsePacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketResponsePacket.m; sourceTree = "<group>"; };
 		FECA26121D23A3E200ED8FDD /* VDSocketClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketClient.h; sourceTree = "<group>"; };
 		FECA26131D23A3E200ED8FDD /* VDSocketClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketClient.m; sourceTree = "<group>"; };
-		FECA26301D23BE7800ED8FDD /* VDSocketPacketSender.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketPacketSender.h; sourceTree = "<group>"; };
-		FECA26311D23BE7800ED8FDD /* VDSocketPacketSender.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketPacketSender.m; sourceTree = "<group>"; };
 		FECA263F1D2505ED00ED8FDD /* objcSocketClient.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = objcSocketClient.podspec; sourceTree = "<group>"; };
 		FECA26401D2505ED00ED8FDD /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				096F37F18F483AC28D42CE12 /* Pods_objcSocketClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,12 +89,35 @@
 			buildActionMask = 2147483647;
 			files = (
 				FECA25C61D23A35400ED8FDD /* objcSocketClient.framework in Frameworks */,
+				737240C96020284B69017833 /* Pods_objcSocketClientTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F906075D3C221CBDD481A0E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				9E53C7445D1A8EE372B2305C /* Pods-objcSocketClient.debug.xcconfig */,
+				AE245C1A2801C969B35CDB6B /* Pods-objcSocketClient.release.xcconfig */,
+				F9C267C922AFAB2C9DD5708C /* Pods-objcSocketClientTests.debug.xcconfig */,
+				B19836E59B0B73AA517E21C6 /* Pods-objcSocketClientTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		5AB37DD300C77C59F3AF4857 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FE6401411D507D1B00652BAC /* CocoaAsyncSocket.framework */,
+				FE6401421D507D1B00652BAC /* objcTemp.framework */,
+				86844D0640324CA6D57CE431 /* Pods_objcSocketClient.framework */,
+				D73352445B7FEB02FFCAECD3 /* Pods_objcSocketClientTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FECA25B11D23A35400ED8FDD = {
 			isa = PBXGroup;
 			children = (
@@ -93,7 +125,10 @@
 				FECA25C91D23A35400ED8FDD /* objcSocketClientTests */,
 				FECA25BC1D23A35400ED8FDD /* Products */,
 				FECA263F1D2505ED00ED8FDD /* objcSocketClient.podspec */,
+				FE64013F1D5079AC00652BAC /* Cartfile */,
 				FECA26401D2505ED00ED8FDD /* README.md */,
+				3F906075D3C221CBDD481A0E /* Pods */,
+				5AB37DD300C77C59F3AF4857 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -142,8 +177,6 @@
 				FECA26031D23A3D700ED8FDD /* VDSocketPacketHelper.m */,
 				FECA26041D23A3D700ED8FDD /* VDSocketResponsePacket.h */,
 				FECA26051D23A3D700ED8FDD /* VDSocketResponsePacket.m */,
-				FECA26301D23BE7800ED8FDD /* VDSocketPacketSender.h */,
-				FECA26311D23BE7800ED8FDD /* VDSocketPacketSender.m */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -160,7 +193,6 @@
 				FECA260E1D23A3D700ED8FDD /* VDSocketPacketHelper.h in Headers */,
 				FECA26061D23A3D700ED8FDD /* VDSocketAddress.h in Headers */,
 				FECA260A1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.h in Headers */,
-				FECA26321D23BE7800ED8FDD /* VDSocketPacketSender.h in Headers */,
 				FECA25BF1D23A35400ED8FDD /* objcSocketClient.h in Headers */,
 				FECA260C1D23A3D700ED8FDD /* VDSocketPacket.h in Headers */,
 				FECA26101D23A3D700ED8FDD /* VDSocketResponsePacket.h in Headers */,
@@ -174,10 +206,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FECA25CF1D23A35400ED8FDD /* Build configuration list for PBXNativeTarget "objcSocketClient" */;
 			buildPhases = (
+				50B53A29AE9A75F6358A06DC /* 📦 Check Pods Manifest.lock */,
 				FECA25B61D23A35400ED8FDD /* Sources */,
 				FECA25B71D23A35400ED8FDD /* Frameworks */,
 				FECA25B81D23A35400ED8FDD /* Headers */,
 				FECA25B91D23A35400ED8FDD /* Resources */,
+				2D2480124D765B3197BF0B94 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -192,9 +226,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FECA25D21D23A35400ED8FDD /* Build configuration list for PBXNativeTarget "objcSocketClientTests" */;
 			buildPhases = (
+				3C7ABD673CB4C9D0DB5965AE /* 📦 Check Pods Manifest.lock */,
 				FECA25C11D23A35400ED8FDD /* Sources */,
 				FECA25C21D23A35400ED8FDD /* Frameworks */,
 				FECA25C31D23A35400ED8FDD /* Resources */,
+				01640FF94B9A89E57B878413 /* 📦 Embed Pods Frameworks */,
+				49F859F4BC69E900C52A121E /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -248,6 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE6401401D5079AC00652BAC /* Cartfile in Resources */,
 				FECA26411D2505ED00ED8FDD /* objcSocketClient.podspec in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -261,6 +299,84 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		01640FF94B9A89E57B878413 /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-objcSocketClientTests/Pods-objcSocketClientTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2D2480124D765B3197BF0B94 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-objcSocketClient/Pods-objcSocketClient-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3C7ABD673CB4C9D0DB5965AE /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		49F859F4BC69E900C52A121E /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-objcSocketClientTests/Pods-objcSocketClientTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		50B53A29AE9A75F6358A06DC /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		FECA25B61D23A35400ED8FDD /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -271,7 +387,6 @@
 				FECA26111D23A3D700ED8FDD /* VDSocketResponsePacket.m in Sources */,
 				FECA260F1D23A3D700ED8FDD /* VDSocketPacketHelper.m in Sources */,
 				FECA26091D23A3D700ED8FDD /* VDSocketConfigure.m in Sources */,
-				FECA26331D23BE7800ED8FDD /* VDSocketPacketSender.m in Sources */,
 				FECA26421D2505ED00ED8FDD /* README.md in Sources */,
 				FECA260D1D23A3D700ED8FDD /* VDSocketPacket.m in Sources */,
 				FECA260B1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.m in Sources */,
@@ -389,12 +504,13 @@
 		};
 		FECA25D01D23A35400ED8FDD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E53C7445D1A8EE372B2305C /* Pods-objcSocketClient.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS/";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = objcSocketClient/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -406,12 +522,13 @@
 		};
 		FECA25D11D23A35400ED8FDD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AE245C1A2801C969B35CDB6B /* Pods-objcSocketClient.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/Carthage/Build/iOS/";
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = objcSocketClient/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -423,7 +540,9 @@
 		};
 		FECA25D31D23A35400ED8FDD /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9C267C922AFAB2C9DD5708C /* Pods-objcSocketClientTests.debug.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = objcSocketClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vilyever.objcSocketClientTests;
@@ -433,7 +552,9 @@
 		};
 		FECA25D41D23A35400ED8FDD /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B19836E59B0B73AA517E21C6 /* Pods-objcSocketClientTests.release.xcconfig */;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = objcSocketClientTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vilyever.objcSocketClientTests;

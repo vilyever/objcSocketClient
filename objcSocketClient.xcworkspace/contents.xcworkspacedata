@@ -2,9 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:objcSocketClientDemo/objcSocketClientDemo.xcodeproj">
+      location = "group:objcSocketClient.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:objcSocketClient.xcodeproj">
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
