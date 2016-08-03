@@ -11,7 +11,7 @@
 @import objcSocketClient;
 @import objcTemp;
 
-@interface ViewController () <VDSocketClientDelegate, VDSocketClientReceiveDelegate, VDSocketClientSendingDelegate>
+@interface ViewController () <VDSocketClientDelegate, VDSocketClientSendingDelegate>
 
 @property (nonatomic, strong) VDSocketClient *socketClient;
 
@@ -26,29 +26,18 @@
     self.socketClient = [[VDSocketClient alloc] init];
     self.socketClient.address = [VDSocketAddress addressWithRemoteIP:@"192.168.1.70" remotePort:@"21998"];
     [self.socketClient registerSocketClientDelegate:self];
-    [self.socketClient registerSocketClientReceiveDelegate:self];
     [self.socketClient registerSocketClientSendingDelegate:self];
     
-//    self.socketClient.heartBeatHelper.sendMessage = @"$HB$";
-//    self.socketClient.heartBeatHelper.receiveMessage = @"$HB$";
-//    self.socketClient.heartBeatHelper.heartBeatInterval = 30;
     self.socketClient.socketPacketHelper.sendTrailerData = [NSData dataWithBytes:"\x0D\x0A" length:2];
     self.socketClient.socketPacketHelper.receiveTrailerData = [NSData dataWithBytes:"\x0D\x0A" length:2];
     self.socketClient.socketPacketHelper.sendSegmentLength = 1024 * 4;
     
-    [self.socketClient.socketPacketHelper setSendHeaderDataBlock:^NSData *(NSData *data, BOOL isHeartBeat) {
-        NSInteger length = data.length;
-        NSString *ls = [NSString stringWithFormat:@"%@", @(length)];
-        NSData *headerData = [ls dataUsingEncoding:NSUTF8StringEncoding];
-        NSLog(@"header length %@", @(headerData.length));
-        return headerData;
+    [self.socketClient.socketPacketHelper setSendPacketLengthDataConvertor:^NSData *(NSInteger packetLength) {
+        NSString *ls = [NSString stringWithFormat:@"%@", @(packetLength)];
+        NSData *lengthData = [ls dataUsingEncoding:NSUTF8StringEncoding];
+        NSLog(@"length %@", @(lengthData.length));
+        return lengthData;
     }];
-    
-    [self.socketClient.socketPacketHelper setReceiveBodyDataLengthBlock:^NSInteger(NSData *headerData) {
-        return 100;
-    }];
-    
-    self.socketClient.socketPacketHelper.receiveHeaderDataLength = 8;
         
     [self.socketClient connect];
 }

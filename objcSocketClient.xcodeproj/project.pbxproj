@@ -28,7 +28,6 @@
 		FECA26141D23A3E200ED8FDD /* VDSocketClient.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA26121D23A3E200ED8FDD /* VDSocketClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FECA26151D23A3E200ED8FDD /* VDSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA26131D23A3E200ED8FDD /* VDSocketClient.m */; };
 		FECA26411D2505ED00ED8FDD /* objcSocketClient.podspec in Resources */ = {isa = PBXBuildFile; fileRef = FECA263F1D2505ED00ED8FDD /* objcSocketClient.podspec */; };
-		FECA26421D2505ED00ED8FDD /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = FECA26401D2505ED00ED8FDD /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -335,7 +334,6 @@
 				FECA26111D23A3D700ED8FDD /* VDSocketResponsePacket.m in Sources */,
 				FECA260F1D23A3D700ED8FDD /* VDSocketPacketHelper.m in Sources */,
 				FECA26091D23A3D700ED8FDD /* VDSocketConfigure.m in Sources */,
-				FECA26421D2505ED00ED8FDD /* README.md in Sources */,
 				FECA260D1D23A3D700ED8FDD /* VDSocketPacket.m in Sources */,
 				FECA260B1D23A3D700ED8FDD /* VDSocketHeartBeatHelper.m in Sources */,
 			);
