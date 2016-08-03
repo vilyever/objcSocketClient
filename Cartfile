@@ -1,2 +1,2 @@
-github "vilyever/objcTemp" "master"
+github "vilyever/objcTemp" == 0.0.083
 github "robbiehanson/CocoaAsyncSocket" "master"

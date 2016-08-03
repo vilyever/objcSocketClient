@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		096F37F18F483AC28D42CE12 /* Pods_objcSocketClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86844D0640324CA6D57CE431 /* Pods_objcSocketClient.framework */; };
-		737240C96020284B69017833 /* Pods_objcSocketClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D73352445B7FEB02FFCAECD3 /* Pods_objcSocketClientTests.framework */; };
 		FE6401401D5079AC00652BAC /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = FE64013F1D5079AC00652BAC /* Cartfile */; };
+		FE64014E1D51BD6B00652BAC /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE64014C1D51BD6B00652BAC /* CocoaAsyncSocket.framework */; };
+		FE64014F1D51BD6B00652BAC /* objcTemp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE64014D1D51BD6B00652BAC /* objcTemp.framework */; };
 		FECA25BF1D23A35400ED8FDD /* objcSocketClient.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA25BE1D23A35400ED8FDD /* objcSocketClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FECA25C61D23A35400ED8FDD /* objcSocketClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FECA25BB1D23A35400ED8FDD /* objcSocketClient.framework */; };
 		FECA25CB1D23A35400ED8FDD /* objcSocketClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25CA1D23A35400ED8FDD /* objcSocketClientTests.m */; };
@@ -42,15 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		86844D0640324CA6D57CE431 /* Pods_objcSocketClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_objcSocketClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9E53C7445D1A8EE372B2305C /* Pods-objcSocketClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objcSocketClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-objcSocketClient/Pods-objcSocketClient.debug.xcconfig"; sourceTree = "<group>"; };
-		AE245C1A2801C969B35CDB6B /* Pods-objcSocketClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objcSocketClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-objcSocketClient/Pods-objcSocketClient.release.xcconfig"; sourceTree = "<group>"; };
-		B19836E59B0B73AA517E21C6 /* Pods-objcSocketClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objcSocketClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-objcSocketClientTests/Pods-objcSocketClientTests.release.xcconfig"; sourceTree = "<group>"; };
-		D73352445B7FEB02FFCAECD3 /* Pods_objcSocketClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_objcSocketClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9C267C922AFAB2C9DD5708C /* Pods-objcSocketClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-objcSocketClientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-objcSocketClientTests/Pods-objcSocketClientTests.debug.xcconfig"; sourceTree = "<group>"; };
 		FE64013F1D5079AC00652BAC /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		FE6401411D507D1B00652BAC /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = "../../../Library/Developer/Xcode/DerivedData/objcSocketClient-anvzfxhedjydjbfwqfikualelhkd/Build/Products/Debug-iphoneos/CocoaAsyncSocket/CocoaAsyncSocket.framework"; sourceTree = "<group>"; };
-		FE6401421D507D1B00652BAC /* objcTemp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcTemp.framework; path = "../../../Library/Developer/Xcode/DerivedData/objcSocketClient-anvzfxhedjydjbfwqfikualelhkd/Build/Products/Debug-iphoneos/objcTemp/objcTemp.framework"; sourceTree = "<group>"; };
+		FE64014C1D51BD6B00652BAC /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
+		FE64014D1D51BD6B00652BAC /* objcTemp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcTemp.framework; path = Carthage/Build/iOS/objcTemp.framework; sourceTree = "<group>"; };
 		FECA25BB1D23A35400ED8FDD /* objcSocketClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = objcSocketClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FECA25BE1D23A35400ED8FDD /* objcSocketClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = objcSocketClient.h; sourceTree = "<group>"; };
 		FECA25C01D23A35400ED8FDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -80,7 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				096F37F18F483AC28D42CE12 /* Pods_objcSocketClient.framework in Frameworks */,
+				FE64014E1D51BD6B00652BAC /* CocoaAsyncSocket.framework in Frameworks */,
+				FE64014F1D51BD6B00652BAC /* objcTemp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,31 +84,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				FECA25C61D23A35400ED8FDD /* objcSocketClient.framework in Frameworks */,
-				737240C96020284B69017833 /* Pods_objcSocketClientTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3F906075D3C221CBDD481A0E /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				9E53C7445D1A8EE372B2305C /* Pods-objcSocketClient.debug.xcconfig */,
-				AE245C1A2801C969B35CDB6B /* Pods-objcSocketClient.release.xcconfig */,
-				F9C267C922AFAB2C9DD5708C /* Pods-objcSocketClientTests.debug.xcconfig */,
-				B19836E59B0B73AA517E21C6 /* Pods-objcSocketClientTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 		5AB37DD300C77C59F3AF4857 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				FE6401411D507D1B00652BAC /* CocoaAsyncSocket.framework */,
-				FE6401421D507D1B00652BAC /* objcTemp.framework */,
-				86844D0640324CA6D57CE431 /* Pods_objcSocketClient.framework */,
-				D73352445B7FEB02FFCAECD3 /* Pods_objcSocketClientTests.framework */,
+				FE64014C1D51BD6B00652BAC /* CocoaAsyncSocket.framework */,
+				FE64014D1D51BD6B00652BAC /* objcTemp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -127,7 +108,6 @@
 				FECA263F1D2505ED00ED8FDD /* objcSocketClient.podspec */,
 				FE64013F1D5079AC00652BAC /* Cartfile */,
 				FECA26401D2505ED00ED8FDD /* README.md */,
-				3F906075D3C221CBDD481A0E /* Pods */,
 				5AB37DD300C77C59F3AF4857 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -206,12 +186,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = FECA25CF1D23A35400ED8FDD /* Build configuration list for PBXNativeTarget "objcSocketClient" */;
 			buildPhases = (
-				50B53A29AE9A75F6358A06DC /* 📦 Check Pods Manifest.lock */,
 				FECA25B61D23A35400ED8FDD /* Sources */,
 				FECA25B71D23A35400ED8FDD /* Frameworks */,
 				FECA25B81D23A35400ED8FDD /* Headers */,
 				FECA25B91D23A35400ED8FDD /* Resources */,
-				2D2480124D765B3197BF0B94 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -315,21 +293,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-objcSocketClientTests/Pods-objcSocketClientTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		2D2480124D765B3197BF0B94 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-objcSocketClient/Pods-objcSocketClient-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		3C7ABD673CB4C9D0DB5965AE /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -358,21 +321,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-objcSocketClientTests/Pods-objcSocketClientTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		50B53A29AE9A75F6358A06DC /* 📦 Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -504,13 +452,15 @@
 		};
 		FECA25D01D23A35400ED8FDD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9E53C7445D1A8EE372B2305C /* Pods-objcSocketClient.debug.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = objcSocketClient/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -522,13 +472,15 @@
 		};
 		FECA25D11D23A35400ED8FDD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE245C1A2801C969B35CDB6B /* Pods-objcSocketClient.release.xcconfig */;
 			buildSettings = {
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = objcSocketClient/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -540,7 +492,6 @@
 		};
 		FECA25D31D23A35400ED8FDD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F9C267C922AFAB2C9DD5708C /* Pods-objcSocketClientTests.debug.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = objcSocketClientTests/Info.plist;
@@ -552,7 +503,6 @@
 		};
 		FECA25D41D23A35400ED8FDD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B19836E59B0B73AA517E21C6 /* Pods-objcSocketClientTests.release.xcconfig */;
 			buildSettings = {
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = objcSocketClientTests/Info.plist;
