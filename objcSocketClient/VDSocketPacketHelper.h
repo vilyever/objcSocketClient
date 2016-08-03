@@ -70,7 +70,7 @@
  *  设置后可再次变更sendSegmentEnabled的值
  */
 @property (nonatomic, assign) NSInteger sendSegmentLength;
-@property (nonatomic, assign) BOOL sendSegmentEnabled; // 若sendSegmentLength<=0,返回NO
+@property (nonatomic, assign, getter=isSendSegmentEnabled) BOOL sendSegmentEnabled; // 若sendSegmentLength<=0,返回NO
 
 /**
  *  接收时每条消息的包头

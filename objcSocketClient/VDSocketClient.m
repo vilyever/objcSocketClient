@@ -354,7 +354,7 @@ static const long VDSocketClientWriteTrailerTag = 3;
         self.sendedDataLength += self.sendingPacketLengthDataLength;
     }
     else if (tag == VDSocketClientWriteBodyTag) {
-        if (self.socketConfigure.socketPacketHelper.sendSegmentEnabled) {
+        if (self.socketConfigure.socketPacketHelper.isSendSegmentEnabled) {
             self.sendedDataLength += self.socketConfigure.socketPacketHelper.sendSegmentLength;
         }
         else {
@@ -455,7 +455,7 @@ static const long VDSocketClientWriteTrailerTag = 3;
         [self.asyncSocket writeData:packetLengthData withTimeout:-1 tag:VDSocketClientWritePacketLengthTag];
     }
     
-    if (self.socketConfigure.socketPacketHelper.sendSegmentEnabled) {
+    if (self.socketConfigure.socketPacketHelper.isSendSegmentEnabled) {
         NSInteger segmentLength = self.socketConfigure.socketPacketHelper.sendSegmentLength;
         NSInteger offset = 0;
         while (offset < self.sendingPacket.data.length) {
@@ -484,7 +484,7 @@ static const long VDSocketClientWriteTrailerTag = 3;
         return;
     }
     
-    if (![self.socketConfigure.heartBeatHelper sendHeartBeatEnabled]) {
+    if (!self.socketConfigure.heartBeatHelper.isSendHeartBeatEnabled) {
         return;
     }
     
@@ -664,7 +664,7 @@ static const long VDSocketClientWriteTrailerTag = 3;
     }
     
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
-    if (self.socketConfigure.heartBeatHelper.sendHeartBeatEnabled) {
+    if (self.socketConfigure.heartBeatHelper.isSendHeartBeatEnabled) {
         if (currentTime - self.lastSendHeartBeatMessageTime >= self.socketConfigure.heartBeatHelper.heartBeatInterval) {
             [self __i__sendHeartBeat];
             self.lastSendHeartBeatMessageTime = [NSDate timeIntervalSinceReferenceDate];

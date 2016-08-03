@@ -84,8 +84,8 @@
     }
 }
 
-- (BOOL)sendSegmentEnabled {
-    if (self.sendSegmentEnabled <= 0) {
+- (BOOL)isSendSegmentEnabled {
+    if (self.sendSegmentLength <= 0) {
         return NO;
     }
     

@@ -71,7 +71,7 @@
     }
 }
 
-- (void)setIsReceiveHeartBeatPacketChecker:(BOOL (^)(VDSocketResponsePacket *))isReceiveHeartBeatPacketChecker {
+- (void)setReceiveHeartBeatPacketChecker:(BOOL (^)(VDSocketResponsePacket *))isReceiveHeartBeatPacketChecker {
     _isReceiveHeartBeatPacketChecker = isReceiveHeartBeatPacketChecker;
 }
 
@@ -82,7 +82,7 @@
     }
 }
 
-- (BOOL)sendHeartBeatEnabled {
+- (BOOL)isSendHeartBeatEnabled {
     if ((!self.protocol
             && !self.defaultSendData
             && !self.sendDataBuilder)
@@ -100,7 +100,7 @@
     }
 }
 
-- (BOOL)autoDisconnectOnRemoteNoReplyAliveTimeout {
+- (BOOL)isAutoDisconnectOnRemoteNoReplyAliveTimeout {
     if (self.remoteNoReplyAliveTimeout <= 0) {
         return NO;
     }

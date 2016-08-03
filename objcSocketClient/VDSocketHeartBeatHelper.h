@@ -48,8 +48,8 @@
 /**
  *  接收时判断可变心跳包数据block
  */
-@property (nonatomic, copy, setter=setIsReceiveHeartBeatPacketChecker:) BOOL(^isReceiveHeartBeatPacketChecker)(VDSocketResponsePacket *packet);
-- (void)setIsReceiveHeartBeatPacketChecker:(BOOL (^)(VDSocketResponsePacket *packet))isReceiveHeartBeatPacketChecker;
+@property (nonatomic, copy, setter=setReceiveHeartBeatPacketChecker:) BOOL(^isReceiveHeartBeatPacketChecker)(VDSocketResponsePacket *packet);
+- (void)setReceiveHeartBeatPacketChecker:(BOOL (^)(VDSocketResponsePacket *packet))isReceiveHeartBeatPacketChecker;
 
 /**
  *  发送心跳包的间隔
@@ -65,7 +65,7 @@
  *  自动变更后可手动设置
  *  上述三者皆为nil，返回NO
  */
-@property (nonatomic, assign) BOOL sendHeartBeatEnabled;
+@property (nonatomic, assign, getter=isSendHeartBeatEnabled) BOOL sendHeartBeatEnabled;
 
 /**
  *  若远程端在此时长内都没有发送信息到本地，自动断开连接
@@ -73,6 +73,6 @@
  *  设置后可再次变更autoDisconnectOnRemoteNoReplyAliveTimeout的值
  */
 @property (nonatomic, assign) NSTimeInterval remoteNoReplyAliveTimeout;
-@property (nonatomic, assign) BOOL autoDisconnectOnRemoteNoReplyAliveTimeout; // 若remoteNoReplyAliveTimeout<=0,返回NO
+@property (nonatomic, assign, getter=isAutoDisconnectOnRemoteNoReplyAliveTimeout) BOOL autoDisconnectOnRemoteNoReplyAliveTimeout; // 若remoteNoReplyAliveTimeout<=0,返回NO
 
 @end
