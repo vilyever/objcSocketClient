@@ -32,6 +32,10 @@ Pod::Spec.new do |s|
   s.public_header_files = 'objcSocketClient/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
 
-  s.dependency 'objcTemp', '0.0.083'
+  s.dependency 'objcString'
+  s.dependency 'objcTimer'
+  s.dependency 'objcWeakRef'
+  s.dependency 'objcBlock'
+  s.dependency 'objcArray'
   s.dependency 'CocoaAsyncSocket'
 end

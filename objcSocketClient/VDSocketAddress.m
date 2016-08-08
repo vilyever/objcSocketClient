@@ -1,14 +1,13 @@
 //
 //  VDSocketAddress.m
-//  objcTempUtilities
+//  objcSocketClient
 //
 //  Created by Deng on 16/6/28.
 //  Copyright © Deng. All rights reserved.
 //
 
 #import "VDSocketAddress.h"
-
-@import objcTemp;
+#import <objcString/objcString.h>
 
 static const NSTimeInterval VDSocketAddressDefaultConnectionTimeout = 15;
 

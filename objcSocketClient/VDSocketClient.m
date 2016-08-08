@@ -1,15 +1,17 @@
 //
 //  VDSocketClient.m
-//  objcTempUtilities
+//  objcSocketClient
 //
 //  Created by Deng on 16/6/27.
 //  Copyright © Deng. All rights reserved.
 //
 
 #import "VDSocketClient.h"
-
-@import objcTemp;
-@import CocoaAsyncSocket;
+#import <CocoaAsyncSocket/CocoaAsyncSocket.h>
+#import <objcTimer/objcTimer.h>
+#import <objcBlock/objcBlock.h>
+#import <objcWeakRef/objcWeakRef.h>
+#import <objcArray/objcArray.h>
 
 
 static const long VDSocketClientReadHeaderTag = 0;
@@ -23,6 +25,18 @@ static const long VDSocketClientWriteTrailerTag = 3;
 
 
 @interface VDSocketClient () <GCDAsyncSocketDelegate>
+
+- (void)__i__enqueueNewPacket:(VDSocketPacket *)packet;
+- (void)__i__sendNextPacket;
+- (void)__i__sendHeartBeat;
+- (void)__i__readNextResponse;
+- (void)__i__onConnected;
+- (void)__i__onDisconnected;
+- (void)__i__onReceiveResponse:(VDSocketResponsePacket *)packet;
+- (void)__i__onSendPacketBegin:(VDSocketPacket *)packet;
+- (void)__i__onSendPacketEnd:(VDSocketPacket *)packet;
+- (void)__i__onSendingPacket:(VDSocketPacket *)packet withSendedLength:(NSInteger)sendedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength;
+- (void)__i__onTimeTick;
 
 @property (nonatomic, strong) GCDAsyncSocket *asyncSocket;
 
@@ -254,7 +268,7 @@ static const long VDSocketClientWriteTrailerTag = 3;
 - (VDGCDTimer *)timer {
     if (!_timer) {
         VDWeakifySelf;
-        _timer = [VDGCDTimer timerWithInterval:1 repeats:YES fireOnMainThread:NO actionBlock:^(VDGCDTimer *timer) {
+        _timer = [VDGCDTimer timerWithInterval:1 repeats:YES fireOnMainThread:NO action:^(VDGCDTimer *timer) {
             VDStrongifySelf;
             [self __i__onTimeTick];
         }];

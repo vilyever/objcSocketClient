@@ -1,2 +1,6 @@
 github "robbiehanson/CocoaAsyncSocket" "b392b5c15151b65823223713985463e6627cf3ad"
-github "vilyever/objcTemp" "0.0.084"
+github "vilyever/objcArray" "0f12cf0f962dd9c76d570802a8e1b9b66c9c5961"
+github "vilyever/objcBlock" "e8d21785b49900e7881b96b57071f273ce479535"
+github "vilyever/objcString" "c88904bd4c3bcde2365c45083bcddca50d20375a"
+github "vilyever/objcWeakRef" "0f5f70838a29cf763c36eadc3bb62a022e0c629f"
+github "vilyever/objcTimer" "0a304ab1fe8afb2cd0c261e442d70a698492f9e8"

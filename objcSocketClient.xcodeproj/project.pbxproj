@@ -8,8 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		FE6401401D5079AC00652BAC /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = FE64013F1D5079AC00652BAC /* Cartfile */; };
-		FE64014E1D51BD6B00652BAC /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE64014C1D51BD6B00652BAC /* CocoaAsyncSocket.framework */; };
-		FE64014F1D51BD6B00652BAC /* objcTemp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE64014D1D51BD6B00652BAC /* objcTemp.framework */; };
+		FE640AAA1D58513B00652BAC /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE640AA31D58513B00652BAC /* CocoaAsyncSocket.framework */; };
+		FE640AAB1D58513B00652BAC /* objcArray.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE640AA41D58513B00652BAC /* objcArray.framework */; };
+		FE640AAC1D58513B00652BAC /* objcBlock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE640AA51D58513B00652BAC /* objcBlock.framework */; };
+		FE640AAD1D58513B00652BAC /* objcString.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE640AA61D58513B00652BAC /* objcString.framework */; };
+		FE640AAF1D58513B00652BAC /* objcTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE640AA81D58513B00652BAC /* objcTimer.framework */; };
+		FE640AB01D58513B00652BAC /* objcWeakRef.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE640AA91D58513B00652BAC /* objcWeakRef.framework */; };
 		FECA25BF1D23A35400ED8FDD /* objcSocketClient.h in Headers */ = {isa = PBXBuildFile; fileRef = FECA25BE1D23A35400ED8FDD /* objcSocketClient.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FECA25C61D23A35400ED8FDD /* objcSocketClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FECA25BB1D23A35400ED8FDD /* objcSocketClient.framework */; };
 		FECA25CB1D23A35400ED8FDD /* objcSocketClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25CA1D23A35400ED8FDD /* objcSocketClientTests.m */; };
@@ -42,8 +46,12 @@
 
 /* Begin PBXFileReference section */
 		FE64013F1D5079AC00652BAC /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = "<group>"; };
-		FE64014C1D51BD6B00652BAC /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
-		FE64014D1D51BD6B00652BAC /* objcTemp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcTemp.framework; path = Carthage/Build/iOS/objcTemp.framework; sourceTree = "<group>"; };
+		FE640AA31D58513B00652BAC /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
+		FE640AA41D58513B00652BAC /* objcArray.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcArray.framework; path = Carthage/Build/iOS/objcArray.framework; sourceTree = "<group>"; };
+		FE640AA51D58513B00652BAC /* objcBlock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcBlock.framework; path = Carthage/Build/iOS/objcBlock.framework; sourceTree = "<group>"; };
+		FE640AA61D58513B00652BAC /* objcString.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcString.framework; path = Carthage/Build/iOS/objcString.framework; sourceTree = "<group>"; };
+		FE640AA81D58513B00652BAC /* objcTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcTimer.framework; path = Carthage/Build/iOS/objcTimer.framework; sourceTree = "<group>"; };
+		FE640AA91D58513B00652BAC /* objcWeakRef.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcWeakRef.framework; path = Carthage/Build/iOS/objcWeakRef.framework; sourceTree = "<group>"; };
 		FECA25BB1D23A35400ED8FDD /* objcSocketClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = objcSocketClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FECA25BE1D23A35400ED8FDD /* objcSocketClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = objcSocketClient.h; sourceTree = "<group>"; };
 		FECA25C01D23A35400ED8FDD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -73,8 +81,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE64014E1D51BD6B00652BAC /* CocoaAsyncSocket.framework in Frameworks */,
-				FE64014F1D51BD6B00652BAC /* objcTemp.framework in Frameworks */,
+				FE640AAA1D58513B00652BAC /* CocoaAsyncSocket.framework in Frameworks */,
+				FE640AAB1D58513B00652BAC /* objcArray.framework in Frameworks */,
+				FE640AAC1D58513B00652BAC /* objcBlock.framework in Frameworks */,
+				FE640AAD1D58513B00652BAC /* objcString.framework in Frameworks */,
+				FE640AAF1D58513B00652BAC /* objcTimer.framework in Frameworks */,
+				FE640AB01D58513B00652BAC /* objcWeakRef.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,25 +101,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		5AB37DD300C77C59F3AF4857 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FE64014C1D51BD6B00652BAC /* CocoaAsyncSocket.framework */,
-				FE64014D1D51BD6B00652BAC /* objcTemp.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		FECA25B11D23A35400ED8FDD = {
 			isa = PBXGroup;
 			children = (
+				FE640AA31D58513B00652BAC /* CocoaAsyncSocket.framework */,
+				FE640AA41D58513B00652BAC /* objcArray.framework */,
+				FE640AA51D58513B00652BAC /* objcBlock.framework */,
+				FE640AA61D58513B00652BAC /* objcString.framework */,
+				FE640AA81D58513B00652BAC /* objcTimer.framework */,
+				FE640AA91D58513B00652BAC /* objcWeakRef.framework */,
 				FECA25BD1D23A35400ED8FDD /* objcSocketClient */,
 				FECA25C91D23A35400ED8FDD /* objcSocketClientTests */,
 				FECA25BC1D23A35400ED8FDD /* Products */,
-				FECA263F1D2505ED00ED8FDD /* objcSocketClient.podspec */,
 				FE64013F1D5079AC00652BAC /* Cartfile */,
+				FECA263F1D2505ED00ED8FDD /* objcSocketClient.podspec */,
 				FECA26401D2505ED00ED8FDD /* README.md */,
-				5AB37DD300C77C59F3AF4857 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};

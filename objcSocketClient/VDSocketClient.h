@@ -1,6 +1,6 @@
 //
 //  VDSocketClient.h
-//  objcTempUtilities
+//  objcSocketClient
 //
 //  Created by Deng on 16/6/27.
 //  Copyright © Deng. All rights reserved.
@@ -83,16 +83,5 @@ static const NSInteger NoneEncodingType = -1;
 #pragma mark Protected Method
 
 #pragma mark Private Method
-- (void)__i__enqueueNewPacket:(VDSocketPacket *)packet;
-- (void)__i__sendNextPacket;
-- (void)__i__sendHeartBeat;
-- (void)__i__readNextResponse;
-- (void)__i__onConnected;
-- (void)__i__onDisconnected;
-- (void)__i__onReceiveResponse:(VDSocketResponsePacket *)packet;
-- (void)__i__onSendPacketBegin:(VDSocketPacket *)packet;
-- (void)__i__onSendPacketEnd:(VDSocketPacket *)packet;
-- (void)__i__onSendingPacket:(VDSocketPacket *)packet withSendedLength:(NSInteger)sendedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength;
-- (void)__i__onTimeTick;
 
 @end

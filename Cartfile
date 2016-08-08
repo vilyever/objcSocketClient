@@ -1,2 +1,6 @@
-github "vilyever/objcTemp" == 0.0.084
+github "vilyever/objcString" "master"
+github "vilyever/objcTimer" "master"
+github "vilyever/objcWeakRef" "master"
+github "vilyever/objcBlock" "master"
+github "vilyever/objcArray" "master"
 github "robbiehanson/CocoaAsyncSocket" "master"
