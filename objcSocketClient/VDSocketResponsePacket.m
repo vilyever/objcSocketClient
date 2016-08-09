@@ -26,6 +26,13 @@
     return [data isEqualToData:self.data];
 }
 
+- (void)buildStringWithEncoding:(NSStringEncoding)encoding {
+    if (self.data) {
+        self.message = [[NSString alloc] initWithData:self.data encoding:encoding];
+    }
+}
+
+
 #pragma mark Properties
 
 

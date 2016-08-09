@@ -41,7 +41,16 @@ static const NSInteger NoneEncodingType = -1;
 - (void)socketClient:(VDSocketClient *)client didBeginSending:(VDSocketPacket *)packet;
 - (void)socketClient:(VDSocketClient *)client didEndSending:(VDSocketPacket *)packet;
 - (void)socketClient:(VDSocketClient *)client didCancelSending:(VDSocketPacket *)packet;
-- (void)socketClient:(VDSocketClient *)client sendingPacket:(VDSocketPacket *)packet withSendedLength:(NSInteger)sendedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength;
+- (void)socketClient:(VDSocketClient *)client sendingPacket:(VDSocketPacket *)packet withSendedLength:(NSInteger)sendedLength progress:(float)progress;
+
+@end
+
+@protocol VDSocketClientReceivingDelegate <NSObject>
+
+@optional
+- (void)socketClient:(VDSocketClient *)client didBeginReceiving:(VDSocketResponsePacket *)packet;
+- (void)socketClient:(VDSocketClient *)client didEndReceiving:(VDSocketResponsePacket *)packet;
+- (void)socketClient:(VDSocketClient *)client receivingResponsePacket:(VDSocketResponsePacket *)packet withReceivedLength:(NSInteger)receivedLength progress:(float)progress;
 
 @end
 
@@ -52,13 +61,18 @@ static const NSInteger NoneEncodingType = -1;
 
 - (void)connect;
 - (void)disconnect;
+
+- (BOOL)isConnected;
+- (BOOL)isConnecting;
+- (BOOL)isDisconnected;
+
 - (VDSocketPacket *)sendData:(NSData *)data;
 - (VDSocketPacket *)sendString:(NSString *)message;
 - (void)sendPacket:(VDSocketPacket *)packet;
 - (void)cancelSend:(VDSocketPacket *)packet;
-- (BOOL)isConnected;
-- (BOOL)isConnecting;
-- (BOOL)isDisconnected;
+
+- (VDSocketResponsePacket *)readDataToLength:(NSInteger)length;
+- (VDSocketResponsePacket *)readDataToData:(NSData *)data;
 
 - (void)registerSocketClientDelegate:(id<VDSocketClientDelegate>)delegate;
 - (void)registerWeakSocketClientDelegate:(id<VDSocketClientDelegate>)delegate;
@@ -67,6 +81,10 @@ static const NSInteger NoneEncodingType = -1;
 - (void)registerSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
 - (void)registerWeakSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
 - (void)removeSocketClientSendingDelegate:(id<VDSocketClientSendingDelegate>)delegate;
+
+- (void)registerSocketClientReceivingDelegate:(id<VDSocketClientReceivingDelegate>)delegate;
+- (void)registerWeakSocketClientReceivingDelegate:(id<VDSocketClientReceivingDelegate>)delegate;
+- (void)removeSocketClientReceivingDelegate:(id<VDSocketClientReceivingDelegate>)delegate;
 
 #pragma mark Properties
 @property (nonatomic, strong) VDSocketAddress *address;

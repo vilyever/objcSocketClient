@@ -73,6 +73,12 @@
 @property (nonatomic, assign, getter=isSendSegmentEnabled) BOOL sendSegmentEnabled; // 若sendSegmentLength<=0,返回NO
 
 /**
+ *  是否自动依照下述配置读取信息，默认为YES
+ *  若设为NO，需手动调用SocketClient中的方法读取
+ */
+@property (nonatomic, assign) BOOL autoReceiveEnabled;
+
+/**
  *  接收时每条消息的包头
  */
 @property (nonatomic, copy) NSData *receiveHeaderData;
@@ -92,5 +98,13 @@
  *  接收时每条消息的包尾
  */
 @property (nonatomic, copy) NSData *receiveTrailerData;
+
+/**
+ *  分段接收信息，每段的长度
+ *  若设置大于0时，receiveSegmentEnabled自动变更为YES，反之亦然
+ *  设置后可再次变更receiveSegmentEnabled的值
+ */
+@property (nonatomic, assign) NSInteger receiveSegmentLength;
+@property (nonatomic, assign, getter=isReceiveSegmentEnabled) BOOL receiveSegmentEnabled; // 若receiveSegmentLength<=0,返回NO
 
 @end

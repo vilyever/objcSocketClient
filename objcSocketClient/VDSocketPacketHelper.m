@@ -100,9 +100,29 @@
     _receivePacketDataLengthConvertor = [receivePacketDataLengthConvertor copy];
 }
 
+- (void)setReceiveSegmentLength:(NSInteger)receiveSegmentLength {
+    _receiveSegmentLength = receiveSegmentLength;
+    if (_receiveSegmentLength <= 0) {
+        self.receiveSegmentEnabled = NO;
+    }
+    else {
+        self.receiveSegmentEnabled = YES;
+    }
+}
+
+- (BOOL)isReceiveSegmentEnabled {
+    if (self.receiveSegmentLength <= 0) {
+        return NO;
+    }
+    
+    return _receiveSegmentEnabled;
+}
+
 #pragma mark Overrides
 - (instancetype)init {
     self = [super init];
+    
+    _autoReceiveEnabled = YES;
     
     return self;
 }
@@ -121,11 +141,15 @@
     packetHelper.sendSegmentLength = self.sendSegmentLength;
     packetHelper.sendSegmentEnabled = self.sendSegmentEnabled;
     
+    packetHelper.autoReceiveEnabled = self.autoReceiveEnabled;
+
     packetHelper.receiveHeaderData = [self.receiveHeaderData copy];
     packetHelper.receivePacketLengthDataLength = self.receivePacketLengthDataLength;
     packetHelper.receivePacketDataLengthConvertor = [self.receivePacketDataLengthConvertor copy];
     packetHelper.receiveTrailerData = [self.receiveTrailerData copy];
-    
+    packetHelper.receiveSegmentLength = self.receiveSegmentLength;
+    packetHelper.receiveSegmentEnabled = self.receiveSegmentEnabled;
+
     return packetHelper;
 }
 

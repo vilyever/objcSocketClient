@@ -16,7 +16,11 @@
 
 static const long VDSocketClientReadHeaderTag = 0;
 static const long VDSocketClientReadPacketLengthTag = 1;
-static const long VDSocketClientReadBodyTrailerTag = 2;
+static const long VDSocketClientReadBodyTrailerWithLengthTag = 2;
+static const long VDSocketClientReadBodyTrailerWithTrailerDataTag = 3;
+
+static const long VDSocketClientReadManuallyTag = 100;
+
 
 static const long VDSocketClientWriteHeaderTag = 0;
 static const long VDSocketClientWritePacketLengthTag = 1;
@@ -30,12 +34,20 @@ static const long VDSocketClientWriteTrailerTag = 3;
 - (void)__i__sendNextPacket;
 - (void)__i__sendHeartBeat;
 - (void)__i__readNextResponse;
+
 - (void)__i__onConnected;
 - (void)__i__onDisconnected;
 - (void)__i__onReceiveResponse:(VDSocketResponsePacket *)packet;
+
 - (void)__i__onSendPacketBegin:(VDSocketPacket *)packet;
 - (void)__i__onSendPacketEnd:(VDSocketPacket *)packet;
 - (void)__i__onSendingPacket:(VDSocketPacket *)packet withSendedLength:(NSInteger)sendedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength;
+
+- (void)__i__onReceiveResponsePacketBegin:(VDSocketResponsePacket *)packet;
+- (void)__i__onReceiveResponsePacketEnd:(VDSocketResponsePacket *)packet;
+- (void)__i__onReceivingResponsePacket:(VDSocketResponsePacket *)packet withReceivedLength:(NSInteger)receivedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength;
+
+
 - (void)__i__onTimeTick;
 
 @property (nonatomic, strong) GCDAsyncSocket *asyncSocket;
@@ -46,6 +58,7 @@ static const long VDSocketClientWriteTrailerTag = 3;
 
 @property (nonatomic, strong) NSMutableArray *socketClientDelegates;
 @property (nonatomic, strong) NSMutableArray *socketClientSendingDelegates;
+@property (nonatomic, strong) NSMutableArray *socketClientRecevingDelegates;
 
 @property (nonatomic, strong) NSMutableArray *sendingPacketQueue;
 
@@ -54,10 +67,20 @@ static const long VDSocketClientWriteTrailerTag = 3;
 @property (nonatomic, assign) NSTimeInterval lastReceiveMessageTime;
 
 @property (nonatomic, strong) VDSocketPacket *sendingPacket;
-@property (nonatomic, assign) NSInteger sendingPacketLengthDataLength;
-@property (nonatomic, assign) NSInteger sendingDataFullLength;
-@property (nonatomic, assign) NSInteger sendedDataLength;
+@property (nonatomic, assign) NSUInteger sendingHeaderDataLength;
+@property (nonatomic, assign) NSUInteger sendingPacketLengthDataLength;
+@property (nonatomic, assign) NSUInteger sendingDataLength;
+@property (nonatomic, assign) NSUInteger sendingTrailerDataLength;
+@property (nonatomic, assign) NSUInteger sendingPacketFullLength;
+@property (nonatomic, assign) NSUInteger sendedPacketDataLength;
+
 @property (nonatomic, strong) VDSocketResponsePacket *receivingResponsePacket;
+@property (nonatomic, assign) NSUInteger receivingHeaderDataLength;
+@property (nonatomic, assign) NSUInteger receivingPacketLengthDataLength;
+@property (nonatomic, assign) NSUInteger receivingDataLength;
+@property (nonatomic, assign) NSUInteger receivingTrailerDataLength;
+@property (nonatomic, assign) NSUInteger receivingResponsePacketFullLength;
+@property (nonatomic, assign) NSUInteger receiviedResponsePacketLength;
 
 @end
 
@@ -106,6 +129,18 @@ static const long VDSocketClientWriteTrailerTag = 3;
     [self.asyncSocket disconnect];
 }
 
+- (BOOL)isConnected {
+    return self.state == VDSocketClientStateConnected;
+}
+
+- (BOOL)isConnecting {
+    return self.state == VDSocketClientStateConnecting;
+}
+
+- (BOOL)isDisconnected {
+    return self.state == VDSocketClientStateDisconnected;
+}
+
 - (VDSocketPacket *)sendData:(NSData *)data {
     if (![self isConnected]) {
         return nil;
@@ -152,16 +187,36 @@ static const long VDSocketClientWriteTrailerTag = 3;
     }    
 }
 
-- (BOOL)isConnected {
-    return self.state == VDSocketClientStateConnected;
+- (VDSocketResponsePacket *)readDataToLength:(NSInteger)length {
+    if (![self isConnected]) {
+        return nil;
+    }
+    
+    if (self.receivingResponsePacket) {
+        return nil;
+    }
+    
+    self.receivingResponsePacket = [VDSocketResponsePacket packet];
+    
+    [self.asyncSocket readDataToLength:length withTimeout:-1 tag:VDSocketClientReadManuallyTag];
+    
+    return self.receivingResponsePacket;
 }
 
-- (BOOL)isConnecting {
-	return self.state == VDSocketClientStateConnecting;
-}
-
-- (BOOL)isDisconnected {
-	return self.state == VDSocketClientStateDisconnected;
+- (VDSocketResponsePacket *)readDataToData:(NSData *)data {
+    if (![self isConnected]) {
+        return nil;
+    }
+    
+    if (self.receivingResponsePacket) {
+        return nil;
+    }
+    
+    self.receivingResponsePacket = [VDSocketResponsePacket packet];
+    
+    [self.asyncSocket readDataToData:data withTimeout:-1 tag:VDSocketClientReadManuallyTag];
+    
+    return self.receivingResponsePacket;
 }
 
 - (void)registerSocketClientDelegate:(id<VDSocketClientDelegate>)delegate {
@@ -196,6 +251,22 @@ static const long VDSocketClientWriteTrailerTag = 3;
     [self.socketClientSendingDelegates removeObject:delegate];
 }
 
+- (void)registerSocketClientReceivingDelegate:(id<VDSocketClientReceivingDelegate>)delegate {
+    if (![self.socketClientRecevingDelegates containsObject:delegate]) {
+        [self.socketClientRecevingDelegates addObject:delegate];
+    }
+}
+
+- (void)registerWeakSocketClientReceivingDelegate:(id<VDSocketClientReceivingDelegate>)delegate {
+    if (![self.socketClientRecevingDelegates containsObject:delegate]) {
+        [self.socketClientRecevingDelegates addObject:[VDWeakRef refWithObject:delegate]];
+    }
+}
+
+- (void)removeSocketClientReceivingDelegate:(id<VDSocketClientReceivingDelegate>)delegate {
+    [self.socketClientRecevingDelegates removeObject:delegate];
+}
+
 #pragma mark Properties
 - (NSMutableArray *)sendingPacketQueue {
     if (!_sendingPacketQueue) {
@@ -219,6 +290,14 @@ static const long VDSocketClientWriteTrailerTag = 3;
     }
     
     return _socketClientSendingDelegates;
+}
+
+- (NSMutableArray *)socketClientRecevingDelegates {
+    if (!_socketClientRecevingDelegates) {
+        _socketClientRecevingDelegates = [NSMutableArray new];
+    }
+    
+    return _socketClientRecevingDelegates;
 }
 
 - (VDSocketConfigure *)socketConfigure {
@@ -277,12 +356,28 @@ static const long VDSocketClientWriteTrailerTag = 3;
     return _timer;
 }
 
-- (VDSocketResponsePacket *)receivingResponsePacket {
-    if (!_receivingResponsePacket) {
-        _receivingResponsePacket = [VDSocketResponsePacket packet];
+- (void)setSendingPacket:(VDSocketPacket *)sendingPacket {
+    if (_sendingPacket != sendingPacket) {
+        _sendingPacket = sendingPacket;
+        self.sendingHeaderDataLength = 0;
+        self.sendingPacketLengthDataLength = 0;
+        self.sendingDataLength = 0;
+        self.sendingTrailerDataLength = 0;
+        self.sendingPacketFullLength = 0;
+        self.sendedPacketDataLength = 0;
     }
-    
-    return _receivingResponsePacket;
+}
+
+- (void)setReceivingResponsePacket:(VDSocketResponsePacket *)receivingResponsePacket {
+    if (_receivingResponsePacket != receivingResponsePacket) {
+        _receivingResponsePacket = receivingResponsePacket;
+        self.receivingHeaderDataLength = 0;
+        self.receivingPacketLengthDataLength = 0;
+        self.receivingDataLength = 0;
+        self.receivingTrailerDataLength = 0;
+        self.receivingResponsePacketFullLength = 0;
+        self.receivingDataLength = 0;
+    }
 }
 
 #pragma mark Overrides
@@ -310,51 +405,78 @@ static const long VDSocketClientWriteTrailerTag = 3;
 //            NSLog(@"Enabling backgrounding failed!");
     }];
     
-    self.sendingPacket = nil;
-    self.sendingPacketLengthDataLength = 0;
-    self.sendedDataLength = 0;
-    self.sendingDataFullLength = 0;
-    
-    self.receivingResponsePacket = nil;
-    
     [self __i__onConnected];
-
-    [self __i__readNextResponse];
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
-    self.sendingPacket = nil;
-    self.sendingPacketLengthDataLength = 0;
-    self.sendedDataLength = 0;
-    self.sendingDataFullLength = 0;
-    
-    self.receivingResponsePacket = nil;
-    
     [self __i__onDisconnected];
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+    BOOL isCurrentReadOver = NO;
     if (tag == VDSocketClientReadHeaderTag) {
         self.receivingResponsePacket.headerData = self.socketConfigure.socketPacketHelper.receiveHeaderData;
+        self.receiviedResponsePacketLength += self.socketConfigure.socketPacketHelper.receiveHeaderData.length;
     }
     else if (tag == VDSocketClientReadPacketLengthTag) {
         self.receivingResponsePacket.packetLengthData = data;
+        
+        self.receiviedResponsePacketLength += data.length;
     }
-    else if (tag == VDSocketClientReadBodyTrailerTag) {
-        if (self.socketConfigure.socketPacketHelper.receiveTrailerData) {
-            NSInteger trailerLength = self.socketConfigure.socketPacketHelper.receiveTrailerData.length;
-            self.receivingResponsePacket.data = [data subdataWithRange:NSMakeRange(0, data.length - trailerLength)];
-            self.receivingResponsePacket.trailerData = [data subdataWithRange:NSMakeRange(data.length - trailerLength, trailerLength)];
-        }
-        else {
-            self.receivingResponsePacket.data = data;
-            self.receivingResponsePacket.trailerData = nil;
+    else if (tag == VDSocketClientReadBodyTrailerWithLengthTag) {
+        if (!self.receivingResponsePacket.data) {
+            self.receivingResponsePacket.data = [NSMutableData dataWithCapacity:self.receivingDataLength];
         }
         
+        NSUInteger appendLength = data.length;
+        if (self.receivingResponsePacket.data.length + data.length > self.receivingDataLength) {
+            appendLength -= self.receivingTrailerDataLength;
+            self.receivingResponsePacket.trailerData = self.socketConfigure.socketPacketHelper.receiveTrailerData;
+        }
+        
+        [self.receivingResponsePacket.data appendBytes:[data bytes] length:appendLength];
+
+        self.receiviedResponsePacketLength += data.length;
+        
+        [self __i__onReceivingResponsePacket:self.receivingResponsePacket withReceivedLength:self.receiviedResponsePacketLength headerLength:self.socketConfigure.socketPacketHelper.receiveHeaderData.length packetLengthDataLength:self.receivingPacketLengthDataLength dataLength:self.receivingResponsePacket.data.length trailerLength:self.socketConfigure.socketPacketHelper.receiveTrailerData.length];
+        
+        if (self.receiviedResponsePacketLength == self.receivingResponsePacketFullLength) {
+            isCurrentReadOver = YES;
+        }
+    }
+    else if (tag == VDSocketClientReadBodyTrailerWithTrailerDataTag) {
+        self.receivingResponsePacket.data = [NSMutableData dataWithCapacity:data.length - self.receivingTrailerDataLength];
+        [self.receivingResponsePacket.data appendBytes:[data bytes] length:data.length - self.receivingTrailerDataLength];
+        self.receivingResponsePacket.trailerData = self.socketConfigure.socketPacketHelper.receiveTrailerData;
+        
+        self.receiviedResponsePacketLength += data.length;
+        
+        [self __i__onReceivingResponsePacket:self.receivingResponsePacket withReceivedLength:self.receiviedResponsePacketLength headerLength:self.receivingHeaderDataLength packetLengthDataLength:0 dataLength:self.receivingResponsePacket.data.length trailerLength:self.receivingTrailerDataLength];
+        
+        isCurrentReadOver = YES;
+    }
+    else if (tag == VDSocketClientReadManuallyTag) {
+        self.receivingResponsePacket.data = [NSMutableData dataWithData:data];
+        
+        self.receiviedResponsePacketLength += data.length;
+        
+        [self __i__onReceivingResponsePacket:self.receivingResponsePacket withReceivedLength:data.length headerLength:0 packetLengthDataLength:0 dataLength:data.length trailerLength:0];
+        
+        isCurrentReadOver = YES;
+    }
+    
+    if (isCurrentReadOver) {
         self.receivingResponsePacket.isHeartBeat = [self.socketConfigure.heartBeatHelper isReceiveHeartBeatPacket:self.receivingResponsePacket];
         
-        [self __i__onReceiveResponse:self.receivingResponsePacket];
+        if (self.encoding != NoneEncodingType) {
+            [self.receivingResponsePacket buildStringWithEncoding:self.encoding];
+        }
+        
+        VDSocketResponsePacket *packet = self.receivingResponsePacket;
         self.receivingResponsePacket = nil;
+        
+        [self __i__onReceiveResponsePacketEnd:packet];
+        [self __i__onReceiveResponse:packet];
     }
     
     [self __i__readNextResponse];
@@ -362,35 +484,33 @@ static const long VDSocketClientWriteTrailerTag = 3;
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
     if (tag == VDSocketClientWriteHeaderTag) {
-        self.sendedDataLength += self.socketConfigure.socketPacketHelper.sendHeaderData.length;
+        self.sendedPacketDataLength += self.sendingHeaderDataLength;
     }
     else if (tag == VDSocketClientWritePacketLengthTag) {
-        self.sendedDataLength += self.sendingPacketLengthDataLength;
+        self.sendedPacketDataLength += self.sendingPacketLengthDataLength;
     }
     else if (tag == VDSocketClientWriteBodyTag) {
         if (self.socketConfigure.socketPacketHelper.isSendSegmentEnabled) {
-            self.sendedDataLength += self.socketConfigure.socketPacketHelper.sendSegmentLength;
+            self.sendedPacketDataLength += self.socketConfigure.socketPacketHelper.sendSegmentLength;
         }
         else {
-            self.sendedDataLength += self.sendingPacket.data.length;
+            self.sendedPacketDataLength += self.sendingDataLength;
         }
         
-        self.sendedDataLength = MIN(self.sendedDataLength, self.socketConfigure.socketPacketHelper.sendHeaderData.length + self.sendingPacketLengthDataLength + self.sendingPacket.data.length);
+        self.sendedPacketDataLength = MIN(self.sendedPacketDataLength, self.sendingHeaderDataLength + self.sendingPacketLengthDataLength + self.sendingDataLength);
     }
     else if (tag == VDSocketClientWriteTrailerTag) {
-        self.sendedDataLength += self.socketConfigure.socketPacketHelper.sendTrailerData.length;
+        self.sendedPacketDataLength += self.sendingTrailerDataLength;
     }
 
 
-    [self __i__onSendingPacket:self.sendingPacket withSendedLength:self.sendedDataLength headerLength:self.socketConfigure.socketPacketHelper.sendHeaderData.length packetLengthDataLength:self.sendingPacketLengthDataLength dataLength:self.sendingPacket.data.length trailerLength:self.socketConfigure.socketPacketHelper.sendTrailerData.length];
-    if (self.sendedDataLength == self.sendingDataFullLength) {
-        [self __i__onSendPacketEnd:self.sendingPacket];
-    }
+    [self __i__onSendingPacket:self.sendingPacket withSendedLength:self.sendedPacketDataLength headerLength:self.sendingHeaderDataLength packetLengthDataLength:self.sendingPacketLengthDataLength dataLength:self.sendingDataLength trailerLength:self.sendingTrailerDataLength];
     
-    self.sendingPacket = nil;
-    self.sendingPacketLengthDataLength = 0;
-    self.sendedDataLength = 0;
-    self.sendingDataFullLength = 0;
+    if (self.sendedPacketDataLength == self.sendingPacketFullLength) {
+        [self __i__onSendPacketEnd:self.sendingPacket];
+        
+        self.sendingPacket = nil;
+    }
     
     [self __i__sendNextPacket];
 }
@@ -455,8 +575,15 @@ static const long VDSocketClientWriteTrailerTag = 3;
     NSData *trailerData = self.socketConfigure.socketPacketHelper.sendTrailerData;
     NSData *packetLengthData = [self.socketConfigure.socketPacketHelper getSendPacketLengthDataForPacketLength:self.sendingPacket.data.length + trailerData.length];
     
+    self.sendingPacket.headerData = headerData;
+    self.sendingPacket.trailerData = trailerData;
+    self.sendingPacket.packetLengthData = packetLengthData;
+    
+    self.sendingHeaderDataLength = headerData.length;
     self.sendingPacketLengthDataLength = packetLengthData.length;
-    self.sendingDataFullLength = headerData.length + packetLengthData.length + self.sendingPacket.data.length + trailerData.length;
+    self.sendingDataLength = self.sendingPacket.data.length;
+    self.sendingTrailerDataLength = trailerData.length;
+    self.sendingPacketFullLength = self.sendingHeaderDataLength + self.sendingPacketLengthDataLength + self.sendingDataLength + self.sendingTrailerDataLength;
     
     [self __i__onSendPacketBegin:self.sendingPacket];
     [self __i__onSendingPacket:self.sendingPacket withSendedLength:0 headerLength:headerData.length packetLengthDataLength:packetLengthData.length dataLength:self.sendingPacket.data.length trailerLength:trailerData.length];
@@ -472,9 +599,9 @@ static const long VDSocketClientWriteTrailerTag = 3;
     if (self.socketConfigure.socketPacketHelper.isSendSegmentEnabled) {
         NSInteger segmentLength = self.socketConfigure.socketPacketHelper.sendSegmentLength;
         NSInteger offset = 0;
-        while (offset < self.sendingPacket.data.length) {
+        while (offset < self.sendingDataLength) {
             NSInteger end = offset + segmentLength;
-            end = MIN(end, self.sendingPacket.data.length);
+            end = MIN(end, self.sendingDataLength);
             [self.asyncSocket writeData:[self.sendingPacket.data subdataWithRange:NSMakeRange(offset, end - offset)] withTimeout:-1 tag:VDSocketClientWriteBodyTag];
             offset = end;
         }
@@ -507,6 +634,10 @@ static const long VDSocketClientWriteTrailerTag = 3;
 }
 
 - (void)__i__readNextResponse {
+    if (!self.socketConfigure.socketPacketHelper.autoReceiveEnabled) {
+        return;
+    }
+    
     if ([NSThread isMainThread]) {
         VDWeakifySelf;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -520,20 +651,52 @@ static const long VDSocketClientWriteTrailerTag = 3;
         return;
     }
     
+    if (self.receivingResponsePacket) {
+        return;
+    }
+    
+    if (!self.receivingResponsePacket) {
+        self.receivingResponsePacket = [VDSocketResponsePacket packet];
+
+        self.receivingHeaderDataLength = self.socketConfigure.socketPacketHelper.receiveHeaderData.length;
+        self.receivingPacketLengthDataLength = self.socketConfigure.socketPacketHelper.receivePacketLengthDataLength;
+        self.receivingTrailerDataLength = self.socketConfigure.socketPacketHelper.receiveTrailerData.length;
+        
+        [self __i__onReceiveResponsePacketBegin:self.receivingResponsePacket];
+    }
+    
     if (self.socketConfigure.socketPacketHelper.receiveHeaderData
         && !self.receivingResponsePacket.headerData) {
         [self.asyncSocket readDataToData:self.socketConfigure.socketPacketHelper.receiveHeaderData withTimeout:-1 tag:VDSocketClientReadHeaderTag];
     }
     else if ([self.socketConfigure.socketPacketHelper isReadDataWithPacketLength]
              && !self.receivingResponsePacket.packetLengthData) {
-        [self.asyncSocket readDataToLength:self.socketConfigure.socketPacketHelper.receivePacketLengthDataLength withTimeout:-1 tag:VDSocketClientReadPacketLengthTag];
+        [self.asyncSocket readDataToLength:self.receivingPacketLengthDataLength withTimeout:-1 tag:VDSocketClientReadPacketLengthTag];
     }
     else if (!self.receivingResponsePacket.data) {
         if ([self.socketConfigure.socketPacketHelper isReadDataWithPacketLength]) {
-            [self.asyncSocket readDataToLength:[self.socketConfigure.socketPacketHelper getReceivePacketDataLength:self.receivingResponsePacket.packetLengthData] withTimeout:-1 tag:VDSocketClientReadBodyTrailerTag];
+            
+            NSInteger bodyTrailerLength = [self.socketConfigure.socketPacketHelper getReceivePacketDataLength:self.receivingResponsePacket.packetLengthData];
+            self.receivingDataLength = bodyTrailerLength - self.receivingTrailerDataLength;
+            
+            self.receivingResponsePacketFullLength = self.receivingHeaderDataLength + self.receivingPacketLengthDataLength + self.receivingDataLength + self.receivingTrailerDataLength;
+            
+            if (self.socketConfigure.socketPacketHelper.isReceiveSegmentEnabled) {
+                NSInteger segmentLength = self.socketConfigure.socketPacketHelper.receiveSegmentLength;
+                NSInteger offset = 0;
+                while (offset < bodyTrailerLength) {
+                    NSInteger end = offset + segmentLength;
+                    end = MIN(end, bodyTrailerLength);
+                    [self.asyncSocket readDataToLength:(end - offset) withTimeout:-1 tag:VDSocketClientReadBodyTrailerWithLengthTag];
+                    offset = end;
+                }
+            }
+            else {
+                [self.asyncSocket readDataToLength:bodyTrailerLength withTimeout:-1 tag:VDSocketClientReadBodyTrailerWithLengthTag];
+            }
         }
         else {
-            [self.asyncSocket readDataToData:self.socketConfigure.socketPacketHelper.receiveTrailerData withTimeout:-1 tag:VDSocketClientReadBodyTrailerTag];
+            [self.asyncSocket readDataToData:self.socketConfigure.socketPacketHelper.receiveTrailerData withTimeout:-1 tag:VDSocketClientReadBodyTrailerWithTrailerDataTag];
         }
     }
 }
@@ -560,6 +723,10 @@ static const long VDSocketClientWriteTrailerTag = 3;
             [delegate socketClientDidConnected:self];
         }
     }
+    
+    self.sendingPacket = nil;
+    self.receivingResponsePacket = nil;
+    [self __i__readNextResponse];
 }
 
 - (void)__i__onDisconnected {
@@ -571,6 +738,9 @@ static const long VDSocketClientWriteTrailerTag = 3;
         });
         return;
     }
+    
+    self.sendingPacket = nil;
+    self.receivingResponsePacket = nil;
     
     self.isDisconnecting = NO;
     self.state = VDSocketClientStateDisconnected;
@@ -666,8 +836,62 @@ static const long VDSocketClientWriteTrailerTag = 3;
     }
     
     for (id delegate in [self.socketClientSendingDelegates copy]) {
-        if ([delegate respondsToSelector:@selector(socketClient:sendingPacket:withSendedLength:headerLength:packetLengthDataLength:dataLength:trailerLength:)]) {
-            [delegate socketClient:self sendingPacket:packet withSendedLength:sendedLength headerLength:headerLength packetLengthDataLength:packetLengthDataLength dataLength:dataLength trailerLength:trailerLength];
+        if ([delegate respondsToSelector:@selector(socketClient:sendingPacket:withSendedLength:progress:)]) {
+            float progress = sendedLength / (float) (headerLength + packetLengthDataLength + dataLength + trailerLength);
+            [delegate socketClient:self sendingPacket:packet withSendedLength:sendedLength progress:progress];
+        }
+    }
+}
+
+- (void)__i__onReceiveResponsePacketBegin:(VDSocketResponsePacket *)packet {
+    if (![NSThread isMainThread]) {
+        VDWeakifySelf;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            VDStrongifySelf;
+            [self __i__onReceiveResponsePacketBegin:packet];
+        });
+        return;
+    }
+    
+    for (id delegate in [self.socketClientRecevingDelegates copy]) {
+        if ([delegate respondsToSelector:@selector(socketClient:didBeginReceiving:)]) {
+            [delegate socketClient:self didBeginReceiving:packet];
+        }
+    }
+}
+
+- (void)__i__onReceiveResponsePacketEnd:(VDSocketResponsePacket *)packet {
+    if (![NSThread isMainThread]) {
+        VDWeakifySelf;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            VDStrongifySelf;
+            [self __i__onReceiveResponsePacketEnd:packet];
+        });
+        return;
+    }
+    
+    for (id delegate in [self.socketClientRecevingDelegates copy]) {
+        if ([delegate respondsToSelector:@selector(socketClient:didEndReceiving:)]) {
+            [delegate socketClient:self didEndReceiving:packet];
+        }
+    }
+}
+
+- (void)__i__onReceivingResponsePacket:(VDSocketResponsePacket *)packet withReceivedLength:(NSInteger)receivedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength {
+    if (![NSThread isMainThread]) {
+        VDWeakifySelf;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            VDStrongifySelf;
+            [self __i__onReceivingResponsePacket:packet withReceivedLength:receivedLength headerLength:headerLength packetLengthDataLength:packetLengthDataLength dataLength:dataLength trailerLength:trailerLength];
+        });
+        return;
+    }
+    
+    for (id delegate in [self.socketClientRecevingDelegates copy]) {
+        if ([delegate respondsToSelector:@selector(socketClient:receivingResponsePacket:withReceivedLength:progress:)]) {
+            
+            float progress = receivedLength / (float) (headerLength + packetLengthDataLength + dataLength + trailerLength);
+            [delegate socketClient:self receivingResponsePacket:packet withReceivedLength:receivedLength progress:progress];
         }
     }
 }

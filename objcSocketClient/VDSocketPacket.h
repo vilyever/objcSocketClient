@@ -32,4 +32,8 @@
 @property (nonatomic, copy, readonly) NSString *message;
 @property (nonatomic, assign, readonly) BOOL isHeartBeat;
 
+@property (nonatomic, copy) NSData *headerData;
+@property (nonatomic, copy) NSData *packetLengthData;
+@property (nonatomic, copy) NSData *trailerData;
+
 @end

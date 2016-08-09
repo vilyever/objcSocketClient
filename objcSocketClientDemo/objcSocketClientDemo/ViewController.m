@@ -8,10 +8,9 @@
 
 #import "ViewController.h"
 
-@import objcSocketClient;
-@import objcTemp;
+#import "objcSocketClient.h"
 
-@interface ViewController () <VDSocketClientDelegate, VDSocketClientSendingDelegate>
+@interface ViewController () <VDSocketClientDelegate, VDSocketClientSendingDelegate, VDSocketClientReceivingDelegate>
 
 @property (nonatomic, strong) VDSocketClient *socketClient;
 
@@ -24,20 +23,15 @@
     // Do any additional setup after loading the view, typically from a nib.
     
     self.socketClient = [[VDSocketClient alloc] init];
-    self.socketClient.address = [VDSocketAddress addressWithRemoteIP:@"192.168.1.70" remotePort:@"21998"];
+    self.socketClient.address = [VDSocketAddress addressWithRemoteIP:@"192.168.1.248" remotePort:@"8566"];
     [self.socketClient registerSocketClientDelegate:self];
     [self.socketClient registerSocketClientSendingDelegate:self];
+    [self.socketClient registerSocketClientReceivingDelegate:self];
     
     self.socketClient.socketPacketHelper.sendTrailerData = [NSData dataWithBytes:"\x0D\x0A" length:2];
     self.socketClient.socketPacketHelper.receiveTrailerData = [NSData dataWithBytes:"\x0D\x0A" length:2];
-    self.socketClient.socketPacketHelper.sendSegmentLength = 1024 * 4;
     
-    [self.socketClient.socketPacketHelper setSendPacketLengthDataConvertor:^NSData *(NSInteger packetLength) {
-        NSString *ls = [NSString stringWithFormat:@"%@", @(packetLength)];
-        NSData *lengthData = [ls dataUsingEncoding:NSUTF8StringEncoding];
-        NSLog(@"length %@", @(lengthData.length));
-        return lengthData;
-    }];
+    self.socketClient.encoding = NSUTF8StringEncoding;
         
     [self.socketClient connect];
 }
@@ -52,46 +46,46 @@
 }
 
 
-- (void)onSocketClientConnected:(VDSocketClient *)client {
+- (void)socketClientDidConnected:(VDSocketClient *)client {
     NSLog(@"onSocketClientConnected");
 //    [self.socketClient sendString:@"from ios"];
-    
-    UIImage *image = [UIImage imageNamed:@"China"];
-    NSData *data = [NSData dataWithData:UIImagePNGRepresentation(image)];
-    
-    NSLog(@"image length %@", @(data.length));
-    
-    [self.socketClient sendData:data];
+
+    [self.socketClient sendString:@"{\"commandType\":\"0\",\"commandTag\":\"0\",\"flag\":\"\"，\"commandValue\":\"设备ID\"}"];
 }
 
 
-- (void)onSocketClientDisconnected:(VDSocketClient *)client {
+- (void)socketClientDidDisconnected:(VDSocketClient *)client {
 	NSLog(@"onSocketClientDisconnected");
 }
 
-- (void)onSocketClientReceiveHeartBeat:(VDSocketClient *)client {
-	NSLog(@"onSocketClientHeartBeat");
+- (void)socketClient:(VDSocketClient *)client didReceiveResponse:(VDSocketResponsePacket *)packet {
+	NSLog(@"response %@", packet.message);
 }
 
-- (void)onSocketClient:(VDSocketClient *)client receiveResponse:(VDSocketResponsePacket *)packet {
-	NSLog(@"response %@", [[NSString alloc] initWithData:packet.data encoding:self.socketClient.encoding]);
-}
-
-- (void)onSocketClient:(VDSocketClient *)client sendingBegin:(VDSocketPacket *)packet {
+- (void)socketClient:(VDSocketClient *)client didBeginSending:(VDSocketPacket *)packet {
 	NSLog(@"sendingBegin %@", @(packet.ID));
 }
 
-- (void)onSocketClient:(VDSocketClient *)client sendingEnd:(VDSocketPacket *)packet {
+- (void)socketClient:(VDSocketClient *)client didEndSending:(VDSocketPacket *)packet {
 	NSLog(@"sendingEnd %@", @(packet.ID));
 }
 
-- (void)onSocketClient:(VDSocketClient *)client sending:(VDSocketPacket *)packet inProgressing:(float)progress {
+- (void)socketClient:(VDSocketClient *)client sendingPacket:(VDSocketPacket *)packet withSendedLength:(NSInteger)sendedLength progress:(float)progress {
+
 	NSLog(@"sending %@ %g", @(packet.ID), progress);
 }
 
+- (void)socketClient:(VDSocketClient *)client didBeginReceiving:(VDSocketResponsePacket *)packet {
+    NSLog(@"didBeginReceiving");
+}
 
+- (void)socketClient:(VDSocketClient *)client didEndReceiving:(VDSocketResponsePacket *)packet {
+    NSLog(@"didEndReceiving");
+}
 
+- (void)socketClient:(VDSocketClient *)client receivingResponsePacket:(VDSocketResponsePacket *)packet withReceivedLength:(NSInteger)receivedLength progress:(float)progress {
 
-
+    NSLog(@"receing %g", progress);
+}
 
 @end

@@ -7,12 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		FE6401531D51C51400652BAC /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE6401501D51C51400652BAC /* CocoaAsyncSocket.framework */; };
-		FE6401541D51C51400652BAC /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE6401501D51C51400652BAC /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FE6401551D51C51400652BAC /* objcSocketClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE6401511D51C51400652BAC /* objcSocketClient.framework */; };
-		FE6401561D51C51400652BAC /* objcSocketClient.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE6401511D51C51400652BAC /* objcSocketClient.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		FE6401571D51C51400652BAC /* objcTemp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE6401521D51C51400652BAC /* objcTemp.framework */; };
-		FE6401581D51C51400652BAC /* objcTemp.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE6401521D51C51400652BAC /* objcTemp.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE640C351D597B3100652BAC /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FE640C251D597B3100652BAC /* Info.plist */; };
+		FE640C361D597B3100652BAC /* VDSocketAddress.m in Sources */ = {isa = PBXBuildFile; fileRef = FE640C281D597B3100652BAC /* VDSocketAddress.m */; };
+		FE640C371D597B3100652BAC /* VDSocketClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FE640C2A1D597B3100652BAC /* VDSocketClient.m */; };
+		FE640C381D597B3100652BAC /* VDSocketConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = FE640C2C1D597B3100652BAC /* VDSocketConfigure.m */; };
+		FE640C391D597B3100652BAC /* VDSocketHeartBeatHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FE640C2E1D597B3100652BAC /* VDSocketHeartBeatHelper.m */; };
+		FE640C3A1D597B3100652BAC /* VDSocketPacket.m in Sources */ = {isa = PBXBuildFile; fileRef = FE640C301D597B3100652BAC /* VDSocketPacket.m */; };
+		FE640C3B1D597B3100652BAC /* VDSocketPacketHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = FE640C321D597B3100652BAC /* VDSocketPacketHelper.m */; };
+		FE640C3C1D597B3100652BAC /* VDSocketResponsePacket.m in Sources */ = {isa = PBXBuildFile; fileRef = FE640C341D597B3100652BAC /* VDSocketResponsePacket.m */; };
+		FE640C431D597C7F00652BAC /* CocoaAsyncSocket.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE640C3D1D597C7F00652BAC /* CocoaAsyncSocket.framework */; };
+		FE640C441D597C7F00652BAC /* CocoaAsyncSocket.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE640C3D1D597C7F00652BAC /* CocoaAsyncSocket.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE640C451D597C7F00652BAC /* objcArray.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE640C3E1D597C7F00652BAC /* objcArray.framework */; };
+		FE640C461D597C7F00652BAC /* objcArray.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE640C3E1D597C7F00652BAC /* objcArray.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE640C471D597C7F00652BAC /* objcBlock.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE640C3F1D597C7F00652BAC /* objcBlock.framework */; };
+		FE640C481D597C7F00652BAC /* objcBlock.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE640C3F1D597C7F00652BAC /* objcBlock.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE640C491D597C7F00652BAC /* objcString.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE640C401D597C7F00652BAC /* objcString.framework */; };
+		FE640C4A1D597C7F00652BAC /* objcString.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE640C401D597C7F00652BAC /* objcString.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE640C4B1D597C7F00652BAC /* objcTimer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE640C411D597C7F00652BAC /* objcTimer.framework */; };
+		FE640C4C1D597C7F00652BAC /* objcTimer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE640C411D597C7F00652BAC /* objcTimer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FE640C4D1D597C8000652BAC /* objcWeakRef.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE640C421D597C7F00652BAC /* objcWeakRef.framework */; };
+		FE640C4E1D597C8000652BAC /* objcWeakRef.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FE640C421D597C7F00652BAC /* objcWeakRef.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		FECA25E31D23A36D00ED8FDD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25E21D23A36D00ED8FDD /* main.m */; };
 		FECA25E61D23A36D00ED8FDD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25E51D23A36D00ED8FDD /* AppDelegate.m */; };
 		FECA25E91D23A36D00ED8FDD /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FECA25E81D23A36D00ED8FDD /* ViewController.m */; };
@@ -28,9 +42,12 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				FE6401581D51C51400652BAC /* objcTemp.framework in Embed Frameworks */,
-				FE6401561D51C51400652BAC /* objcSocketClient.framework in Embed Frameworks */,
-				FE6401541D51C51400652BAC /* CocoaAsyncSocket.framework in Embed Frameworks */,
+				FE640C4C1D597C7F00652BAC /* objcTimer.framework in Embed Frameworks */,
+				FE640C461D597C7F00652BAC /* objcArray.framework in Embed Frameworks */,
+				FE640C4E1D597C8000652BAC /* objcWeakRef.framework in Embed Frameworks */,
+				FE640C4A1D597C7F00652BAC /* objcString.framework in Embed Frameworks */,
+				FE640C481D597C7F00652BAC /* objcBlock.framework in Embed Frameworks */,
+				FE640C441D597C7F00652BAC /* CocoaAsyncSocket.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -38,9 +55,28 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		FE6401501D51C51400652BAC /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
-		FE6401511D51C51400652BAC /* objcSocketClient.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcSocketClient.framework; path = Carthage/Build/iOS/objcSocketClient.framework; sourceTree = "<group>"; };
-		FE6401521D51C51400652BAC /* objcTemp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcTemp.framework; path = Carthage/Build/iOS/objcTemp.framework; sourceTree = "<group>"; };
+		FE640C251D597B3100652BAC /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FE640C261D597B3100652BAC /* objcSocketClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = objcSocketClient.h; sourceTree = "<group>"; };
+		FE640C271D597B3100652BAC /* VDSocketAddress.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketAddress.h; sourceTree = "<group>"; };
+		FE640C281D597B3100652BAC /* VDSocketAddress.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketAddress.m; sourceTree = "<group>"; };
+		FE640C291D597B3100652BAC /* VDSocketClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketClient.h; sourceTree = "<group>"; };
+		FE640C2A1D597B3100652BAC /* VDSocketClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketClient.m; sourceTree = "<group>"; };
+		FE640C2B1D597B3100652BAC /* VDSocketConfigure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketConfigure.h; sourceTree = "<group>"; };
+		FE640C2C1D597B3100652BAC /* VDSocketConfigure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketConfigure.m; sourceTree = "<group>"; };
+		FE640C2D1D597B3100652BAC /* VDSocketHeartBeatHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketHeartBeatHelper.h; sourceTree = "<group>"; };
+		FE640C2E1D597B3100652BAC /* VDSocketHeartBeatHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketHeartBeatHelper.m; sourceTree = "<group>"; };
+		FE640C2F1D597B3100652BAC /* VDSocketPacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketPacket.h; sourceTree = "<group>"; };
+		FE640C301D597B3100652BAC /* VDSocketPacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketPacket.m; sourceTree = "<group>"; };
+		FE640C311D597B3100652BAC /* VDSocketPacketHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketPacketHelper.h; sourceTree = "<group>"; };
+		FE640C321D597B3100652BAC /* VDSocketPacketHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketPacketHelper.m; sourceTree = "<group>"; };
+		FE640C331D597B3100652BAC /* VDSocketResponsePacket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VDSocketResponsePacket.h; sourceTree = "<group>"; };
+		FE640C341D597B3100652BAC /* VDSocketResponsePacket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VDSocketResponsePacket.m; sourceTree = "<group>"; };
+		FE640C3D1D597C7F00652BAC /* CocoaAsyncSocket.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CocoaAsyncSocket.framework; path = ../Carthage/Build/iOS/CocoaAsyncSocket.framework; sourceTree = "<group>"; };
+		FE640C3E1D597C7F00652BAC /* objcArray.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcArray.framework; path = ../Carthage/Build/iOS/objcArray.framework; sourceTree = "<group>"; };
+		FE640C3F1D597C7F00652BAC /* objcBlock.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcBlock.framework; path = ../Carthage/Build/iOS/objcBlock.framework; sourceTree = "<group>"; };
+		FE640C401D597C7F00652BAC /* objcString.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcString.framework; path = ../Carthage/Build/iOS/objcString.framework; sourceTree = "<group>"; };
+		FE640C411D597C7F00652BAC /* objcTimer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcTimer.framework; path = ../Carthage/Build/iOS/objcTimer.framework; sourceTree = "<group>"; };
+		FE640C421D597C7F00652BAC /* objcWeakRef.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = objcWeakRef.framework; path = ../Carthage/Build/iOS/objcWeakRef.framework; sourceTree = "<group>"; };
 		FECA25DE1D23A36D00ED8FDD /* objcSocketClientDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = objcSocketClientDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FECA25E21D23A36D00ED8FDD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FECA25E41D23A36D00ED8FDD /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -58,21 +94,52 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FE6401571D51C51400652BAC /* objcTemp.framework in Frameworks */,
-				FE6401551D51C51400652BAC /* objcSocketClient.framework in Frameworks */,
-				FE6401531D51C51400652BAC /* CocoaAsyncSocket.framework in Frameworks */,
+				FE640C4B1D597C7F00652BAC /* objcTimer.framework in Frameworks */,
+				FE640C451D597C7F00652BAC /* objcArray.framework in Frameworks */,
+				FE640C4D1D597C8000652BAC /* objcWeakRef.framework in Frameworks */,
+				FE640C491D597C7F00652BAC /* objcString.framework in Frameworks */,
+				FE640C471D597C7F00652BAC /* objcBlock.framework in Frameworks */,
+				FE640C431D597C7F00652BAC /* CocoaAsyncSocket.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FE640C241D597B3100652BAC /* objcSocketClient */ = {
+			isa = PBXGroup;
+			children = (
+				FE640C251D597B3100652BAC /* Info.plist */,
+				FE640C261D597B3100652BAC /* objcSocketClient.h */,
+				FE640C271D597B3100652BAC /* VDSocketAddress.h */,
+				FE640C281D597B3100652BAC /* VDSocketAddress.m */,
+				FE640C291D597B3100652BAC /* VDSocketClient.h */,
+				FE640C2A1D597B3100652BAC /* VDSocketClient.m */,
+				FE640C2B1D597B3100652BAC /* VDSocketConfigure.h */,
+				FE640C2C1D597B3100652BAC /* VDSocketConfigure.m */,
+				FE640C2D1D597B3100652BAC /* VDSocketHeartBeatHelper.h */,
+				FE640C2E1D597B3100652BAC /* VDSocketHeartBeatHelper.m */,
+				FE640C2F1D597B3100652BAC /* VDSocketPacket.h */,
+				FE640C301D597B3100652BAC /* VDSocketPacket.m */,
+				FE640C311D597B3100652BAC /* VDSocketPacketHelper.h */,
+				FE640C321D597B3100652BAC /* VDSocketPacketHelper.m */,
+				FE640C331D597B3100652BAC /* VDSocketResponsePacket.h */,
+				FE640C341D597B3100652BAC /* VDSocketResponsePacket.m */,
+			);
+			name = objcSocketClient;
+			path = ../objcSocketClient;
+			sourceTree = "<group>";
+		};
 		FECA25D51D23A36D00ED8FDD = {
 			isa = PBXGroup;
 			children = (
-				FE6401501D51C51400652BAC /* CocoaAsyncSocket.framework */,
-				FE6401511D51C51400652BAC /* objcSocketClient.framework */,
-				FE6401521D51C51400652BAC /* objcTemp.framework */,
+				FE640C3D1D597C7F00652BAC /* CocoaAsyncSocket.framework */,
+				FE640C3E1D597C7F00652BAC /* objcArray.framework */,
+				FE640C3F1D597C7F00652BAC /* objcBlock.framework */,
+				FE640C401D597C7F00652BAC /* objcString.framework */,
+				FE640C411D597C7F00652BAC /* objcTimer.framework */,
+				FE640C421D597C7F00652BAC /* objcWeakRef.framework */,
+				FE640C241D597B3100652BAC /* objcSocketClient */,
 				FECA25E01D23A36D00ED8FDD /* objcSocketClientDemo */,
 				FECA25DF1D23A36D00ED8FDD /* Products */,
 			);
@@ -169,6 +236,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE640C351D597B3100652BAC /* Info.plist in Resources */,
 				FECA25F11D23A36D00ED8FDD /* LaunchScreen.storyboard in Resources */,
 				FECA25EE1D23A36D00ED8FDD /* Assets.xcassets in Resources */,
 				FECA25EC1D23A36D00ED8FDD /* Main.storyboard in Resources */,
@@ -183,8 +251,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FECA25E91D23A36D00ED8FDD /* ViewController.m in Sources */,
+				FE640C371D597B3100652BAC /* VDSocketClient.m in Sources */,
+				FE640C391D597B3100652BAC /* VDSocketHeartBeatHelper.m in Sources */,
+				FE640C361D597B3100652BAC /* VDSocketAddress.m in Sources */,
+				FE640C381D597B3100652BAC /* VDSocketConfigure.m in Sources */,
+				FE640C3B1D597B3100652BAC /* VDSocketPacketHelper.m in Sources */,
 				FECA25E61D23A36D00ED8FDD /* AppDelegate.m in Sources */,
+				FE640C3A1D597B3100652BAC /* VDSocketPacket.m in Sources */,
 				FECA25E31D23A36D00ED8FDD /* main.m in Sources */,
+				FE640C3C1D597B3100652BAC /* VDSocketResponsePacket.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,8 +377,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(SRCROOT)/../**",
 				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../**";
 				INFOPLIST_FILE = objcSocketClientDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vilyever.objcSocketClientDemo;
@@ -320,8 +396,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(SRCROOT)/../**",
 				);
+				HEADER_SEARCH_PATHS = "$(SRCROOT)/../**";
 				INFOPLIST_FILE = objcSocketClientDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = vilyever.objcSocketClientDemo;

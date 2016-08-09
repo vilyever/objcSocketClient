@@ -8,9 +8,6 @@
 
 #import "AppDelegate.h"
 
-@import objcTemp;
-@import CocoaAsyncSocket;
-
 @interface AppDelegate ()
 
 @end
@@ -20,20 +17,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    
-    NSMutableDictionary *dic = [NSMutableDictionary new];
-    [dic setObject:@"111" forKey:@(1)];
-    NSInteger i = 2;
-    long l = 3;
-    [dic setObject:@"222" forKey:@(i)];
-    [dic setObject:@"333" forKey:@(l)];
-    
-    NSInteger i3 = 3;
-    long l2 = 2;
-    
-    VDLog(@"dic1 %@", [dic objectForKey:@(1)]);
-    VDLog(@"dic2 %@", [dic objectForKey:@(l2)]);
-    VDLog(@"dic3 %@", [dic objectForKey:@(i3)]);
     
     return YES;
 }

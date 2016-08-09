@@ -19,12 +19,13 @@
 
 #pragma mark Public Method
 - (BOOL)isDataEqual:(NSData *)data;
+- (void)buildStringWithEncoding:(NSStringEncoding)encoding; // for auto encode message background
 
 #pragma mark Properties
 /**
  *  正文信息
  */
-@property (nonatomic, copy) NSData *data;
+@property (nonatomic, strong) NSMutableData *data;
 @property (nonatomic, copy) NSString *message;
 
 @property (nonatomic, copy) NSData *headerData;
