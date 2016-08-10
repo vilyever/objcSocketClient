@@ -50,6 +50,7 @@ static const NSInteger NoneEncodingType = -1;
 @optional
 - (void)socketClient:(VDSocketClient *)client didBeginReceiving:(VDSocketResponsePacket *)packet;
 - (void)socketClient:(VDSocketClient *)client didEndReceiving:(VDSocketResponsePacket *)packet;
+- (void)socketClient:(VDSocketClient *)client didCancelReceiving:(VDSocketResponsePacket *)packet;
 - (void)socketClient:(VDSocketClient *)client receivingResponsePacket:(VDSocketResponsePacket *)packet withReceivedLength:(NSInteger)receivedLength progress:(float)progress;
 
 @end

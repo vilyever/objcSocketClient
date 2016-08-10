@@ -41,10 +41,12 @@ static const long VDSocketClientWriteTrailerTag = 3;
 
 - (void)__i__onSendPacketBegin:(VDSocketPacket *)packet;
 - (void)__i__onSendPacketEnd:(VDSocketPacket *)packet;
+- (void)__i__onSendPacketCancel:(VDSocketPacket *)packet;
 - (void)__i__onSendingPacket:(VDSocketPacket *)packet withSendedLength:(NSInteger)sendedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength;
 
 - (void)__i__onReceiveResponsePacketBegin:(VDSocketResponsePacket *)packet;
 - (void)__i__onReceiveResponsePacketEnd:(VDSocketResponsePacket *)packet;
+- (void)__i__onReceiveResponsePacketCancel:(VDSocketResponsePacket *)packet;
 - (void)__i__onReceivingResponsePacket:(VDSocketResponsePacket *)packet withReceivedLength:(NSInteger)receivedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength;
 
 
@@ -397,6 +399,8 @@ static const long VDSocketClientWriteTrailerTag = 3;
 
 #pragma mark Delegates
 - (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
+    self.state = VDSocketClientStateConnected;
+    
     [sock performBlock:^{
         [sock enableBackgroundingOnSocket];
 //        if ([sock enableBackgroundingOnSocket])
@@ -409,6 +413,24 @@ static const long VDSocketClientWriteTrailerTag = 3;
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+    self.isDisconnecting = NO;
+    self.state = VDSocketClientStateDisconnected;
+    
+    if (self.sendingPacket) {
+        [self __i__onSendPacketCancel:self.sendingPacket];
+        self.sendingPacket = nil;
+    }
+    
+    VDSocketPacket *packet;
+    while ((packet = [self.sendingPacketQueue vd_queuePop])) {
+        [self __i__onSendPacketCancel:packet];
+    }
+    
+    if (self.receivingResponsePacket) {
+        [self __i__onReceiveResponsePacketCancel:self.receivingResponsePacket];
+        self.receivingResponsePacket = nil;
+    }
+    
     [self __i__onDisconnected];
 }
 
@@ -711,9 +733,6 @@ static const long VDSocketClientWriteTrailerTag = 3;
         return;
     }
     
-    self.state = VDSocketClientStateConnected;
-
-    
     self.lastSendHeartBeatMessageTime = [NSDate timeIntervalSinceReferenceDate];
     self.lastReceiveMessageTime = [NSDate timeIntervalSinceReferenceDate];
     [self.timer start];
@@ -741,9 +760,6 @@ static const long VDSocketClientWriteTrailerTag = 3;
     
     self.sendingPacket = nil;
     self.receivingResponsePacket = nil;
-    
-    self.isDisconnecting = NO;
-    self.state = VDSocketClientStateDisconnected;
 
     [self.timer stop];
     
@@ -873,6 +889,23 @@ static const long VDSocketClientWriteTrailerTag = 3;
     for (id delegate in [self.socketClientRecevingDelegates copy]) {
         if ([delegate respondsToSelector:@selector(socketClient:didEndReceiving:)]) {
             [delegate socketClient:self didEndReceiving:packet];
+        }
+    }
+}
+
+- (void)__i__onReceiveResponsePacketCancel:(VDSocketResponsePacket *)packet {
+    if (![NSThread isMainThread]) {
+        VDWeakifySelf;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            VDStrongifySelf;
+            [self __i__onReceiveResponsePacketCancel:packet];
+        });
+        return;
+    }
+    
+    for (id delegate in [self.socketClientRecevingDelegates copy]) {
+        if ([delegate respondsToSelector:@selector(socketClient:didCancelReceiving:)]) {
+            [delegate socketClient:self didCancelReceiving:packet];
         }
     }
 }

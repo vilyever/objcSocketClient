@@ -50,7 +50,7 @@
     NSLog(@"onSocketClientConnected");
 //    [self.socketClient sendString:@"from ios"];
 
-    [self.socketClient sendString:@"{\"commandType\":\"0\",\"commandTag\":\"0\",\"flag\":\"\"，\"commandValue\":\"设备ID\"}"];
+    [self.socketClient sendString:@"{\"commandType\":\"0\",\"commandTag\":\"0\",\"flag\":\"\",\"token\":\"\",\"commandValue\":\"设备ID\"}"];
 }
 
 
