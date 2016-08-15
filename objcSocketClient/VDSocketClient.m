@@ -169,28 +169,27 @@ static const long VDSocketClientWriteTrailerTag = 3;
         return nil;
     }
     
-    [self __i__enqueueNewPacket:packet];
+    VDWeakifySelf;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        VDStrongifySelf;
+        [self __i__enqueueNewPacket:packet];
+    });
     
     return packet;
 }
 
 - (void)cancelSend:(VDSocketPacket *)packet {
-    if ([NSThread isMainThread]) {
-        VDWeakifySelf;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            VDStrongifySelf;
-            [self cancelSend:packet];
-        });
-        return;
-    }
-    
-    @synchronized (self.sendingPacketQueue) {
-        if ([self.sendingPacketQueue containsObject:packet]) {
-            [self.sendingPacketQueue removeObject:packet];
-            
-            [self __i__onSendPacketCancel:packet];
+    VDWeakifySelf;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        VDStrongifySelf;
+        @synchronized (self.sendingPacketQueue) {
+            if ([self.sendingPacketQueue containsObject:packet]) {
+                [self.sendingPacketQueue removeObject:packet];
+                
+                [self __i__onSendPacketCancel:packet];
+            }
         }
-    }    
+    });
 }
 
 - (VDSocketResponsePacket *)readDataToLength:(NSInteger)length {
@@ -452,7 +451,11 @@ static const long VDSocketClientWriteTrailerTag = 3;
     self.sendingPacket = nil;
     self.receivingResponsePacket = nil;
     
-    [self __i__onConnected];
+    VDWeakifySelf;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        VDStrongifySelf;
+        [self __i__onConnected];
+    });
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
@@ -483,7 +486,11 @@ static const long VDSocketClientWriteTrailerTag = 3;
     self.writeSemaphore = nil;
     self.readSemaphore = nil;
 
-    [self __i__onDisconnected];
+    VDWeakifySelf;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        VDStrongifySelf;
+        [self __i__onDisconnected];
+    });
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
@@ -524,16 +531,6 @@ static const long VDSocketClientWriteTrailerTag = 3;
 
 #pragma mark Private Method
 - (void)__i__enqueueNewPacket:(VDSocketPacket *)packet {
-    if ([NSThread isMainThread]) {
-        VDWeakifySelf;
-        
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            VDStrongifySelf;
-            [self __i__enqueueNewPacket:packet];
-        });
-        return;
-    }
-    
     if (![self isConnected]) {
         return;
     }
@@ -546,15 +543,6 @@ static const long VDSocketClientWriteTrailerTag = 3;
 }
 
 - (void)__i__sendNextPacket {
-    if ([NSThread isMainThread]) {
-        VDWeakifySelf;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            VDStrongifySelf;
-            [self __i__sendNextPacket];
-        });
-        return;
-    }
-    
     if (![self isConnected]) {
         return;
     }
@@ -685,15 +673,6 @@ static const long VDSocketClientWriteTrailerTag = 3;
 }
 
 - (void)__i__sendHeartBeat {
-    if ([NSThread isMainThread]) {
-        VDWeakifySelf;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            VDStrongifySelf;
-            [self __i__sendHeartBeat];
-        });
-        return;
-    }
-    
     if (![self isConnected]) {
         return;
     }
@@ -708,15 +687,6 @@ static const long VDSocketClientWriteTrailerTag = 3;
 
 - (void)__i__readNextResponse {
     if (self.socketConfigure.socketPacketHelper.readStrategy == VDSocketPacketReadStrategyManually) {
-        return;
-    }
-    
-    if ([NSThread isMainThread]) {
-        VDWeakifySelf;
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            VDStrongifySelf;
-            [self __i__readNextResponse];
-        });
         return;
     }
     
@@ -858,34 +828,20 @@ static const long VDSocketClientWriteTrailerTag = 3;
 }
 
 - (void)__i__onConnected {
-    if (![NSThread isMainThread]) {
-        VDWeakifySelf;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            VDStrongifySelf;
-            [self __i__onConnected];
-        });
-        return;
-    }
-    
     for (id delegate in [self.socketClientDelegates copy]) {
         if ([delegate respondsToSelector:@selector(socketClientDidConnected:)]) {
             [delegate socketClientDidConnected:self];
         }
     }
     
-    [self __i__readNextResponse];
+    VDWeakifySelf;
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        VDStrongifySelf;
+        [self __i__readNextResponse];
+    });
 }
 
 - (void)__i__onDisconnected {
-    if (![NSThread isMainThread]) {
-        VDWeakifySelf;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            VDStrongifySelf;
-            [self __i__onDisconnected];
-        });
-        return;
-    }
-    
     for (id delegate in [self.socketClientDelegates copy]) {
         if ([delegate respondsToSelector:@selector(socketClientDidDisconnected:)]) {
             [delegate socketClientDidDisconnected:self];
