@@ -32,13 +32,19 @@ static NSInteger AtomicID = 0;
 }
 
 + (instancetype)heartBeatPacketWithData:(NSData *)data {
-    return [[self alloc] initHeartBeatPacketWithData:data];
+    return [[self alloc] initWithData:data isHeartBeat:YES];
 }
 
 - (instancetype)initWithData:(NSData *)data {
+    return [self initWithData:data isHeartBeat:NO];
+}
+
+- (instancetype)initWithData:(NSData *)data isHeartBeat:(BOOL)isHeartBeat {
     self = [super init];
     
-    self.data = data;
+    _ID = AtomicID++;
+    _data = data;
+    _isHeartBeat = isHeartBeat;
     
     return self;
 }
@@ -46,19 +52,12 @@ static NSInteger AtomicID = 0;
 - (instancetype)initWithString:(NSString *)message {
     self = [super init];
     
-    self.message = message;
+    _ID = AtomicID++;
+    _message = message;
     
     return self;
 }
 
-- (instancetype)initHeartBeatPacketWithData:(NSData *)data {
-    self = [super init];
-    
-    self.data = data;
-    self.isHeartBeat = YES;
-    
-    return self;
-}
 
 #pragma mark Public Method
 - (void)buildDataWithEncoding:(NSStringEncoding)encoding {
@@ -73,8 +72,6 @@ static NSInteger AtomicID = 0;
 #pragma mark Overrides
 - (instancetype)init {
     self = [super init];
-    
-    _ID = AtomicID++;
     
     return self;
 }

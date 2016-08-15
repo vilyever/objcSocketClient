@@ -13,6 +13,7 @@
 
 @interface VDSocketHeartBeatHelper ()
 
+@property (nonatomic, strong) VDSocketHeartBeatHelper *original;
 
 @end
 
@@ -25,20 +26,12 @@
         return self.sendDataBuilder();
     }
     
-    if (self.protocol && [self.protocol respondsToSelector:@selector(sendHeartBeatDataForSocketHeartBeatHelper:)]) {
-        return [self.protocol sendHeartBeatDataForSocketHeartBeatHelper:self];
-    }
-    
     return self.defaultSendData;
 }
 
 - (BOOL)isReceiveHeartBeatPacket:(VDSocketResponsePacket *)packet {
     if (self.isReceiveHeartBeatPacketChecker) {
         return self.isReceiveHeartBeatPacketChecker(packet);
-    }
-    
-    if (self.protocol && [self.protocol respondsToSelector:@selector(isReceiveHeartBeatPacket:forSocketHeartBeatHelper:)]) {
-        return [self.protocol isReceiveHeartBeatPacket:packet forSocketHeartBeatHelper:self];
     }
     
     if (self.defaultReceiveData) {
@@ -50,41 +43,24 @@
 
 
 #pragma mark Properties
-- (void)setProtocol:(id<VDSocketHeartBeatHelperProtocol>)protocol {
-    _protocol = protocol;
-    if (_protocol) {
-        self.sendHeartBeatEnabled = YES;
+- (VDSocketHeartBeatHelper *)original {
+    if (!_original) {
+        return self;
     }
-}
-
-- (void)setDefaultSendData:(NSData *)defaultSendData {
-    _defaultSendData = [defaultSendData copy];
-    if (_defaultSendData) {
-        self.sendHeartBeatEnabled = YES;
-    }
+    
+    return _original;
 }
 
 - (void)setSendDataBuilder:(NSData *(^)(void))sendDataBuilder {
     _sendDataBuilder = [sendDataBuilder copy];
-    if (_sendDataBuilder) {
-        self.sendHeartBeatEnabled = YES;
-    }
 }
 
 - (void)setReceiveHeartBeatPacketChecker:(BOOL (^)(VDSocketResponsePacket *))isReceiveHeartBeatPacketChecker {
     _isReceiveHeartBeatPacketChecker = isReceiveHeartBeatPacketChecker;
 }
 
-- (void)setHeartBeatInterval:(NSTimeInterval)heartBeatInterval {
-    _heartBeatInterval = heartBeatInterval;
-    if (_heartBeatInterval > 0) {
-        self.sendHeartBeatEnabled = YES;
-    }
-}
-
 - (BOOL)isSendHeartBeatEnabled {
-    if ((!self.protocol
-            && !self.defaultSendData
+    if ((!self.defaultSendData
             && !self.sendDataBuilder)
         || self.heartBeatInterval <= 0) {
         return NO;
@@ -95,9 +71,6 @@
 
 - (void)setRemoteNoReplyAliveTimeout:(NSTimeInterval)remoteNoReplyAliveTimeout {
     _remoteNoReplyAliveTimeout = remoteNoReplyAliveTimeout;
-    if (_remoteNoReplyAliveTimeout > 0) {
-        self.autoDisconnectOnRemoteNoReplyAliveTimeout = YES;
-    }
 }
 
 - (BOOL)isAutoDisconnectOnRemoteNoReplyAliveTimeout {
@@ -119,15 +92,15 @@
     
 }
 
-- (id)copy {
-    VDSocketHeartBeatHelper *helper = [[[self class] alloc] init];
-    helper.protocol = self.protocol;
+- (id)copyWithZone:(NSZone *)zone {
+    VDSocketHeartBeatHelper *helper = [[VDSocketHeartBeatHelper alloc] init];
+    helper.original = self;
     
-    helper.defaultSendData = [self.defaultSendData copy];
-    helper.sendDataBuilder = [self.sendDataBuilder copy];
+    helper.defaultSendData = self.defaultSendData;
+    helper.sendDataBuilder = self.sendDataBuilder;
     
-    helper.defaultReceiveData = [self.defaultReceiveData copy];
-    helper.isReceiveHeartBeatPacketChecker = [self.isReceiveHeartBeatPacketChecker copy];
+    helper.defaultReceiveData = self.defaultReceiveData;
+    helper.isReceiveHeartBeatPacketChecker = self.isReceiveHeartBeatPacketChecker;
 
     helper.heartBeatInterval = self.heartBeatInterval;
     helper.sendHeartBeatEnabled = self.sendHeartBeatEnabled;

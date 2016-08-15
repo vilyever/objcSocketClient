@@ -21,6 +21,10 @@
 
 
 #pragma mark Properties
+- (void)setAddress:(VDSocketAddress *)address {
+    _address = [address copy];
+}
+
 - (void)setSocketPacketHelper:(VDSocketPacketHelper *)socketPacketHelper {
     _socketPacketHelper = [socketPacketHelper copy];
 }

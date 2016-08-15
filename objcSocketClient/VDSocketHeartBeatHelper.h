@@ -11,24 +11,14 @@
 
 @class VDSocketHeartBeatHelper;
 
-@protocol VDSocketHeartBeatHelperProtocol <NSObject>
 
-@required
-- (NSData *)sendHeartBeatDataForSocketHeartBeatHelper:(VDSocketHeartBeatHelper *)helper; // doing on background thread
-- (BOOL)isReceiveHeartBeatPacket:(VDSocketResponsePacket *)packet forSocketHeartBeatHelper:(VDSocketHeartBeatHelper *)helper; // doing on background thread
-
-@end
-
-
-@interface VDSocketHeartBeatHelper : NSObject
+@interface VDSocketHeartBeatHelper : NSObject <NSCopying>
 
 #pragma mark Public Method
 - (NSData *)getSendData;
 - (BOOL)isReceiveHeartBeatPacket:(VDSocketResponsePacket *)packet;
 
 #pragma mark Properties
-@property (nonatomic, weak) id<VDSocketHeartBeatHelperProtocol> protocol;
-
 /**
  *  默认发送时不变的心跳包数据
  */
@@ -58,21 +48,22 @@
 
 /**
  *  是否发送心跳包
- *  设置defaultSendData不为nil，自动变更为YES
- *  设置sendDataBuilderBlock不为nil，自动变更为YES
- *  设置protocol不为nil，自动变更为YES
- *  
- *  自动变更后可手动设置
- *  上述三者皆为nil，返回NO
+ *  若没有设置发送数据，返回NO
+ *  若heartBeatInterval不大于0，返回NO
+ *  默认为NO
  */
 @property (nonatomic, assign, getter=isSendHeartBeatEnabled) BOOL sendHeartBeatEnabled;
 
 /**
  *  若远程端在此时长内都没有发送信息到本地，自动断开连接
- *  若设置大于0时，autoDisconnectOnRemoteNoReplyAliveTimeout自动变更为YES，反之亦然
- *  设置后可再次变更autoDisconnectOnRemoteNoReplyAliveTimeout的值
  */
 @property (nonatomic, assign) NSTimeInterval remoteNoReplyAliveTimeout;
-@property (nonatomic, assign, getter=isAutoDisconnectOnRemoteNoReplyAliveTimeout) BOOL autoDisconnectOnRemoteNoReplyAliveTimeout; // 若remoteNoReplyAliveTimeout<=0,返回NO
+
+/**
+ *  是否在超过remoteNoReplyAliveTimeout时长没有接收到消息时自动断开
+ *  若remoteNoReplyAliveTimeout<=0,返回NO
+ *  默认为NO
+ */
+@property (nonatomic, assign, getter=isAutoDisconnectOnRemoteNoReplyAliveTimeout) BOOL autoDisconnectOnRemoteNoReplyAliveTimeout; //
 
 @end

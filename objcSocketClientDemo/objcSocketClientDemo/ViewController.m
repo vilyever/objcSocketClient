@@ -30,6 +30,7 @@
     
     self.socketClient.socketPacketHelper.sendTrailerData = [NSData dataWithBytes:"\x0D\x0A" length:2];
     self.socketClient.socketPacketHelper.receiveTrailerData = [NSData dataWithBytes:"\x0D\x0A" length:2];
+    self.socketClient.socketPacketHelper.readStrategy = VDSocketPacketReadStrategyAutoReadToTrailer;
     
     self.socketClient.encoding = NSUTF8StringEncoding;
         
@@ -60,6 +61,11 @@
 
 - (void)socketClient:(VDSocketClient *)client didReceiveResponse:(VDSocketResponsePacket *)packet {
 	NSLog(@"response %@", packet.message);
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        sleep(5);
+        [self.socketClient sendString:@"{\"commandType\":\"0\",\"commandTag\":\"0\",\"flag\":\"\",\"token\":\"\",\"commandValue\":\"设备ID\"}"];
+    });
 }
 
 - (void)socketClient:(VDSocketClient *)client didBeginSending:(VDSocketPacket *)packet {

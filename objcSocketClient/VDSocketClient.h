@@ -67,9 +67,11 @@ static const NSInteger NoneEncodingType = -1;
 - (BOOL)isConnecting;
 - (BOOL)isDisconnected;
 
+- (VDSocketAddress *)connectedAddress;
+
 - (VDSocketPacket *)sendData:(NSData *)data;
 - (VDSocketPacket *)sendString:(NSString *)message;
-- (void)sendPacket:(VDSocketPacket *)packet;
+- (VDSocketPacket *)sendPacket:(VDSocketPacket *)packet;
 - (void)cancelSend:(VDSocketPacket *)packet;
 
 - (VDSocketResponsePacket *)readDataToLength:(NSInteger)length;
@@ -96,8 +98,8 @@ static const NSInteger NoneEncodingType = -1;
 @property (nonatomic, assign) NSStringEncoding encoding;
 @property (nonatomic, strong) VDSocketPacketHelper *socketPacketHelper;
 @property (nonatomic, strong) VDSocketHeartBeatHelper *heartBeatHelper;
-@property (nonatomic, strong) VDSocketConfigure *socketConfigure;
 @property (nonatomic, assign, readonly) VDSocketClientState state;
+@property (nonatomic, assign, readonly) BOOL isDisconnecting;
 
 #pragma mark Protected Method
 

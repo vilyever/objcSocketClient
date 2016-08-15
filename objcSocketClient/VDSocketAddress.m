@@ -13,6 +13,7 @@ static const NSTimeInterval VDSocketAddressDefaultConnectionTimeout = 15;
 
 @interface VDSocketAddress ()
 
+@property (nonatomic, strong) VDSocketAddress *original;
 
 @end
 
@@ -57,9 +58,23 @@ static const NSTimeInterval VDSocketAddressDefaultConnectionTimeout = 15;
     }
 }
 
+- (void)setRemotePortWithInteger:(NSInteger)port {
+    self.remotePort = [NSString stringWithFormat:@"%@", @(port)];
+}
+
+- (NSInteger)getRemotePortIntegerValue {
+    return [self.remotePort integerValue];
+}
+
 
 #pragma mark Properties
-
+- (VDSocketAddress *)original {
+    if (!_original) {
+        return self;
+    }
+    
+    return _original;
+}
 
 #pragma mark Overrides
 - (instancetype)init {
@@ -70,6 +85,13 @@ static const NSTimeInterval VDSocketAddressDefaultConnectionTimeout = 15;
 
 - (void)dealloc {
     
+}
+
+- (id)copyWithZone:(NSZone *)zone {
+    VDSocketAddress *address = [VDSocketAddress addressWithRemoteIP:self.remoteIP remotePort:self.remotePort connectionTimeout:self.connectionTimeout];
+    address.original = self;
+    
+    return address;
 }
 
 

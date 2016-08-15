@@ -10,6 +10,7 @@
 
 #import "VDSocketPacketHelper.h"
 #import "VDSocketHeartBeatHelper.h"
+#import "VDSocketAddress.h"
 
 @class VDSocketConfigure;
 
@@ -21,6 +22,7 @@
 
 #pragma mark Properties
 @property (nonatomic, assign) NSStringEncoding encoding;
+@property (nonatomic, strong) VDSocketAddress *address;
 @property (nonatomic, strong) VDSocketPacketHelper *socketPacketHelper;
 @property (nonatomic, strong) VDSocketHeartBeatHelper *heartBeatHelper;
 

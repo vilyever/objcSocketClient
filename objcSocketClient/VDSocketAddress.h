@@ -12,7 +12,7 @@
 @class VDSocketAddress;
 
 
-@interface VDSocketAddress : NSObject
+@interface VDSocketAddress : NSObject <NSCopying>
 
 #pragma mark Constructor
 + (instancetype)emptyAddress;
@@ -23,6 +23,9 @@
 
 #pragma mark Public Method
 - (void)checkValidation;
+
+- (void)setRemotePortWithInteger:(NSInteger)port;
+- (NSInteger)getRemotePortIntegerValue;
 
 #pragma mark Properties
 @property (nonatomic, copy) NSString *remoteIP;

@@ -20,8 +20,8 @@
 + (instancetype)heartBeatPacketWithData:(NSData *)data;
 
 - (instancetype)initWithData:(NSData *)data;
+- (instancetype)initWithData:(NSData *)data isHeartBeat:(BOOL)isHeartBeat;
 - (instancetype)initWithString:(NSString *)message;
-- (instancetype)initHeartBeatPacketWithData:(NSData *)data;
 
 #pragma mark Public Method
 - (void)buildDataWithEncoding:(NSStringEncoding)encoding; // for string packet
