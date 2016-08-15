@@ -925,7 +925,7 @@ static const long VDSocketClientWriteTrailerTag = 3;
 - (void)__i__onSendingPacket:(VDSocketPacket *)packet withSendedLength:(NSInteger)sendedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength {
     
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
-    if (currentTime - self.lastSendProgressCallbackTime < 1.0f / 60.0f) {
+    if (currentTime - self.lastSendProgressCallbackTime < 1.0f / 24.0f) {
         return;
     }
     
@@ -1003,7 +1003,7 @@ static const long VDSocketClientWriteTrailerTag = 3;
 - (void)__i__onReceivingResponsePacket:(VDSocketResponsePacket *)packet withReceivedLength:(NSInteger)receivedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength {
     
     NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
-    if (currentTime - self.lastReveiceProgressCallbackTime < 1.0f / 60.0f) {
+    if (currentTime - self.lastReveiceProgressCallbackTime < 1.0f / 24.0f) {
         return;
     }
     
