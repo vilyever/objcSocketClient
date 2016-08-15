@@ -34,7 +34,55 @@
     
     self.socketClient.encoding = NSUTF8StringEncoding;
         
-    [self.socketClient connect];
+//    [self.socketClient connect];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+        NSLog(@"111");
+        sleep(3);
+        
+        NSLog(@"222");
+        sleep(3);
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            NSLog(@"333");
+            sleep(6);
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+                NSLog(@"444");
+                sleep(2);
+                
+            });
+            
+            NSLog(@"555");
+            sleep(4);
+        });
+        
+        NSLog(@"666");
+        sleep(2);
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            NSLog(@"777");
+            sleep(5);
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                NSLog(@"888");
+                sleep(1);
+                
+            });
+            
+            NSLog(@"999");
+            sleep(3);
+            
+        });
+        
+        NSLog(@"aaa");
+        sleep(3);
+
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated {

@@ -538,9 +538,7 @@ static const long VDSocketClientWriteTrailerTag = 3;
         return;
     }
     
-    @synchronized (self.sendingPacketQueue) {
-        [self.sendingPacketQueue vd_queuePush:packet];
-    }
+    [self.sendingPacketQueue vd_queuePush:packet];
     
     [self __i__sendNextPacket];
 }
@@ -554,9 +552,7 @@ static const long VDSocketClientWriteTrailerTag = 3;
         return;
     }
     
-    @synchronized (self.sendingPacketQueue) {
-        self.sendingPacket = [self.sendingPacketQueue vd_queuePop];
-    }
+    self.sendingPacket = [self.sendingPacketQueue vd_queuePop];
     
     if (!self.sendingPacket) {
         return;
