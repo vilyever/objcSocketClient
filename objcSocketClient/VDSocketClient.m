@@ -669,6 +669,8 @@ static const long VDSocketClientWriteTrailerTag = 3;
     
     self.sendingPacket = nil;
     [self __i__onSendPacketEnd:packet];
+    
+    [self __i__sendNextPacket];
 }
 
 - (void)__i__sendHeartBeat {
