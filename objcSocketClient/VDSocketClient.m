@@ -384,11 +384,11 @@ static const long VDSocketClientWriteTrailerTag = 3;
     if (_state != state) {
         _state = state;
         
-        for (id delegate in [self.socketClientDelegates copy]) {
-            if ([delegate respondsToSelector:@selector(socketClient:didChangeState:)]) {
-                [delegate socketClient:self didChangeState:_state];
-            }
-        }
+//        for (id delegate in [self.socketClientDelegates copy]) {
+//            if ([delegate respondsToSelector:@selector(socketClient:didChangeState:)]) {
+//                [delegate socketClient:self didChangeState:_state];
+//            }
+//        }
     }
 }
 
@@ -1044,31 +1044,5 @@ static const long VDSocketClientWriteTrailerTag = 3;
         }
     }
 }
-
-//- (void)__i__doAction:(void(^)(void))block onMainThread:(BOOL)onMainThread {
-//    if (!block) {
-//        return;
-//    }
-//    
-//    if (onMainThread) {
-//        if ([NSThread isMainThread]) {
-//            block();
-//        }
-//        else {
-//            dispatch_async(dispatch_get_main_queue(), block);
-//        }
-//        
-//    }
-//    
-//    if (!onMainThread) {
-//        if (![NSThread isMainThread]) {
-//            block();
-//        }
-//        else {
-//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), block);
-//        }
-//    }
-//    
-//}
 
 @end

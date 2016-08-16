@@ -31,7 +31,7 @@ static const NSInteger NoneEncodingType = -1;
 - (void)socketClientDidConnected:(VDSocketClient *)client;
 - (void)socketClientDidDisconnected:(VDSocketClient *)client;
 - (void)socketClient:(VDSocketClient *)client didReceiveResponse:(VDSocketResponsePacket *)packet;
-- (void)socketClient:(VDSocketClient *)client didChangeState:(VDSocketClientState)state;
+//- (void)socketClient:(VDSocketClient *)client didChangeState:(VDSocketClientState)state;
 
 @end
 
