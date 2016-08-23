@@ -72,11 +72,9 @@ static const long VDSocketClientWriteTrailerTag = 3;
 
 @property (nonatomic, strong) VDSocketPacket *sendingPacket;
 @property (nonatomic, strong) dispatch_semaphore_t writeSemaphore;
-@property (nonatomic, assign) NSTimeInterval lastSendProgressCallbackTime;
 
 @property (nonatomic, strong) VDSocketResponsePacket *receivingResponsePacket;
 @property (nonatomic, strong) dispatch_semaphore_t readSemaphore;
-@property (nonatomic, assign) NSTimeInterval lastReveiceProgressCallbackTime;
 
 
 @end
@@ -922,11 +920,6 @@ static const long VDSocketClientWriteTrailerTag = 3;
 
 - (void)__i__onSendingPacket:(VDSocketPacket *)packet withSendedLength:(NSInteger)sendedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength {
     
-    NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
-    if (currentTime - self.lastSendProgressCallbackTime < 1.0f / 24.0f) {
-        return;
-    }
-    
     if (![NSThread isMainThread]) {
         VDWeakifySelf;
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -943,8 +936,6 @@ static const long VDSocketClientWriteTrailerTag = 3;
             [delegate socketClient:self sendingPacket:packet withSendedLength:sendedLength progress:progress];
         }
     }
-    
-    self.lastSendProgressCallbackTime = [NSDate timeIntervalSinceReferenceDate];;
 }
 
 - (void)__i__onReceiveResponsePacketBegin:(VDSocketResponsePacket *)packet {
@@ -1000,11 +991,6 @@ static const long VDSocketClientWriteTrailerTag = 3;
 
 - (void)__i__onReceivingResponsePacket:(VDSocketResponsePacket *)packet withReceivedLength:(NSInteger)receivedLength headerLength:(NSInteger)headerLength packetLengthDataLength:(NSInteger)packetLengthDataLength dataLength:(NSInteger)dataLength trailerLength:(NSInteger)trailerLength {
     
-    NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
-    if (currentTime - self.lastReveiceProgressCallbackTime < 1.0f / 24.0f) {
-        return;
-    }
-    
     if (![NSThread isMainThread]) {
         VDWeakifySelf;
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -1021,8 +1007,6 @@ static const long VDSocketClientWriteTrailerTag = 3;
             [delegate socketClient:self receivingResponsePacket:packet withReceivedLength:receivedLength progress:progress];
         }
     }
-    
-    self.lastReveiceProgressCallbackTime = [NSDate timeIntervalSinceReferenceDate];
 }
 
 - (void)__i__onTimeTick {
