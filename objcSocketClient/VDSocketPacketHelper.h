@@ -76,6 +76,13 @@ typedef NS_ENUM(NSInteger, VDSocketPacketReadStrategy) {
 @property (nonatomic, assign, getter=isSendSegmentEnabled) BOOL sendSegmentEnabled;
 
 /**
+ * 发送超时时长，超过时长无法写出自动断开连接
+ * 仅在每个发送包开始发送时计时，结束后重置计时
+ */
+@property (nonatomic, assign) NSTimeInterval sendTimeout;
+@property (nonatomic, assign, getter=isSendTimeoutEnabled) BOOL sendTimeoutEnabled;
+
+/**
  *  读取策略
  *  默认为VDSocketPacketReadStrategyManually
  */
@@ -112,5 +119,11 @@ typedef NS_ENUM(NSInteger, VDSocketPacketReadStrategy) {
  *  默认为NO
  */
 @property (nonatomic, assign, getter=isReceiveSegmentEnabled) BOOL receiveSegmentEnabled;
+
+/**
+ * 读取超时时长，超过时长没有读取到任何消息自动断开连接
+ */
+@property (nonatomic, assign) NSTimeInterval receiveTimeout;
+@property (nonatomic, assign, getter=isReceiveTimeoutEnabled) BOOL receiveTimeoutEnabled;
 
 @end

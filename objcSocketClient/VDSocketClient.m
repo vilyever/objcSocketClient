@@ -28,8 +28,13 @@ static const long VDSocketClientWritePacketLengthTag = 1;
 static const long VDSocketClientWriteBodyTag = 2;
 static const long VDSocketClientWriteTrailerTag = 3;
 
+static const NSTimeInterval VDSocketClientNoSendingTime = -1;
+
 
 @interface VDSocketClient () <GCDAsyncSocketDelegate>
+
+- (void)__i__onSendThreadRun;
+- (void)__i__onReceiveThreadRun;
 
 - (void)__i__enqueueNewPacket:(VDSocketPacket *)packet;
 - (void)__i__sendNextPacket;
@@ -58,6 +63,9 @@ static const long VDSocketClientWriteTrailerTag = 3;
 
 @property (nonatomic, strong) GCDAsyncSocket *asyncSocket;
 
+//@property (nonatomic, strong) NSThread *sendThread;
+//@property (nonatomic, strong) NSThread *receiveThread;
+
 @property (nonatomic, strong) VDSocketConfigure *socketConfigure;
 
 @property (nonatomic, strong) NSMutableArray *socketClientDelegates;
@@ -68,6 +76,7 @@ static const long VDSocketClientWriteTrailerTag = 3;
 
 @property (nonatomic, strong) VDGCDTimer *timer;
 @property (nonatomic, assign) NSTimeInterval lastSendHeartBeatMessageTime;
+@property (nonatomic, assign) NSTimeInterval lastSendMessageTime;
 @property (nonatomic, assign) NSTimeInterval lastReceiveMessageTime;
 
 @property (nonatomic, strong) VDSocketPacket *sendingPacket;
@@ -314,6 +323,22 @@ static const long VDSocketClientWriteTrailerTag = 3;
 }
 
 #pragma mark Properties
+//- (NSThread *)sendThread {
+//    if (!_sendThread) {
+//        _sendThread = [[NSThread alloc] initWithTarget:self selector:@selector(__i__onSendThreadRun) object:nil];
+//    }
+//    
+//    return _sendThread;
+//}
+//
+//- (NSThread *)receiveThread {
+//    if (!_receiveThread) {
+//        _receiveThread = [[NSThread alloc] initWithTarget:self selector:@selector(__i__onReceiveThreadRun) object:nil];
+//    }
+//    
+//    return _receiveThread;
+//}
+
 - (NSMutableArray *)sendingPacketQueue {
     if (!_sendingPacketQueue) {
         _sendingPacketQueue = [NSMutableArray new];
@@ -446,11 +471,15 @@ static const long VDSocketClientWriteTrailerTag = 3;
     self.state = VDSocketClientStateConnected;
 
     self.lastSendHeartBeatMessageTime = [NSDate timeIntervalSinceReferenceDate];
+    self.lastSendMessageTime = VDSocketClientNoSendingTime;
     self.lastReceiveMessageTime = [NSDate timeIntervalSinceReferenceDate];
     [self.timer start];
     
     self.sendingPacket = nil;
     self.receivingResponsePacket = nil;
+    
+//    [self.sendThread start];
+//    [self.receiveThread start];
     
     VDWeakifySelf;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -460,6 +489,9 @@ static const long VDSocketClientWriteTrailerTag = 3;
 }
 
 - (void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err {
+//    [self performSelector:@selector(__i__stopRunLoop) onThread:self.sendThread withObject:nil waitUntilDone:NO];
+//    [self performSelector:@selector(__i__stopRunLoop) onThread:self.receiveThread withObject:nil waitUntilDone:NO];
+
     self.isDisconnecting = NO;
     self.state = VDSocketClientStateDisconnected;
     self.socketConfigure = nil;
@@ -495,6 +527,7 @@ static const long VDSocketClientWriteTrailerTag = 3;
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+    self.lastReceiveMessageTime = [NSDate timeIntervalSinceReferenceDate];
     if (tag == VDSocketClientReadHeaderTag) {
         self.receivingResponsePacket.headerData = data;
     }
@@ -526,11 +559,38 @@ static const long VDSocketClientWriteTrailerTag = 3;
 }
 
 - (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+    self.lastSendMessageTime = [NSDate timeIntervalSinceReferenceDate];
     dispatch_semaphore_signal(self.writeSemaphore);
 }
 
 
 #pragma mark Private Method
+- (void)__i__onSendThreadRun {
+    NSLog(@"send start");
+    @autoreleasepool {
+        NSRunLoop *loop = [NSRunLoop currentRunLoop];
+        [loop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
+        [loop run];
+    }
+    NSLog(@"send end");
+}
+
+- (void)__i__onReceiveThreadRun {
+    NSLog(@"read start");
+    @autoreleasepool {
+        NSRunLoop *loop = [NSRunLoop currentRunLoop];
+        [loop addPort:[NSMachPort port] forMode:NSDefaultRunLoopMode];
+        [loop run];
+    }
+    NSLog(@"read end");
+}
+
+- (void)__i__stopRunLoop {
+    NSLog(@"stop");
+    NSRunLoop *loop = [NSRunLoop currentRunLoop];
+    CFRunLoopStop([loop getCFRunLoop]);
+}
+
 - (void)__i__enqueueNewPacket:(VDSocketPacket *)packet {
     if (![self isConnected]) {
         return;
@@ -858,8 +918,6 @@ static const long VDSocketClientWriteTrailerTag = 3;
         return;
     }
     
-    self.lastReceiveMessageTime = [NSDate timeIntervalSinceReferenceDate];
-    
     for (id delegate in [self.socketClientDelegates copy]) {
         if ([delegate respondsToSelector:@selector(socketClient:didReceiveResponse:)]) {
             [delegate socketClient:self didReceiveResponse:packet];
@@ -1022,8 +1080,14 @@ static const long VDSocketClientWriteTrailerTag = 3;
         }
     }
     
-    if (self.socketConfigure.heartBeatHelper.autoDisconnectOnRemoteNoReplyAliveTimeout) {
-        if (currentTime - self.lastReceiveMessageTime >= self.socketConfigure.heartBeatHelper.remoteNoReplyAliveTimeout) {
+    if (self.socketConfigure.socketPacketHelper.receiveTimeoutEnabled) {
+        if (currentTime - self.lastReceiveMessageTime >= self.socketConfigure.socketPacketHelper.receiveTimeout) {
+            [self disconnect];
+        }
+    }
+    
+    if (self.socketConfigure.socketPacketHelper.sendTimeoutEnabled) {
+        if (currentTime - self.lastSendMessageTime >= self.socketConfigure.socketPacketHelper.sendTimeout) {
             [self disconnect];
         }
     }

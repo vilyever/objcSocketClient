@@ -69,18 +69,6 @@
     return _sendHeartBeatEnabled;
 }
 
-- (void)setRemoteNoReplyAliveTimeout:(NSTimeInterval)remoteNoReplyAliveTimeout {
-    _remoteNoReplyAliveTimeout = remoteNoReplyAliveTimeout;
-}
-
-- (BOOL)isAutoDisconnectOnRemoteNoReplyAliveTimeout {
-    if (self.remoteNoReplyAliveTimeout <= 0) {
-        return NO;
-    }
-    
-    return _autoDisconnectOnRemoteNoReplyAliveTimeout;
-}
-
 #pragma mark Overrides
 - (instancetype)init {
     self = [super init];
@@ -104,9 +92,6 @@
 
     helper.heartBeatInterval = self.heartBeatInterval;
     helper.sendHeartBeatEnabled = self.sendHeartBeatEnabled;
-    
-    helper.remoteNoReplyAliveTimeout = self.remoteNoReplyAliveTimeout;
-    helper.autoDisconnectOnRemoteNoReplyAliveTimeout = self.autoDisconnectOnRemoteNoReplyAliveTimeout;
     
     return helper;
 }

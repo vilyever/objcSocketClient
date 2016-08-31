@@ -1,6 +1,6 @@
-github "vilyever/objcString" "master"
-github "vilyever/objcTimer" "master"
-github "vilyever/objcWeakRef" "master"
-github "vilyever/objcBlock" "master"
-github "vilyever/objcArray" "master"
+github "vilyever/objcString" == 1.1.0
+github "vilyever/objcTimer" == 1.1.0
+github "vilyever/objcWeakRef" == 1.1.0
+github "vilyever/objcBlock" == 1.1.0
+github "vilyever/objcArray" == 1.1.0
 github "robbiehanson/CocoaAsyncSocket" "master"

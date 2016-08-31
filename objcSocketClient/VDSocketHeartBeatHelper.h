@@ -54,16 +54,4 @@
  */
 @property (nonatomic, assign, getter=isSendHeartBeatEnabled) BOOL sendHeartBeatEnabled;
 
-/**
- *  若远程端在此时长内都没有发送信息到本地，自动断开连接
- */
-@property (nonatomic, assign) NSTimeInterval remoteNoReplyAliveTimeout;
-
-/**
- *  是否在超过remoteNoReplyAliveTimeout时长没有接收到消息时自动断开
- *  若remoteNoReplyAliveTimeout<=0,返回NO
- *  默认为NO
- */
-@property (nonatomic, assign, getter=isAutoDisconnectOnRemoteNoReplyAliveTimeout) BOOL autoDisconnectOnRemoteNoReplyAliveTimeout; //
-
 @end
